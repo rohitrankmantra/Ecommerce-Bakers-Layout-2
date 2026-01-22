@@ -40,7 +40,7 @@ export function GalleryPreview() {
           <span className="text-gold uppercase tracking-widest text-sm font-medium">
             Visual Delights
           </span>
-          <h2 className="font-serif text-3xl md:text-4xl text-primary mt-3 font-extrabold">
+          <h2 className="font-serif normal-case text-3xl md:text-5xl text-primary mt-3 mb-6 font-extrabold">
             Our Gallery
           </h2>
         </motion.div>

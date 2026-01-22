@@ -165,7 +165,7 @@ export function FeaturedProducts() {
                         </h3>
                         <div className="flex items-center justify-between">
                           <span className="text-gold font-medium text-base md:text-lg">
-                            ${product.price.toFixed(2)}
+                            ₹{product.price.toFixed(2)}
                           </span>
                           <button
                             type="button"
