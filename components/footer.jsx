@@ -30,7 +30,7 @@ export function Footer() {
                 alt="Artisan Bakery Logo"
                 width={200}
                 height={80}
-                className="h-24 w-auto object-contain"
+                className="h-32 w-auto object-contain"
               />
             </Link>
             <p className="text-muted-foreground leading-relaxed">
@@ -114,8 +114,8 @@ export function Footer() {
 
                 </a>
                 <br />
-                  <a href="tel: +91 9068664222" className="hover:text-primary transition-colors">
-                   +919068664222
+                  <a href="tel: +911352717771" className="hover:text-primary transition-colors">
+                   +911352717771
                    
                 </a>
               </li>

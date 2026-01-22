@@ -1,4 +1,4 @@
-import { HeroSlider } from '@/components/hero-slider'
+import  HeroSlider  from '@/components/hero-slider'
 import { CategoriesSection } from '@/components/categories-section'
 import { FeaturedProducts } from '@/components/featured-products'
 import { GalleryPreview } from '@/components/gallery-preview'
