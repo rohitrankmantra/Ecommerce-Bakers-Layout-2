@@ -75,7 +75,7 @@ export function WhyChooseUs() {
             <span className="text-gold uppercase tracking-widest text-sm font-medium">
               Our Promise
             </span>
-           <h2 className="font-serif normal-case text-3xl md:text-5xl text-primary mt-3 mb-6">
+           <h2 className="font-serif normal-case text-3xl md:text-5xl text-primary mt-3 mb-6 font-extrabold">
   Why Choose Us
 </h2>
 

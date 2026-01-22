@@ -69,7 +69,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-serif text-lg text-primary mb-6">Quick Links</h3>
+            <h3 className="font-serif font-bold text-lg text-primary mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
@@ -86,7 +86,7 @@ export function Footer() {
 
           {/* Categories */}
           <div>
-            <h3 className="font-serif text-lg text-primary mb-6">Categories</h3>
+            <h3 className="font-serif text-lg font-bold text-primary mb-6">Categories</h3>
             <ul className="space-y-3">
               {categories.map((link) => (
                 <li key={link.href}>
@@ -103,18 +103,25 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-serif text-lg text-primary mb-6">Contact Us</h3>
+            <h3 className="font-serif text-lg font-bold text-primary mb-6">Contact Us</h3>
             <ul className="space-y-3 text-muted-foreground">
-              <li>123 Baker Street</li>
-              <li>New York, NY 10001</li>
+              <li>BAKEMASTERS, 19,Rajpur Road, Kwality Complex, Dehradun, 
+</li>
+              <li>Uttarakhand. 248001 INDIA</li>
               <li>
-                <a href="tel:+1234567890" className="hover:text-primary transition-colors">
-                  +1 (234) 567-890
+                <a href="tel: +91 9068664222" className="hover:text-primary transition-colors">
+                   +919068664222
+
+                </a>
+                <br />
+                  <a href="tel: +91 9068664222" className="hover:text-primary transition-colors">
+                   +919068664222
+                   
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@artisanbakery.com" className="hover:text-primary transition-colors">
-                  hello@artisanbakery.com
+                <a href="mailto: navrajjolly@gmail.com" className="hover:text-primary transition-colors">
+                   navrajjolly@gmail.com
                 </a>
               </li>
             </ul>

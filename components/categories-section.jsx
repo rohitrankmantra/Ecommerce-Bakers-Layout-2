@@ -64,7 +64,7 @@ export function CategoriesSection() {
           <span className="text-gold uppercase tracking-widest text-sm font-medium">
             Explore Our
           </span>
-          <h2 className="font-serif text-3xl md:text-5xl text-primary capitalize mt-3">
+          <h2 className="font-serif text-3xl md:text-5xl text-primary capitalize mt-3 font-extrabold">
             Categories
           </h2>
         </motion.div>

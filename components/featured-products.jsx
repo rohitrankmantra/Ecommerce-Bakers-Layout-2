@@ -100,7 +100,7 @@ export function FeaturedProducts() {
           <span className="text-gold uppercase tracking-widest text-sm font-medium">
             Bestsellers
           </span>
-          <h2 className="font-serif text-3xl md:text-5xl text-primary mt-3">
+          <h2 className="font-serif text-3xl md:text-5xl text-primary mt-3 font-extrabold">
             Featured Products
           </h2>
         </motion.div>

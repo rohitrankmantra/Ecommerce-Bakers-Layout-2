@@ -69,22 +69,28 @@ export function Header() {
             {/* Contact Details - Left Side */}
             <div className="flex items-center gap-4 md:gap-6">
               <a 
-                href="tel:+1234567890" 
+                href="tel:+919068664222" 
                 className="flex items-center gap-1.5 hover:text-gold transition-colors"
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">+1 (234) 567-890</span>
+                <span className="hidden sm:inline">+91 9068664222</span>
               </a>
               <a 
-                href="mailto:hello@artisanbakery.com" 
+                href="tel:+911352717771" 
+                className="flex items-center gap-1.5 hover:text-gold transition-colors"
+              >
+                <span className="hidden sm:inline">+91 1352717771</span>
+              </a>
+              <a 
+                href="mailto:navrajjolly@gmail.com" 
                 className="flex items-center gap-1.5 hover:text-gold transition-colors"
               >
                 <Mail className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">hello@artisanbakery.com</span>
+                <span className="hidden sm:inline">navrajjolly@gmail.com</span>
               </a>
               <div className="hidden lg:flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5" />
-                <span>123 Bakery Lane, Sweet City</span>
+                <span>BAKEMASTERS , 19,Rajpur Road, Kwality Complex, Dehradun, Uttarakhand. 248001 INDIA</span>
               </div>
             </div>
 
