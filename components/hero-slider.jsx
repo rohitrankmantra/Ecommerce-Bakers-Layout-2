@@ -8,13 +8,9 @@ import Image from 'next/image'
 const slides = [
   {
     id: 1,
-    image: '/homebanner1.png',
+    imageDesktop: '/homebanner1.png',
+    imageMobile: '/homebannermobile1.png',
   },
-  // add more images anytime 👇
-  // {
-  //   id: 2,
-  //   image: 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=1920&q=80',
-  // },
 ]
 
 function HeroSlider() {
@@ -31,16 +27,14 @@ function HeroSlider() {
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
   }, [hasMultipleSlides])
 
-  // autoplay only when more than 1 image
   useEffect(() => {
     if (!hasMultipleSlides) return
-
     const timer = setInterval(nextSlide, 5000)
     return () => clearInterval(timer)
   }, [nextSlide, hasMultipleSlides])
 
   return (
-    <section className="relative w-full h-[70vh] md:h-[75vh] -mt-9   ">
+    <section className="relative w-full h-[70vh] md:h-[75vh] md:-mt-8.5">
       <AnimatePresence initial={false}>
         <motion.div
           key={current}
@@ -49,18 +43,28 @@ function HeroSlider() {
           transition={{ duration: 0.8, ease: 'easeInOut' }}
           className="absolute inset-0"
         >
+          {/* Desktop Image */}
           <Image
-            src={slides[current].image}
+            src={slides[current].imageDesktop}
             alt={`Slide ${current + 1}`}
             fill
             priority
             quality={90}
-            className="object-contain"
+            className="hidden md:block object-contain"
+          />
+
+          {/* Mobile Image */}
+          <Image
+            src={slides[current].imageMobile}
+            alt={`Slide ${current + 1}`}
+            fill
+            priority
+            quality={90}
+            className="block md:hidden object-cover"
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Arrows – show only if multiple images */}
       {hasMultipleSlides && (
         <>
           <button

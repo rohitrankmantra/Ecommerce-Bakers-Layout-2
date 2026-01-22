@@ -20,7 +20,7 @@ const categories = [
 export function Footer() {
   return (
     <footer id="contact" className="bg-beige/50 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -128,7 +128,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border mt-12 pt-8 text-center text-muted-foreground text-sm">
+        <div className="border-t border-border mt-12 pt-4 text-center text-muted-foreground text-sm">
           <p>&copy; {new Date().getFullYear()} Artisan Bakery. All rights reserved.</p>
         </div>
       </div>
