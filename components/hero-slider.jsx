@@ -8,7 +8,7 @@ import Image from 'next/image'
 const slides = [
   {
     id: 1,
-    imageDesktop: '/homebanner1.png',
+    imageDesktop: '/homebanner.png',
     imageMobile: '/homebannermobile1.png',
   },
 ]
@@ -34,7 +34,7 @@ function HeroSlider() {
   }, [nextSlide, hasMultipleSlides])
 
   return (
-    <section className="relative w-full h-[70vh] md:h-[75vh] md:-mt-8.5">
+    <section className="relative w-full h-[70vh] md:h-[75vh] ">
       <AnimatePresence initial={false}>
         <motion.div
           key={current}
@@ -50,7 +50,7 @@ function HeroSlider() {
             fill
             priority
             quality={90}
-            className="hidden md:block object-contain"
+            className="hidden md:block object-cover"
           />
 
           {/* Mobile Image */}

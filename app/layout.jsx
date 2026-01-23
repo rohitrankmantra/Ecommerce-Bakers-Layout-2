@@ -22,10 +22,16 @@ const dmSans = DM_Sans({
 })
 
 export const metadata = {
-  title: 'Artisan Bakery | Premium Baked Goods',
+  title: 'BakeMasters | Dehradun | Premium Baked Goods in Dehradun',
   description:
     'Discover our collection of freshly baked artisan cakes, biscuits, rusks, and premium bakery items made with the finest ingredients.',
-  generator: 'v0.app',
+      icons: {
+    icon: [
+      { url: '/logo-transparent.png', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+    
 }
 
 export default function RootLayout({ children }) {
