@@ -21,7 +21,7 @@ const categories = [
   },
   {
     id: 'rusk',
-    name: 'Rusk',
+    name: 'Rusks',
     image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80',
     description: 'Traditional baked rusks',
   },
