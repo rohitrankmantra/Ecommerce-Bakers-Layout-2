@@ -106,7 +106,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden">
+              <div className="relative aspect-4/5 rounded-3xl overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?w=800&q=80"
                   alt="Baker kneading dough"
@@ -183,7 +183,7 @@ export default function AboutPage() {
               {
                 title: 'Community First',
                 description: 'We believe in giving back, supporting local farmers, and creating a welcoming space for our neighborhood.',
-                image: 'https://images.unsplash.com/photo-1517433670267-30f41a9cba6f?w=600&q=80',
+                image: 'https://images.pexels.com/photos/8002133/pexels-photo-8002133.jpeg',
               },
             ].map((value, index) => (
               <motion.div
@@ -194,7 +194,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-6">
+                <div className="relative aspect-4/3 rounded-2xl overflow-hidden mb-6">
                   <Image
                     src={value.image || "/placeholder.svg"}
                     alt={value.title}

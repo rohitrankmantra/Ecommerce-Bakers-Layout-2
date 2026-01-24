@@ -13,22 +13,22 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Visit Us',
-    details: ['123 Bakery Lane', 'Sweet City, SC 12345'],
+    details: ['BAKEMASTERS , 19,Rajpur Road, Kwality Complex, Dehradun, Uttarakhand. 248001 INDIA'],
   },
   {
     icon: Phone,
     title: 'Call Us',
-    details: ['+1 (234) 567-890', '+1 (234) 567-891'],
+    details: ['+91 9068664222', '+91 1352717771'],
   },
   {
     icon: Mail,
     title: 'Email Us',
-    details: ['hello@artisanbakery.com', 'orders@artisanbakery.com'],
+    details: ['navrajjolly@gmail.com'],
   },
   {
     icon: Clock,
     title: 'Opening Hours',
-    details: ['Mon - Fri: 6AM - 8PM', 'Sat - Sun: 7AM - 6PM'],
+    details: ['Mon - Sun: 8AM - 10PM'],
   },
 ]
 
@@ -69,6 +69,13 @@ export default function ContactPage() {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
+    // ✅ FAQ toggle state (ONLY ADDITION)
+  const [openFaq, setOpenFaq] = useState(null)
+
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index)
+  }
+
   return (
     <div className="min-h-screen bg-cream">
       {/* Hero Section */}
@@ -76,7 +83,7 @@ export default function ContactPage() {
         title="Get in Touch"
         subtitle="Contact Us"
         description="Have a question, special request, or want to place a custom order? We would love to hear from you."
-        backgroundImage="https://images.unsplash.com/photo-1517433670267-30f41a9cba6f?w=1920&q=80"
+        backgroundImage="https://images.pexels.com/photos/19651268/pexels-photo-19651268.jpeg"
       />
 
       {/* Contact Section */}
@@ -113,7 +120,7 @@ export default function ContactPage() {
                     className="bg-card rounded-2xl p-6 border border-border"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-gold/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gold/20 rounded-xl flex items-center justify-center shrink-0">
                         <info.icon className="w-6 h-6 text-gold" />
                       </div>
                       <div>
@@ -307,10 +314,9 @@ export default function ContactPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative aspect-[21/9] rounded-3xl overflow-hidden border border-border"
+            className="relative aspect-21/9 rounded-3xl overflow-hidden border border-border"
           >
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425878428698!3d40.74076794379132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sGoogle!5e0!3m2!1sen!2sus!4v1637158842024!5m2!1sen!2sus"
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.8254857162847!2d78.04264507535643!3d30.32748137478225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390929ea7d7d85cd%3A0xc809d50c3b236bd8!2sBake%20Masters!5e0!3m2!1sen!2sin!4v1769233731258!5m2!1sen!2sin" 
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -324,7 +330,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
+     {/* FAQ Section */}
       <section className="py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -342,40 +348,65 @@ export default function ContactPage() {
             </h2>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             {[
               {
                 question: 'Do you take custom cake orders?',
-                answer: 'Yes! We specialize in custom cakes for weddings, birthdays, and special occasions. Please contact us at least 2 weeks in advance for custom orders.',
+                answer:
+                  'Yes! We specialize in custom cakes for weddings, birthdays, and special occasions. Please contact us at least 2 weeks in advance for custom orders.',
               },
               {
                 question: 'Are your products made fresh daily?',
-                answer: 'Absolutely. Our bakers start at 4 AM every morning to ensure all products are freshly baked. We never sell day-old items.',
+                answer:
+                  'Absolutely. Our bakers start at 4 AM every morning to ensure all products are freshly baked. We never sell day-old items.',
               },
               {
                 question: 'Do you offer gluten-free or vegan options?',
-                answer: 'Yes, we have a selection of gluten-free breads and vegan pastries available daily. Please ask our staff for the current options.',
+                answer:
+                  'Yes, we have a selection of gluten-free breads and vegan pastries available daily. Please ask our staff for the current options.',
               },
               {
                 question: 'Can I place an order for pickup?',
-                answer: 'Yes, you can call us or use our online ordering system to place orders for pickup. We recommend ordering at least 24 hours in advance for larger orders.',
+                answer:
+                  'Yes, you can call us or use our online ordering system to place orders for pickup. We recommend ordering at least 24 hours in advance for larger orders.',
               },
             ].map((faq, index) => (
               <div
                 key={index}
-                className="bg-card rounded-2xl p-6 border border-border"
+                className="bg-card rounded-2xl border border-border overflow-hidden"
               >
-                <h3 className="font-serif text-lg text-primary mb-3">{faq.question}</h3>
-                <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full flex items-center justify-between p-6 text-left"
+                >
+                  <h3 className="font-serif text-lg text-primary">
+                    {faq.question}
+                  </h3>
+                  <span
+                    className={`text-gold text-2xl transition-transform duration-300 ${
+                      openFaq === index ? 'rotate-45' : ''
+                    }`}
+                  >
+                    +
+                  </span>
+                </button>
+
+                <motion.div
+                  initial={false}
+                  animate={{
+                    height: openFaq === index ? 'auto' : 0,
+                    opacity: openFaq === index ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  className="overflow-hidden px-6"
+                >
+                  <p className="pb-6 text-muted-foreground leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </motion.div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

@@ -11,10 +11,10 @@ import { products } from '@/lib/products'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '#', label: 'Shop' },
-  { href: '#', label: 'Gallery' },
-  { href: '#', label: 'About' },
-  { href: '#', label: 'Contact' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export function Header() {
@@ -90,7 +90,7 @@ export function Header() {
               </a>
               <div className="hidden lg:flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5" />
-                <span>BAKEMASTERS , 19,Rajpur Road, Kwality Complex, Dehradun, Uttarakhand. 248001 INDIA</span>
+                <span>BAKEMASTERS , 19,Rajpur  Road, Kwality Complex, Dehradun, Uttarakhand. 248001 INDIA</span>
               </div>
             </div>
 

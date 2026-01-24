@@ -4,18 +4,19 @@ import { Instagram, Facebook, Twitter } from 'lucide-react'
 
 const quickLinks = [
   { href: '/', label: 'Home' },
-  { href: '#', label: 'Shop' },
-  { href: '#', label: 'Gallery' },
-  { href: '#', label: 'About Us' },
-  { href: '#', label: 'Contact' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/galllery', label: 'Gallery' },
+  { href: '/about', label: 'About Us' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 const categories = [
-  { href: '#', label: 'Cakes' },
-  { href: '#', label: 'Biscuits' },
-  { href: '#', label: 'Rusk' },
-  { href: '#', label: 'Other Items' },
+  { href: '/shop?category=cakes', label: 'Cakes' },
+  { href: '/shop?category=biscuits', label: 'Biscuits' },
+  { href: '/shop?category=rusk', label: 'Rusk' },
+  { href: '/shop?category=other', label: 'Other Items' },
 ]
+
 
 export function Footer() {
   return (
