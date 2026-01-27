@@ -28,7 +28,7 @@ export function ProductCard({ product, index }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => addItem(product)}
-            className="absolute bottom-4 right-4 w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gold hover:text-primary"
+            className="absolute bottom-4 right-4 w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gold "
             aria-label={`Add ${product.name} to cart`}
           >
             <ShoppingBag className="w-5 h-5" />
@@ -48,7 +48,7 @@ export function ProductCard({ product, index }) {
             <button
               type="button"
               onClick={() => addItem(product)}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors underline underline-offset-4"
+              className="text-sm bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-gold cursor-pointer transition-all duration-300 shadow hover:shadow-md"
             >
               Add to Cart
             </button>

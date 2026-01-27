@@ -70,26 +70,26 @@ export function Header() {
             <div className="flex items-center gap-4 md:gap-6">
               <a 
                 href="tel:+919068664222" 
-                className="flex items-center gap-1.5 hover:text-primary/85 transition-colors"
+                className="flex items-center gap-1.5 text-white  transition-colors"
               >
-                <Phone className="w-3.5 h-3.5" />
+                <Phone className="w-3.5 h-3.5 text-white" />
                 <span className="hidden sm:inline">+91 9068664222</span>
               </a>
               <a 
                 href="tel:+911352717771" 
-                className="flex items-center gap-1.5 hover:text-primary/85 transition-colors"
+                className="flex items-center gap-1.5 text-white"
               >
                 <span className="hidden sm:inline">+91 1352717771</span>
               </a>
               <a 
                 href="mailto:navrajjolly@gmail.com" 
-                className="flex items-center gap-1.5 hover:text-primary/85 transition-colors"
+                className="flex items-center gap-1.5 text-white transition-colors"
               >
-                <Mail className="w-3.5 h-3.5" />
+                <Mail className="w-3.5 h-3.5 text-white transition-colors" />
                 <span className="hidden sm:inline">navrajjolly@gmail.com</span>
               </a>
-              <div className="hidden lg:flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5" />
+              <div className="hidden lg:flex items-center gap-1.5 text-white">
+                <MapPin className="w-3.5 h-3.5 text-white transition-colors" />
                 <span>BAKEMASTERS , 19,Rajpur  Road, Kwality Complex, Dehradun, Uttarakhand. 248001 INDIA</span>
               </div>
             </div>
@@ -100,28 +100,28 @@ export function Header() {
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-primary/85 transition-colors"
+                className="text-white transition-colors"
                 aria-label="Facebook"
               >
-                <Facebook className="w-4 h-4" />
+                <Facebook className="w-4 h-4 text-white  transition-colors" />
               </a>
               <a 
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-primary/85 transition-colors"
+                className="text-white hover:text-primary/85 transition-colors"
                 aria-label="Instagram"
               >
-                <Instagram className="w-4 h-4" />
+                <Instagram className="w-4 h-4 text-white  transition-colors" />
               </a>
               <a 
                 href="https://twitter.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-primary/85 transition-colors"
+                className="text-white transition-colors"
                 aria-label="Twitter"
               >
-                <Twitter className="w-4 h-4" />
+                <Twitter className="w-4 h-4 text-white  transition-colors" />
               </a>
             </div>
           </div>
@@ -129,7 +129,7 @@ export function Header() {
       </div>
 
       {/* Main Header */}
-      <div className="bg-cream/95 backdrop-blur-sm border-b border-border">
+      <div className="bg-cream/95 backdrop-blur-sm p-2 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -150,7 +150,7 @@ export function Header() {
                 <Link
                   key={i}
                   href={link.href}
-                  className="text-primary hover:underline underline-offset-8 transition-colors duration-200 text-sm uppercase tracking-wide font-medium"
+                  className="text-black hover:text-primary hover:underline underline-offset-8 transition-colors duration-200 text-sm uppercase tracking-wide font-medium"
                 >
                   {link.label}
                 </Link>
@@ -164,10 +164,10 @@ export function Header() {
                 <button 
                   type="button"
                   onClick={() => setSearchOpen(!searchOpen)}
-                  className="p-2 text-primary hover:text-primary/80 transition-colors"
+                  className="p-2 text-black hover:text-primary/80 transition-colors"
                   aria-label="Search"
                 >
-                  <Search className="w-5 h-5" />
+                  <Search className="w-5 h-5 text-black hover:text-primary/80 transition-colors" />
                 </button>
 
                 {/* Search Dropdown */}
@@ -253,10 +253,10 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setIsOpen(true)}
-                className="relative p-2 text-primary hover:text-primary/80 transition-colors"
+                className="relative p-2 text-black hover:text-primary/80 transition-colors"
                 aria-label="Open cart"
               >
-                <ShoppingBag className="w-5 h-5" />
+                <ShoppingBag className="w-5 h-5 text-black hover:text-primary/80 transition-colors" />
                 {itemCount > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
@@ -272,13 +272,13 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-primary hover:text-primary/80 transition-colors"
+                className="md:hidden p-2 text-black  transition-colors"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? (
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6 text-black transition-colors" />
                 ) : (
-                  <Menu className="w-6 h-6" />
+                  <Menu className="w-6 h-6 text-black  transition-colors" />
                 )}
               </button>
             </div>
@@ -307,7 +307,7 @@ export function Header() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block py-3 text-foreground/80 hover:text-primary transition-colors text-sm uppercase tracking-wide font-medium border-b border-border/50 last:border-0"
+                    className="block py-3 text-black transition-colors text-sm uppercase tracking-wide font-medium border-b border-border/50 last:border-0"
                   >
                     {link.label}
                   </Link>

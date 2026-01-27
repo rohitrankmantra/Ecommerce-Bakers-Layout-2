@@ -37,7 +37,7 @@ export function GalleryPreview() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="text-gold uppercase tracking-widest text-sm font-medium">
+          <span className="text-black uppercase tracking-widest text-sm font-medium">
             Visual Delights
           </span>
           <h2 className="font-serif normal-case text-3xl md:text-5xl text-primary mt-3 mb-6 font-extrabold">

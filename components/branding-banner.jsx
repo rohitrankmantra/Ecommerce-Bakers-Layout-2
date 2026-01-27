@@ -67,16 +67,16 @@ export function BrandingBanner() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex-1 text-center lg:text-left"
           >
-            <div className="inline-flex items-center gap-2 bg-gold/20 backdrop-blur-sm px-4 py-1.5 rounded-full mb-6">
-              <Sparkles className="w-4 h-4 text-gold" />
-              <span className="text-gold text-sm font-medium tracking-wide uppercase">
+            <div className="inline-flex items-center gap-2 bg-[#C85B24]/20 backdrop-blur-sm px-4 py-1.5 rounded-full mb-6"> 
+              <Sparkles className="w-4 h-4 text-[#C85B24]" /> 
+              <span className="text-[#D4A373] text-sm font-medium tracking-wide uppercase">
                 Since 2010
               </span>
             </div>
 
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-cream leading-tight">
               Baked Fresh Daily,{' '}
-              <span className="text-gold">Crafted with Love</span>
+              <span className="text-[#C85B24]">Crafted with Love</span>
             </h2>
 
             <p className="mt-6 text-cream/80 text-lg max-w-xl leading-relaxed">
@@ -92,11 +92,11 @@ export function BrandingBanner() {
                 <span className="text-cream/90 text-sm">Premium Ingredients</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-gold rounded-full" />
+                <div className="w-2 h-2 bg-[#D4A373] rounded-full" />
                 <span className="text-cream/90 text-sm">Handcrafted Daily</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-gold rounded-full" />
+                <div className="w-2 h-2 bg-[#D4A373] rounded-full" />
                 <span className="text-cream/90 text-sm">Local Delivery</span>
               </div>
             </div>
@@ -106,7 +106,7 @@ export function BrandingBanner() {
               <Button
                 asChild
                 size="lg"
-                className="bg-gold hover:bg-gold-dark text-primary font-medium px-8 rounded-full"
+                className="bg-[#C85B24] hover:bg-[#D4A373] text-primary font-medium px-8 rounded-full"
               >
                 <Link href="/shop">
                   Shop Now
@@ -145,7 +145,7 @@ export function BrandingBanner() {
                 />
               </div>
               {/* Floating Badge */}
-              <div className="absolute -bottom-4 -right-4 bg-gold text-primary px-4 py-2 rounded-full shadow-lg">
+              <div className="absolute -bottom-4 -right-4 bg-[#C85B24] text-primary px-4 py-2 rounded-full shadow-lg">
                 <span className="text-sm font-semibold">100% Fresh</span>
               </div>
             </div>
@@ -162,19 +162,19 @@ export function BrandingBanner() {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="font-serif text-3xl md:text-4xl text-gold">15+</div>
+                <div className="font-serif text-3xl md:text-4xl text-[#C85B24]">15+</div>
               <div className="text-cream/70 text-sm mt-1">Years Experience</div>
             </div>
             <div className="text-center">
-              <div className="font-serif text-3xl md:text-4xl text-gold">50K+</div>
+              <div className="font-serif text-3xl md:text-4xl text-[#C85B24]">50K+</div>
               <div className="text-cream/70 text-sm mt-1">Happy Customers</div>
             </div>
             <div className="text-center">
-              <div className="font-serif text-3xl md:text-4xl text-gold">100+</div>
+              <div className="font-serif text-3xl md:text-4xl text-[#C85B24]">100+</div>
               <div className="text-cream/70 text-sm mt-1">Unique Recipes</div>
             </div>
             <div className="text-center">
-              <div className="font-serif text-3xl md:text-4xl text-gold">4.9</div>
+              <div className="font-serif text-3xl md:text-4xl text-[#C85B24]">4.9</div>
               <div className="text-cream/70 text-sm mt-1">Customer Rating</div>
             </div>
           </div>

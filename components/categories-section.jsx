@@ -65,7 +65,7 @@ export function CategoriesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
-          <span className="text-gold uppercase tracking-widest text-sm font-medium">
+          <span className="text-black uppercase tracking-widest text-sm font-medium">
             Explore Our
           </span>
           <h2 className="font-serif text-3xl md:text-5xl text-primary mt-3 font-extrabold">

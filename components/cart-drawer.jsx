@@ -64,7 +64,7 @@ export function CartDrawer() {
                       exit={{ opacity: 0, y: -20 }}
                       className="flex gap-4"
                     >
-                      <div className="relative w-24 h-24 rounded-2xl overflow-hidden bg-muted flex-shrink-0">
+                      <div className="relative w-24 h-24 rounded-2xl overflow-hidden bg-muted shrink-0">
                         <Image
                           src={item.image || "/placeholder.svg"}
                           alt={item.name}

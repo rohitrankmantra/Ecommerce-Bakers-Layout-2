@@ -21,7 +21,7 @@ export function PageHero({
           priority
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-primary/70 via-primary/60 to-primary/80" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Content */}
@@ -33,11 +33,11 @@ export function PageHero({
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             {subtitle && (
-              <span className="inline-block text-gold uppercase tracking-[0.3em] text-sm font-medium mb-4">
+              <span className="inline-block text-white uppercase tracking-[0.3em] text-sm font-medium mb-4">
                 {subtitle}
               </span>
             )}
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6 text-balance">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gold mb-6 text-balance">
               {title}
             </h1>
             {description && (

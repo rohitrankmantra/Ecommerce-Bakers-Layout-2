@@ -57,7 +57,7 @@ export default function AboutPage() {
         title="Our Story"
         subtitle="About Us"
         description="A family tradition of baking excellence, crafting moments of joy one loaf at a time since 1998."
-        backgroundImage="https://images.unsplash.com/photo-1556217477-d325251ece38?w=1920&q=80"
+        backgroundImage="https://images.unsplash.com/photo-1612539466296-4ecf1db303e3?q=80&w=1243&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />
 
       {/* Story Section */}
@@ -94,7 +94,7 @@ export default function AboutPage() {
                   we pour our hearts into every creation.
                 </p>
               </div>
-              <Button asChild className="mt-8 bg-gold hover:bg-gold/90 text-primary">
+              <Button asChild className="mt-8 bg-gold hover:black text-white">
                 <Link href="/shop">Explore Our Products</Link>
               </Button>
             </motion.div>
@@ -108,7 +108,7 @@ export default function AboutPage() {
             >
               <div className="relative aspect-4/5 rounded-3xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?w=800&q=80"
+                  src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Baker kneading dough"
                   fill
                   className="object-cover"

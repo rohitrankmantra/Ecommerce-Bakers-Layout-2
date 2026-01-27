@@ -42,7 +42,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/15 transition-colors"
+                className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-[#C85B24] hover:text-primary hover:bg-primary/15 transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -51,7 +51,7 @@ export function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/15 transition-colors"
+                className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-[#C85B24] hover:text-primary hover:bg-primary/15 transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
@@ -60,7 +60,7 @@ export function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/15 transition-colors"
+                className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-[#C85B24] hover:text-primary hover:bg-primary/15 transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5" />
@@ -76,7 +76,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-primary hover:underline underline-offset-8 transition-colors"
+                    className="text-black hover:text-primary hover:underline underline-offset-8 transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -93,7 +93,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-primary hover:underline underline-offset-8 transition-colors"
+                    className="text-black hover:text-primary hover:underline underline-offset-8 transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -105,22 +105,22 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h3 className="font-serif text-lg font-bold text-primary mb-6">Contact Us</h3>
-            <ul className="space-y-3 text-muted-foreground">
+            <ul className="space-y-3 text-foreground/80">
               <li>BAKEMASTERS, 19,Rajpur Road, Kwality Complex, Dehradun, 
 </li>
               <li>Uttarakhand. 248001 INDIA</li>
               <li>
-                <a href="tel: +91 9068664222" className="text-primary hover:text-primary/80 transition-colors">
+                <a href="tel: +91 9068664222" className="text-black hover:text-primary/80 transition-colors">
                    +919068664222
                 </a>
                 <br />
-                  <a href="tel: +911352717771" className="text-primary hover:text-primary/80 transition-colors">
+                  <a href="tel: +911352717771" className="text-black hover:text-primary/80 transition-colors">
                    +911352717771
                    
                 </a>
               </li>
               <li>
-                <a href="mailto: navrajjolly@gmail.com" className="text-primary hover:text-primary/80 transition-colors">
+                <a href="mailto: navrajjolly@gmail.com" className="text-black hover:text-primary/80 transition-colors">
                    navrajjolly@gmail.com
                 </a>
               </li>

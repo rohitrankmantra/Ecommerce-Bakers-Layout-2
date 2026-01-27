@@ -72,7 +72,7 @@ export function WhyChooseUs() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-gold uppercase tracking-widest text-sm font-medium">
+            <span className="uppercase tracking-widest text-sm font-medium" style={{ color: '#C85B24' }}>
               Our Promise
             </span>
            <h2 className="font-serif normal-case text-3xl md:text-5xl text-primary mt-3 mb-6 font-extrabold">
@@ -98,8 +98,8 @@ export function WhyChooseUs() {
                   variants={itemVariants}
                   className="flex items-start gap-4"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-gold-light flex items-center justify-center shrink-0">
-                    <feature.icon className="w-6 h-6 text-primary" />
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0" style={{ backgroundColor: '#C85B24' }}>
+                    <feature.icon className="w-6 h-6" style={{ color: 'white' }} />
                   </div>
                   <div>
                     <h3 className="font-serif text-lg text-primary mb-1">

@@ -105,7 +105,7 @@ export function ShopFilters({
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-72 flex-shrink-0">
+      <aside className="hidden lg:block w-72 shrink-0">
         <div className="sticky top-28 bg-card rounded-2xl p-6 shadow-sm">
           <div className="flex items-center gap-2 mb-6">
             <SlidersHorizontal className="w-5 h-5 text-gold" />

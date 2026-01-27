@@ -7,18 +7,17 @@ import { ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCart } from './cart-context'
 import { featuredProducts } from '@/lib/products'
 
-// Hook to get responsive products per view
 function useProductsPerView() {
   const [productsPerView, setProductsPerView] = useState(4)
 
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 640) {
-        setProductsPerView(1) // Mobile: 1 product
+        setProductsPerView(1)
       } else if (window.innerWidth < 1024) {
-        setProductsPerView(2) // Tablet: 2 products
+        setProductsPerView(2)
       } else {
-        setProductsPerView(4) // Desktop: 4 products
+        setProductsPerView(4)
       }
     }
 
@@ -37,7 +36,7 @@ export function FeaturedProducts() {
   const productsPerView = useProductsPerView()
   
   const totalProducts = featuredProducts.length
-  const maxIndex = totalProducts - productsPerView
+  const maxIndex = Math.max(0, totalProducts - productsPerView)
 
   const nextSlide = useCallback(() => {
     setDirection(1)
@@ -49,20 +48,17 @@ export function FeaturedProducts() {
     setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1))
   }
 
-  // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(nextSlide, 5000)
     return () => clearInterval(interval)
   }, [nextSlide])
 
-  // Reset index when productsPerView changes
   useEffect(() => {
     if (currentIndex > maxIndex) {
-      setCurrentIndex(0)
+      setCurrentIndex(maxIndex)
     }
   }, [productsPerView, maxIndex, currentIndex])
 
-  // Get visible products based on current index
   const visibleProducts = featuredProducts.slice(currentIndex, currentIndex + productsPerView)
 
   const slideVariants = {
@@ -80,7 +76,6 @@ export function FeaturedProducts() {
     }),
   }
 
-  // Grid columns based on products per view
   const gridClass = productsPerView === 1 
     ? 'grid-cols-1' 
     : productsPerView === 2 
@@ -105,13 +100,12 @@ export function FeaturedProducts() {
           </h2>
         </motion.div>
 
-        {/* Slider Container */}
         <div className="relative">
           {/* Navigation Arrows */}
           <button
             type="button"
             onClick={prevSlide}
-            className="absolute -left-2 sm:-left-4 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-cream border border-border rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+            className="absolute -left-2 sm:-left-4 md:-left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-cream border border-border rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
             aria-label="Previous product"
           >
             <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
@@ -119,13 +113,12 @@ export function FeaturedProducts() {
           <button
             type="button"
             onClick={nextSlide}
-            className="absolute -right-2 sm:-right-4 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-cream border border-border rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+            className="absolute -right-2 sm:-right-4 md:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-cream border border-border rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
             aria-label="Next product"
           >
             <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
-          {/* Products Grid */}
           <div className="overflow-hidden px-4 sm:px-2">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
@@ -148,17 +141,24 @@ export function FeaturedProducts() {
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
+                        
+                        {/* ICON POSITION RESTORED TO bottom-3 right-3 */}
                         <motion.button
                           type="button"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          onClick={() => addItem(product)}
-                          className="absolute bottom-3 right-3 w-10 h-10 md:w-12 md:h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gold hover:text-primary"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            addItem(product);
+                          }}
+                          className="absolute bottom-3 right-3 z-50 w-10 h-10 md:w-12 md:h-12 bg-primary text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-gold shadow-lg"
                           aria-label={`Add ${product.name} to cart`}
                         >
-                          <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
+                          {/* Force text-white so icon doesn't turn orange and vanish */}
+                          <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 text-white" strokeWidth={2.5} />
                         </motion.button>
                       </div>
+                      
                       <div className="p-4 md:p-5">
                         <h3 className="font-serif text-base md:text-lg text-primary mb-2 truncate">
                           {product.name}
@@ -170,7 +170,7 @@ export function FeaturedProducts() {
                           <button
                             type="button"
                             onClick={() => addItem(product)}
-                            className="text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors underline underline-offset-4"
+                            className="text-sm bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-gold cursor-pointer transition-all duration-300 shadow hover:shadow-md"
                           >
                             Add to Cart
                           </button>
