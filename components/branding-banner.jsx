@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 
 export function BrandingBanner() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden brand-legacy">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <Image

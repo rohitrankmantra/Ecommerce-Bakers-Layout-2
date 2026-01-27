@@ -4,30 +4,30 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.98 0.005 80); /* preserved from existing */
-  --foreground: oklch(0.2 0.01 30); /* preserved from existing */
-  --card: oklch(1 0 0); /* preserved from existing */
-  --card-foreground: oklch(0.2 0.01 30); /* preserved from existing */
-  --popover: oklch(1 0 0); /* preserved from existing */
-  --popover-foreground: oklch(0.2 0.01 30); /* preserved from existing */
-  --primary: oklch(0.15 0 0); /* preserved from existing */
-  --primary-foreground: oklch(0.98 0.005 80); /* preserved from existing */
-  --secondary: oklch(0.94 0.01 80); /* preserved from existing */
-  --secondary-foreground: oklch(0.2 0.01 30); /* preserved from existing */
-  --muted: oklch(0.95 0.008 80); /* preserved from existing */
-  --muted-foreground: oklch(0.45 0.01 30); /* preserved from existing */
-  --accent: oklch(0.75 0.08 85); /* preserved from existing */
-  --accent-foreground: oklch(0.2 0.01 30); /* preserved from existing */
-  --gold: oklch(0.72 0.12 85); /* preserved from existing */
-  --gold-light: oklch(0.85 0.08 85); /* preserved from existing */
-  --cream: oklch(0.97 0.008 85); /* preserved from existing */
-  --beige: oklch(0.92 0.015 75); /* preserved from existing */
-  --beige-dark: oklch(0.85 0.02 70); /* preserved from existing */
+  --background: #ffffff; /* preserved from existing */
+  --foreground: #3b2b22; /* preserved from existing */
+  --card: #ffffff; /* preserved from existing */
+  --card-foreground: #3b2b22; /* preserved from existing */
+  --popover: #ffffff; /* preserved from existing */
+  --popover-foreground: #3b2b22; /* preserved from existing */
+  --primary: #c85b24;
+  --primary-foreground: #ffffff;
+  --secondary: #f3efe7; /* preserved from existing */
+  --secondary-foreground: #3b2b22; /* preserved from existing */
+  --muted: #f2e9de; /* preserved from existing */
+  --muted-foreground: #6d5a4f; /* preserved from existing */
+  --accent: #c85b24;
+  --accent-foreground: #ffffff;
+  --gold: #c85b24;
+  --gold-light: #edb287; /* preserved from existing */
+  --cream: #faf6ef; /* preserved from existing */
+  --beige: #eee3d2; /* preserved from existing */
+  --beige-dark: #d7c4ab; /* preserved from existing */
   --destructive: oklch(0.577 0.245 27.325); /* preserved from existing */
   --destructive-foreground: oklch(0.577 0.245 27.325); /* preserved from existing */
-  --border: oklch(0.9 0.01 80); /* preserved from existing */
-  --input: oklch(0.92 0.01 80); /* preserved from existing */
-  --ring: oklch(0.72 0.12 85); /* preserved from existing */
+  --border: #ede5da; /* preserved from existing */
+  --input: #f3ebe1; /* preserved from existing */
+  --ring: #c85b24;
   --radius: 1rem; /* preserved from existing */
   /* New variables from shadcn/ui diff */
   --chart-1: oklch(0.646 0.222 41.116);
@@ -43,6 +43,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+}
+
+.brand-legacy {
+  --primary: #3b2b22;
+  --primary-foreground: #ffffff;
+  --gold: #d4a373;
+  --gold-light: #ebc08e;
+  --ring: #d4a373;
 }
 
 /* Added .dark theme from shadcn/ui diff */
