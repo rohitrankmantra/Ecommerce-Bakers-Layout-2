@@ -23,7 +23,7 @@ const team = [
   {
     name: 'Thomas Bernard',
     role: 'Master Baker',
-    image: 'https://images.unsplash.com/photo-1583394293214-28ez86a4f0e0?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     name: 'Sophie Dubois',
