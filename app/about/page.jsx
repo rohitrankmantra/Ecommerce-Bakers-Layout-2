@@ -57,7 +57,7 @@ export default function AboutPage() {
         title="Our Story"
         subtitle="About Us"
         description="A family tradition of baking excellence, crafting moments of joy one loaf at a time since 1998."
-        backgroundImage="https://images.unsplash.com/photo-1612539466296-4ecf1db303e3?q=80&w=1243&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        backgroundImage="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579242/_STU0278_qrnxbu.jpg"
       />
 
       {/* Story Section */}
@@ -106,9 +106,9 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="relative aspect-4/5 rounded-3xl overflow-hidden">
+              <div className="relative aspect-3/4 rounded-3xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  src="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579284/_STU0305_a7o5d8.jpg"
                   alt="Baker kneading dough"
                   fill
                   className="object-cover"
@@ -173,17 +173,17 @@ export default function AboutPage() {
               {
                 title: 'Quality Ingredients',
                 description: 'We source only the finest organic flour, farm-fresh eggs, and premium butter to ensure every bite is exceptional.',
-                image: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&q=80',
+                image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579147/_STU0079_jxfko7.jpg',
               },
               {
                 title: 'Artisan Craftsmanship',
                 description: 'Our bakers are trained in traditional European techniques, bringing centuries of wisdom to modern creations.',
-                image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80',
+                image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579242/_STU0278_qrnxbu.jpg',
               },
               {
                 title: 'Community First',
                 description: 'We believe in giving back, supporting local farmers, and creating a welcoming space for our neighborhood.',
-                image: 'https://images.pexels.com/photos/8002133/pexels-photo-8002133.jpeg',
+                image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579279/_STU0303_io5bmq.jpg',
               },
             ].map((value, index) => (
               <motion.div

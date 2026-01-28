@@ -31,17 +31,18 @@ export function PageHero({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]"
           >
             {subtitle && (
-              <span className="inline-block text-white uppercase tracking-[0.3em] text-sm font-medium mb-4">
+              <span className="inline-block text-white uppercase tracking-[0.2em] text-lg md:text-xl font-black mb-4">
                 {subtitle}
               </span>
             )}
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gold mb-6 text-balance">
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-gold mb-6 font-black text-balance drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
               {title}
             </h1>
             {description && (
-              <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-pretty">
+              <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)]">
                 {description}
               </p>
             )}

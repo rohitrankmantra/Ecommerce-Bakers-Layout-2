@@ -83,7 +83,7 @@ export default function ContactPage() {
         title="Get in Touch"
         subtitle="Contact Us"
         description="Have a question, special request, or want to place a custom order? We would love to hear from you."
-        backgroundImage="https://images.pexels.com/photos/19651268/pexels-photo-19651268.jpeg"
+        backgroundImage="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579289/_STU0306_mozypp.jpg"
       />
 
       {/* Contact Section */}
@@ -254,7 +254,7 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-gold hover:bg-gold/90 text-primary font-medium py-6"
+                      className="w-full bg-gold hover:bg-gold/90 text-white font-medium py-6"
                     >
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
