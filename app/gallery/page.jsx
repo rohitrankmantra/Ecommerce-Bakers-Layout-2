@@ -36,7 +36,7 @@ export default function GalleryPage() {
         title="Our Gallery"
         subtitle="Visual Delights"
         description="A visual journey through our artisan creations. Each image tells a story of passion, craftsmanship, and delicious moments."
-        backgroundImage="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1920&q=80"
+        backgroundImage="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579285/_STU0309_ktbfso.jpg"
       />
 
       {/* Gallery Grid */}

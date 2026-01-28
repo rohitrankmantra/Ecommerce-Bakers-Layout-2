@@ -10,25 +10,25 @@ const categories = [
   {
     id: 'cakes',
     name: 'Cakes',
-    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80',
+    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579288/_STU0300_h6yjs9.jpg',
     description: 'Celebration & everyday cakes',
   },
   {
     id: 'biscuits',
     name: 'Biscuits',
-    image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80',
+    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579135/_STU0016_uweqqo.jpg',
     description: 'Crispy & buttery delights',
   },
   {
     id: 'rusk',
     name: 'Rusks',
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80',
+    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579141/_STU0062_dicysj.jpg',
     description: 'Traditional baked rusks',
   },
   {
     id: 'other',
     name: 'Other Items',
-    image: 'https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&q=80',
+    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579287/_STU0310_pwsopq.jpg',
     description: 'Pastries, breads & more',
   },
 ]

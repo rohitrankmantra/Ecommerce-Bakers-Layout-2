@@ -56,7 +56,7 @@ export function WhyChooseUs() {
           >
             <div className="relative w-full h-80 md:h-120 rounded-2xl overflow-hidden">
               <Image
-                src="https://images.pexels.com/photos/18296426/pexels-photo-18296426.jpeg"
+                src="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579287/_STU0310_pwsopq.jpg"
                 alt="Baker at work"
                 fill
                 className="object-cover"

@@ -42,13 +42,13 @@ export function BrandingBanner() {
           >
             <div className="relative">
               {/* Logo Container with Decorative Border */}
-              <div className="relative bg-cream/10 backdrop-blur-sm rounded-2xl p-6 border border-gold/20">
+              <div className="relative bg-cream/10 backdrop-blur-sm rounded-2xl p-1 border border-gold/20">
                 <Image
-                  src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=300&h=120&fit=crop&q=80"
+                  src="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579257/_STU0289_g2iezp.jpg"
                   alt="Artisan Bakery Logo"
                   width={200}
                   height={80}
-                  className="h-16 md:h-20 w-auto object-contain"
+                  className="h-16 md:h-20 rounded-xl w-auto object-contain"
                 />
               </div>
               {/* Corner Decorations */}
@@ -106,7 +106,7 @@ export function BrandingBanner() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#C85B24] hover:bg-[#D4A373] text-primary font-medium px-8 rounded-full"
+                className="bg-[#C85B24] hover:bg-[#D4A373] text-white font-medium px-8 rounded-full"
               >
                 <Link href="/shop">
                   Shop Now
@@ -137,7 +137,7 @@ export function BrandingBanner() {
             <div className="relative">
               <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gold/30">
                 <Image
-                  src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=400&fit=crop&q=80"
+                  src="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579263/_STU0299_poviiu.jpg"
                   alt="Fresh pastries"
                   width={192}
                   height={192}
@@ -145,8 +145,8 @@ export function BrandingBanner() {
                 />
               </div>
               {/* Floating Badge */}
-              <div className="absolute -bottom-4 -right-4 bg-[#C85B24] text-primary px-4 py-2 rounded-full shadow-lg">
-                <span className="text-sm font-semibold">100% Fresh</span>
+              <div className="absolute -bottom-4 -right-4 bg-[#C85B24] text-white px-4 py-2 rounded-full shadow-lg">
+                <span className="text-sm ">100% Fresh</span>
               </div>
             </div>
           </motion.div>
