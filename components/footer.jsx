@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Instagram, Facebook, Twitter } from 'lucide-react'
+import { FiPhone, FiMail } from 'react-icons/fi'  // <- React Icons import
 
 const quickLinks = [
   { href: '/', label: 'Home' },
@@ -13,10 +14,9 @@ const quickLinks = [
 const categories = [
   { href: '/shop?category=cakes', label: 'Cakes' },
   { href: '/shop?category=biscuits', label: 'Biscuits' },
-  { href: '/shop?category=rusk', label: 'Rusk' },
+  { href: '/shop?category=rusk', label: 'Rusks' },
   { href: '/shop?category=other', label: 'Other Items' },
 ]
-
 
 export function Footer() {
   return (
@@ -106,22 +106,24 @@ export function Footer() {
           <div>
             <h3 className="font-serif text-lg font-bold text-primary mb-6">Contact Us</h3>
             <ul className="space-y-3 text-foreground/80">
-              <li>BAKEMASTERS, 19,Rajpur Road, Kwality Complex, Dehradun, 
-</li>
+              <li>BAKEMASTERS, 19,Rajpur Road, Kwality Complex, Dehradun, </li>
               <li>Uttarakhand. 248001 INDIA</li>
-              <li>
-                <a href="tel: +91 9068664222" className="text-black hover:text-primary/80 transition-colors">
-                   +919068664222
-                </a>
-                <br />
-                  <a href="tel: +911352717771" className="text-black hover:text-primary/80 transition-colors">
-                   +911352717771
-                   
+              <li className="flex items-center gap-2">
+                <FiPhone className="w-4 h-4 text-primary" />
+                <a href="tel:+919068664222" className="text-black hover:text-primary/80 transition-colors">
+                  +91 9068664222
                 </a>
               </li>
-              <li>
-                <a href="mailto: navrajjolly@gmail.com" className="text-black hover:text-primary/80 transition-colors">
-                   navrajjolly@gmail.com
+              <li className="flex items-center gap-2">
+                <FiPhone className="w-4 h-4 text-primary" />
+                <a href="tel:+911352717771" className="text-black hover:text-primary/80 transition-colors">
+                  +91 135 2717771
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <FiMail className="w-4 h-4 text-primary" />
+                <a href="mailto:navrajjolly@gmail.com" className="text-black hover:text-primary/80 transition-colors">
+                  navrajjolly@gmail.com
                 </a>
               </li>
             </ul>
@@ -129,7 +131,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border mt-12 pt-4 text-center text-foreground/70 text-sm">
-          <p>&copy; {new Date().getFullYear()} Artisan Bakery. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Bake masters. All rights reserved.</p>
         </div>
       </div>
     </footer>
