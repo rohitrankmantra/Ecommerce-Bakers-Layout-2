@@ -29,7 +29,7 @@ export function ProductCard({ product, index }) {
             whileTap={{ scale: 0.95 }}
             onClick={() => addItem(product)}
             className="absolute bottom-4 right-4 w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-gold "
-            aria-label={`Add ${product.name} to cart`}
+            aria-label={`Add ₹{product.name} to cart`}
           >
             <ShoppingBag className="w-5 h-5" />
           </motion.button>
@@ -43,7 +43,7 @@ export function ProductCard({ product, index }) {
           </h3>
           <div className="flex items-center justify-between">
             <span className="text-gold font-medium text-lg">
-              ${product.price.toFixed(2)}
+              ₹{product.price.toFixed(2)}
             </span>
             <button
               type="button"

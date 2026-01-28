@@ -36,7 +36,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${josefinSlab.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`₹{josefinSlab.variable} ₹{dmSans.variable}`}>
       <body className="font-sans antialiased bg-cream text-foreground">
         <CartProvider>
           <Header />

@@ -13,9 +13,9 @@ const categories = [
 
 const priceRanges = [
   { id: 'all', label: 'All Prices' },
-  { id: 'under-20', label: 'Under $20' },
-  { id: '20-40', label: '$20 - $40' },
-  { id: 'over-40', label: 'Over $40' },
+  { id: 'under-20', label: 'Under ₹20' },
+  { id: '20-40', label: '₹20 - ₹40' },
+  { id: 'over-40', label: 'Over ₹40' },
 ]
 
 const sortOptions = [
@@ -46,7 +46,7 @@ export function ShopFilters({
               key={cat.id}
               type="button"
               onClick={() => onCategoryChange(cat.id)}
-              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ${
+              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ₹{
                 selectedCategory === cat.id
                   ? 'bg-primary text-primary-foreground'
                   : 'text-foreground hover:bg-beige'
@@ -67,7 +67,7 @@ export function ShopFilters({
               key={range.id}
               type="button"
               onClick={() => onPriceChange(range.id)}
-              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ${
+              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ₹{
                 selectedPrice === range.id
                   ? 'bg-primary text-primary-foreground'
                   : 'text-foreground hover:bg-beige'
@@ -88,7 +88,7 @@ export function ShopFilters({
               key={sort.id}
               type="button"
               onClick={() => onSortChange(sort.id)}
-              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ${
+              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ₹{
                 selectedSort === sort.id
                   ? 'bg-primary text-primary-foreground'
                   : 'text-foreground hover:bg-beige'

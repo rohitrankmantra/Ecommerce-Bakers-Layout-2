@@ -46,7 +46,7 @@ function HeroSlider() {
           {/* Desktop Image */}
           <Image
             src={slides[current].imageDesktop}
-            alt={`Slide ${current + 1}`}
+            alt={`Slide ₹{current + 1}`}
             fill
             priority
             quality={90}
@@ -56,7 +56,7 @@ function HeroSlider() {
           {/* Mobile Image */}
           <Image
             src={slides[current].imageMobile}
-            alt={`Slide ${current + 1}`}
+            alt={`Slide ₹{current + 1}`}
             fill
             priority
             quality={90}

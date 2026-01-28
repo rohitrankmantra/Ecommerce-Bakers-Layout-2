@@ -383,7 +383,7 @@ export default function ContactPage() {
                     {faq.question}
                   </h3>
                   <span
-                    className={`text-gold text-2xl transition-transform duration-300 ${
+                    className={`text-gold text-2xl transition-transform duration-300 ₹{
                       openFaq === index ? 'rotate-45' : ''
                     }`}
                   >

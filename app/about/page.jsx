@@ -261,8 +261,21 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 relative overflow-hidden">
+        {/* Black overlay image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579285/_STU0309_ktbfso.jpg"
+            alt=""
+            fill
+            className="object-cover"
+          />
+          {/* Black overlay */}
+          <div className="absolute inset-0 bg-black/70" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-primary-foreground">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -276,7 +289,7 @@ export default function AboutPage() {
               Come experience the aroma of fresh-baked bread, taste our signature pastries, 
               and become part of our story.
             </p>
-            <Button asChild size="lg" className="bg-gold hover:bg-gold/90 text-primary">
+            <Button asChild size="lg" className="bg-gold hover:bg-gold/90 text-white">
               <Link href="/contact">Get in Touch</Link>
             </Button>
           </motion.div>
