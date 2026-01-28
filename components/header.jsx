@@ -48,14 +48,14 @@ export function Header() {
   const handleSearchSubmit = (e) => {
     e.preventDefault()
     if (searchQuery.trim()) {
-      router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`)
+      router.push(`/shop?search=₹{encodeURIComponent(searchQuery.trim())}`)
       setSearchOpen(false)
       setSearchQuery('')
     }
   }
 
   const handleProductClick = (productId) => {
-    router.push(`/shop?highlight=${productId}`)
+    router.push(`/shop?highlight=₹{productId}`)
     setSearchOpen(false)
     setSearchQuery('')
   }
@@ -221,7 +221,7 @@ export function Header() {
                                   </p>
                                 </div>
                                 <span className="text-sm font-medium text-gold">
-                                  ${product.price.toFixed(2)}
+                                  ₹{product.price.toFixed(2)}
                                 </span>
                               </button>
                             ))}

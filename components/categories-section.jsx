@@ -120,7 +120,7 @@ export function CategoriesSection() {
 /* CARD COMPONENT (REUSED) */
 function CategoryCard({ category }) {
   return (
-    <Link href={`/shop?category=${category.id}`} className="group block">
+    <Link href={`/shop?category=₹{category.id}`} className="group block">
       <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-muted">
         <Image
           src={category.image}

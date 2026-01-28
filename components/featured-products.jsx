@@ -129,7 +129,7 @@ export function FeaturedProducts() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className={`grid ${gridClass} gap-4 md:gap-6`}
+                className={`grid ₹{gridClass} gap-4 md:gap-6`}
               >
                 {visibleProducts.map((product) => (
                   <div key={product.id} className="group">
@@ -152,7 +152,7 @@ export function FeaturedProducts() {
                             addItem(product);
                           }}
                           className="absolute bottom-3 right-3 z-50 w-10 h-10 md:w-12 md:h-12 bg-primary text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-gold shadow-lg"
-                          aria-label={`Add ${product.name} to cart`}
+                          aria-label={`Add ₹{product.name} to cart`}
                         >
                           {/* Force text-white so icon doesn't turn orange and vanish */}
                           <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 text-white" strokeWidth={2.5} />
@@ -193,12 +193,12 @@ export function FeaturedProducts() {
                   setDirection(index > currentIndex ? 1 : -1)
                   setCurrentIndex(index)
                 }}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ₹{
                   index === currentIndex
                     ? 'bg-gold w-8'
                     : 'bg-border hover:bg-muted-foreground'
                 }`}
-                aria-label={`Go to product ${index + 1}`}
+                aria-label={`Go to product ₹{index + 1}`}
               />
             ))}
           </div>

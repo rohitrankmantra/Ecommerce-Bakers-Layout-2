@@ -61,7 +61,7 @@ export function GalleryPreview() {
               <div className="relative aspect-4/3">
                 <Image
                   src={image || "/placeholder.svg"}
-                  alt={`Bakery gallery image ${index + 1}`}
+                  alt={`Bakery gallery image ₹{index + 1}`}
                   fill
                   sizes="(max-width: 768px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
