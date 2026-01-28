@@ -1,209 +1,200 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useRef, useCallback } from 'react'
+import { motion, useMotionValue, animate } from 'framer-motion'
 import Image from 'next/image'
 import { ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCart } from './cart-context'
 import { featuredProducts } from '@/lib/products'
 
+/* ---------------- RESPONSIVE COUNT ---------------- */
 function useProductsPerView() {
-  const [productsPerView, setProductsPerView] = useState(4)
+  const [count, setCount] = useState(4)
 
   useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < 640) {
-        setProductsPerView(1)
-      } else if (window.innerWidth < 1024) {
-        setProductsPerView(2)
-      } else {
-        setProductsPerView(4)
-      }
+    const update = () => {
+      if (window.innerWidth < 640) setCount(1)
+      else if (window.innerWidth < 1024) setCount(2)
+      else setCount(4)
     }
 
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
   }, [])
 
-  return productsPerView
+  return count
 }
 
 export function FeaturedProducts() {
   const { addItem } = useCart()
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
-  const productsPerView = useProductsPerView()
-  
-  const totalProducts = featuredProducts.length
-  const maxIndex = Math.max(0, totalProducts - productsPerView)
+  const perView = useProductsPerView()
 
-  const nextSlide = useCallback(() => {
-    setDirection(1)
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1))
-  }, [maxIndex])
+  const totalPages = Math.ceil(featuredProducts.length / perView)
+  const [page, setPage] = useState(0)
 
-  const prevSlide = () => {
-    setDirection(-1)
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1))
-  }
+  const viewportRef = useRef(null)
+  const x = useMotionValue(0)
 
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000)
-    return () => clearInterval(interval)
-  }, [nextSlide])
+  /* ---------------- SLIDE ---------------- */
+  const slideTo = useCallback(
+    (targetPage) => {
+      if (!viewportRef.current) return
 
-  useEffect(() => {
-    if (currentIndex > maxIndex) {
-      setCurrentIndex(maxIndex)
-    }
-  }, [productsPerView, maxIndex, currentIndex])
+      const width = viewportRef.current.offsetWidth
+      const targetX = -targetPage * width
 
-  const visibleProducts = featuredProducts.slice(currentIndex, currentIndex + productsPerView)
-
-  const slideVariants = {
-    enter: (direction) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
+      animate(x, targetX, {
+        duration: 0.75,
+        ease: [0.22, 1, 0.36, 1],
+      })
     },
-    exit: (direction) => ({
-      x: direction > 0 ? -100 : 100,
-      opacity: 0,
-    }),
+    [x]
+  )
+
+  const next = () => {
+    const nextPage = (page + 1) % totalPages
+    setPage(nextPage)
+    slideTo(nextPage)
   }
 
-  const gridClass = productsPerView === 1 
-    ? 'grid-cols-1' 
-    : productsPerView === 2 
-      ? 'grid-cols-2' 
-      : 'grid-cols-4'
+  const prev = () => {
+    const prevPage = (page - 1 + totalPages) % totalPages
+    setPage(prevPage)
+    slideTo(prevPage)
+  }
+
+  /* ---------------- AUTO PLAY ---------------- */
+  useEffect(() => {
+    slideTo(page)
+  }, [page, slideTo])
+
+  useEffect(() => {
+    const id = setInterval(next, 5000)
+    return () => clearInterval(id)
+  }, [page])
 
   return (
-    <section className="py-20 md:py-28 bg-beige/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <span className="text-gold uppercase tracking-widest text-sm font-medium">
+    <section className="py-20 md:py-28 bg-beige/30 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* -------- HEADER -------- */}
+        <div className="text-center mb-12">
+          <span className="text-gold uppercase tracking-widest text-sm">
             Bestsellers
           </span>
-          <h2 className="font-serif text-3xl md:text-5xl text-primary mt-3 font-extrabold">
+          <h2 className="font-serif text-3xl md:text-5xl font-extrabold mt-3">
             Featured Products
           </h2>
-        </motion.div>
+        </div>
 
         <div className="relative">
-          {/* Navigation Arrows */}
-          <button
-            type="button"
-            onClick={prevSlide}
-            className="absolute -left-2 sm:-left-4 md:-left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-cream border border-border rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
-            aria-label="Previous product"
-          >
-            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+          {/* -------- ARROWS -------- */}
+          <button onClick={prev} className="carousel-btn left-0">
+            <ChevronLeft />
           </button>
-          <button
-            type="button"
-            onClick={nextSlide}
-            className="absolute -right-2 sm:-right-4 md:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-cream border border-border rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
-            aria-label="Next product"
-          >
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+          <button onClick={next} className="carousel-btn right-0">
+            <ChevronRight />
           </button>
 
-          <div className="overflow-hidden px-4 sm:px-2">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={currentIndex}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className={`grid ₹{gridClass} gap-4 md:gap-6`}
-              >
-                {visibleProducts.map((product) => (
-                  <div key={product.id} className="group">
-                    <div className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300">
-                      <div className="relative aspect-square overflow-hidden">
-                        <Image
-                          src={product.image || "/placeholder.svg"}
-                          alt={product.name}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        
-                        {/* ICON POSITION RESTORED TO bottom-3 right-3 */}
-                        <motion.button
-                          type="button"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            addItem(product);
-                          }}
-                          className="absolute bottom-3 right-3 z-50 w-10 h-10 md:w-12 md:h-12 bg-primary text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-gold shadow-lg"
-                          aria-label={`Add ₹{product.name} to cart`}
-                        >
-                          {/* Force text-white so icon doesn't turn orange and vanish */}
-                          <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 text-white" strokeWidth={2.5} />
-                        </motion.button>
-                      </div>
-                      
-                      <div className="p-4 md:p-5">
-                        <h3 className="font-serif text-base md:text-lg text-primary mb-2 truncate">
-                          {product.name}
-                        </h3>
-                        <div className="flex items-center justify-between">
-                          <span className="text-gold font-medium text-base md:text-lg">
-                            ₹{product.price.toFixed(2)}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => addItem(product)}
-                            className="text-sm bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-gold cursor-pointer transition-all duration-300 shadow hover:shadow-md"
-                          >
-                            Add to Cart
-                          </button>
+          {/* -------- VIEWPORT -------- */}
+          <div ref={viewportRef} className="overflow-hidden">
+            <motion.div
+              style={{ x }}
+              className="flex will-change-transform"
+            >
+              {Array.from({ length: totalPages }).map((_, i) => {
+                const items = featuredProducts.slice(
+                  i * perView,
+                  i * perView + perView
+                )
+
+                return (
+                  <div
+                    key={i}
+                    className="grid gap-6 px-2 min-w-full"
+                    style={{
+                      gridTemplateColumns: `repeat(${perView}, minmax(0,1fr))`,
+                    }}
+                  >
+                    {items.map((product) => (
+                      <div key={product.id} className="group">
+                        <div className="bg-card rounded-2xl overflow-hidden shadow hover:shadow-xl transition">
+                          <div className="relative aspect-square">
+                            <Image
+                              src={product.image || '/placeholder.svg'}
+                              alt={product.name}
+                              fill
+                              className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+
+                            <button
+                              onClick={() => addItem(product)}
+                              className="absolute bottom-3 right-3 w-11 h-11 bg-primary text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
+                            >
+                              <ShoppingBag className="w-5 h-5" />
+                            </button>
+                          </div>
+
+                          <div className="p-4">
+                            <h3 className="font-serif truncate">
+                              {product.name}
+                            </h3>
+                            <div className="flex justify-between items-center mt-2">
+                              <span className="text-gold font-medium">
+                                ₹{product.price.toFixed(2)}
+                              </span>
+                              <button
+                                onClick={() => addItem(product)}
+                                className="text-sm bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-gold transition"
+                              >
+                                Add
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
+                )
+              })}
+            </motion.div>
           </div>
 
-          {/* Dots Indicator */}
-          <div className="flex items-center justify-center gap-2 mt-8">
-            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+          {/* -------- DOTS -------- */}
+          <div className="flex justify-center gap-2 mt-8">
+            {Array.from({ length: totalPages }).map((_, i) => (
               <button
-                key={index}
-                type="button"
+                key={i}
                 onClick={() => {
-                  setDirection(index > currentIndex ? 1 : -1)
-                  setCurrentIndex(index)
+                  setPage(i)
+                  slideTo(i)
                 }}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ₹{
-                  index === currentIndex
-                    ? 'bg-gold w-8'
-                    : 'bg-border hover:bg-muted-foreground'
+                className={`h-2.5 rounded-full transition-all ${
+                  page === i ? 'bg-gold w-8' : 'bg-border w-2.5'
                 }`}
-                aria-label={`Go to product ₹{index + 1}`}
               />
             ))}
           </div>
         </div>
       </div>
+
+      {/* -------- ARROW STYLE -------- */}
+      <style jsx>{`
+        .carousel-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 10;
+          width: 44px;
+          height: 44px;
+          border-radius: 9999px;
+          background: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+      `}</style>
     </section>
   )
 }
