@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, useMotionValue, animate } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCart } from './cart-context'
 import { featuredProducts } from '@/lib/products'
@@ -143,12 +144,20 @@ export function FeaturedProducts() {
                               <span className="text-gold font-medium">
                                 ₹{product.price.toFixed(2)}
                               </span>
-                              <button
-                                onClick={() => addItem(product)}
-                                className="text-sm bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-gold transition"
-                              >
-                                Add
-                              </button>
+                              <div className="flex gap-2">
+                                <Link
+                                  href={`/product/${product.id}`}
+                                  className="text-sm bg-cream border border-border text-primary px-3 py-1.5 rounded-lg hover:bg-beige transition"
+                                >
+                                  Detail
+                                </Link>
+                                <button
+                                  onClick={() => addItem(product)}
+                                  className="text-sm bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-gold transition"
+                                >
+                                  Add
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
