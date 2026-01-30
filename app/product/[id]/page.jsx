@@ -28,8 +28,14 @@ export default function ProductDetailPage({ params }) {
   if (!product) return null
 
   const images = useMemo(() => {
-    const base = [product.image]
-    return base.concat(base).concat(base).slice(0, 4)
+    if (product.images && product.images.length > 0) {
+      return product.images.slice(0, 3)
+    }
+    return [
+      product.image,
+      product.image,
+      product.image,
+    ]
   }, [product])
 
   const { addItem } = useCart()

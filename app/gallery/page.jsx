@@ -54,9 +54,9 @@ function VideoCard({ src, isPlaying, onPlay, onPause, setEl }) {
     <div
       className="
         group relative
-        aspect-[9/16]
+        aspect-9/16
         w-full
-        max-w-[260px] sm:max-w-[300px] md:max-w-[340px]
+        max-w-65 sm:max-w-75 md:max-w-85
         mx-auto
         overflow-hidden
         rounded-2xl
@@ -288,7 +288,7 @@ export default function GalleryPage() {
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              className="relative w-full max-w-4xl aspect-[4/3] rounded-2xl overflow-hidden"
+              className="relative w-full max-w-4xl aspect-4/3 rounded-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
