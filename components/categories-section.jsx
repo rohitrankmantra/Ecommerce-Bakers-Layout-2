@@ -8,14 +8,14 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const categories = [
   {
-    id: 'cakes',
-    name: 'Cakes',
+    id: 'tea-time-cake',
+    name: 'Tea Time Cake',
     image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579288/_STU0300_h6yjs9.jpg',
     description: 'Celebration & everyday cakes',
   },
   {
-    id: 'biscuits',
-    name: 'Biscuits',
+    id: 'biscuit-and-confections',
+    name: 'Biscuit & Confections',
     image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579135/_STU0016_uweqqo.jpg',
     description: 'Crispy & buttery delights',
   },
@@ -26,10 +26,10 @@ const categories = [
     description: 'Traditional baked rusks',
   },
   {
-    id: 'other',
-    name: 'Other Items',
-    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579287/_STU0310_pwsopq.jpg',
-    description: 'Pastries, breads & more',
+    id: 'fresh-bread',
+    name: 'Fresh Bread',
+    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579226/_STU0235_pxarhy.jpg',
+    description: 'Breads baked fresh',
   },
 ]
 
@@ -120,7 +120,7 @@ export function CategoriesSection() {
 /* CARD COMPONENT (REUSED) */
 function CategoryCard({ category }) {
   return (
-    <Link href={`/shop?category=₹{category.id}`} className="group block">
+    <Link href={`/shop?category=${category.id}`} className="group block">
       <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-muted">
         <Image
           src={category.image}

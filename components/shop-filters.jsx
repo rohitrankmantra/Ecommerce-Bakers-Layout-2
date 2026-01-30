@@ -5,10 +5,10 @@ import { X, SlidersHorizontal } from 'lucide-react'
 
 const categories = [
   { id: 'all', label: 'All Products' },
-  { id: 'cakes', label: 'Cakes' },
-  { id: 'biscuits', label: 'Biscuits' },
+  { id: 'tea-time-cake', label: 'Tea Time Cake' },
+  { id: 'biscuit-and-confections', label: 'Biscuit & Confections' },
   { id: 'rusk', label: 'Rusk' },
-  { id: 'other', label: 'Other Items' },
+  { id: 'fresh-bread', label: 'Fresh Bread' },
 ]
 
 const priceRanges = [
@@ -46,7 +46,7 @@ export function ShopFilters({
               key={cat.id}
               type="button"
               onClick={() => onCategoryChange(cat.id)}
-              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ₹{
+              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ${
                 selectedCategory === cat.id
                   ? 'bg-primary text-primary-foreground'
                   : 'text-foreground hover:bg-beige'
@@ -67,7 +67,7 @@ export function ShopFilters({
               key={range.id}
               type="button"
               onClick={() => onPriceChange(range.id)}
-              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ₹{
+              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ${
                 selectedPrice === range.id
                   ? 'bg-primary text-primary-foreground'
                   : 'text-foreground hover:bg-beige'
@@ -88,7 +88,7 @@ export function ShopFilters({
               key={sort.id}
               type="button"
               onClick={() => onSortChange(sort.id)}
-              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ₹{
+              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ${
                 selectedSort === sort.id
                   ? 'bg-primary text-primary-foreground'
                   : 'text-foreground hover:bg-beige'
