@@ -8,6 +8,13 @@ import { ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCart } from './cart-context'
 import { featuredProducts } from '@/lib/products'
 
+const slugify = (s) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+
 /* ---------------- RESPONSIVE COUNT ---------------- */
 function useProductsPerView() {
   const [count, setCount] = useState(4)
@@ -146,7 +153,7 @@ export function FeaturedProducts() {
                               </span>
                               <div className="flex gap-2">
                                 <Link
-                                  href={`/product/${product.id}`}
+                                  href={`/product/${slugify(product.name)}`}
                                   className="text-sm bg-cream border border-border text-primary px-3 py-1.5 rounded-lg hover:bg-beige transition"
                                 >
                                   Detail

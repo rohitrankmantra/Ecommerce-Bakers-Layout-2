@@ -6,6 +6,13 @@ import Link from 'next/link'
 import { ShoppingBag, ArrowUpRight } from 'lucide-react'
 import { useCart } from './cart-context'
 
+const slugify = (s) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+
 export function ProductCard({ product, index }) {
   const { addItem } = useCart()
 
@@ -59,7 +66,7 @@ export function ProductCard({ product, index }) {
           {/* Buttons */}
           <div className="mt-auto flex gap-3">
             <Link
-              href={`/product/${product.id}`}
+              href={`/product/${slugify(product.name)}`}
               className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-transparent px-4 py-2 text-sm font-medium text-primary hover:bg-muted transition-colors"
             >
               Details

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Plus, Minus, ChevronLeft, ChevronRight } from 'lucide-react'
-import { products } from '@/lib/products'
+import { orderedProducts } from '@/lib/products'
 import { useCart } from '@/components/cart-context'
 import {
   Carousel,
@@ -14,11 +14,26 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from '@/components/ui/carousel'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 
 export default function ProductDetailPage({ params }) {
   const unwrappedParams = use(params)
-  const id = parseInt(unwrappedParams.id, 10)
-  const product = useMemo(() => products.find((p) => p.id === id), [id])
+  const param = unwrappedParams.id
+  const slugify = (s) =>
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+  const product = useMemo(() => {
+    const maybeId = parseInt(param, 10)
+    if (!isNaN(maybeId)) {
+      const foundById = orderedProducts.find((p) => p.id === maybeId)
+      if (foundById) return foundById
+    }
+    const paramSlug = slugify(param)
+    return orderedProducts.find((p) => slugify(p.name) === paramSlug)
+  }, [param])
   const router = useRouter()
 
   useEffect(() => {
@@ -41,6 +56,7 @@ export default function ProductDetailPage({ params }) {
   const { addItem } = useCart()
   const [qty, setQty] = useState(1)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
 
   const carouselApiRef = useRef(null)
   const setApi = (api) => {
@@ -54,22 +70,6 @@ export default function ProductDetailPage({ params }) {
   const handleThumbClick = (index) => {
     setActiveIndex(index)
     carouselApiRef.current?.scrollTo(index)
-  }
-
-  /* IMAGE ZOOM */
-  const handleMove = (e) => {
-    const img = e.currentTarget.querySelector('img')
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = ((e.clientX - rect.left) / rect.width) * 100
-    const y = ((e.clientY - rect.top) / rect.height) * 100
-    img.style.transformOrigin = `${x}% ${y}%`
-    img.style.transform = 'scale(1.25)'
-  }
-
-  const handleLeave = (e) => {
-    const img = e.currentTarget.querySelector('img')
-    img.style.transform = 'scale(1)'
-    img.style.transformOrigin = 'center'
   }
 
   return (
@@ -90,7 +90,7 @@ export default function ProductDetailPage({ params }) {
         <div className="grid lg:grid-cols-2 gap-14 items-start">
 
           {/* LEFT – IMAGE + BACK BUTTON FOR LARGE DEVICES */}
-          <div className="relative flex flex-col items-center">
+          <div className="relative flex flex-col items-center pt-8 lg:pt-12">
             {/* BACK BUTTON FOR LARGE SCREENS */}
             <button
               onClick={() => router.back()}
@@ -100,15 +100,14 @@ export default function ProductDetailPage({ params }) {
               <span className="text-sm font-medium">Back</span>
             </button>
 
-            <div className="relative w-full max-w-md z-10">
+            <div className="relative w-full max-w-2xl z-10">
               <Carousel setApi={setApi} opts={{ align: 'center' }}>
                 <CarouselContent>
                   {images.map((src, i) => (
                     <CarouselItem key={i}>
                       <div
-                        className="relative aspect-[4/5] rounded-xl overflow-hidden bg-muted"
-                        onMouseMove={handleMove}
-                        onMouseLeave={handleLeave}
+                        className="relative aspect-[3/2] rounded-xl overflow-hidden bg-muted cursor-zoom-in"
+                        onClick={() => setLightboxOpen(true)}
                       >
                         <Image
                           src={src || '/placeholder.svg'}
@@ -129,6 +128,19 @@ export default function ProductDetailPage({ params }) {
                 </CarouselNext>
               </Carousel>
             </div>
+            <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+              <DialogContent className="bg-transparent border-none p-0 sm:max-w-3xl w-[95vw] sm:w-[75vw] h-auto rounded-xl shadow-2xl">
+                <DialogTitle className="sr-only">{product.name}</DialogTitle>
+                <div className="relative w-full aspect-[3/2] sm:aspect-[3/2]">
+                  <Image
+                    src={images[activeIndex] || '/placeholder.svg'}
+                    alt={product.name}
+                    fill
+                    className="object-cover rounded-xl"
+                  />
+                </div>
+              </DialogContent>
+            </Dialog>
 
             {/* BOTTOM THUMBNAILS */}
             <div
@@ -184,7 +196,7 @@ export default function ProductDetailPage({ params }) {
             </p>
 
             <p className="text-muted-foreground mt-6 max-w-md leading-relaxed">
-              Crafted with premium ingredients. A perfect companion for your tea time moments.
+              {product.description}
             </p>
 
             <ul className="mt-6 space-y-2 text-muted-foreground">

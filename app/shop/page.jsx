@@ -6,16 +6,18 @@ import { SlidersHorizontal } from 'lucide-react'
 import { ShopFilters } from '@/components/shop-filters'
 import { ProductCard } from '@/components/product-card'
 import { PageHero } from '@/components/page-hero'
-import { products } from '@/lib/products'
+import { orderedProducts } from '@/lib/products'
 
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedPrice, setSelectedPrice] = useState('all')
   const [selectedSort, setSelectedSort] = useState('featured')
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [page, setPage] = useState(1)
+  const pageSize = 12
 
   const filteredProducts = useMemo(() => {
-    let filtered = [...products]
+    let filtered = [...orderedProducts]
 
     // Category filter
     if (selectedCategory !== 'all') {
@@ -44,6 +46,10 @@ export default function ShopPage() {
 
     return filtered
   }, [selectedCategory, selectedPrice, selectedSort])
+
+  const totalPages = Math.ceil(filteredProducts.length / pageSize) || 1
+  const paginated = filteredProducts.slice((page - 1) * pageSize, page * pageSize)
+  const goTo = (p) => setPage(Math.min(Math.max(p, 1), totalPages))
 
   return (
     <div className="min-h-screen bg-cream">
@@ -75,7 +81,7 @@ export default function ShopPage() {
             {/* Mobile Filter Button & Results Count */}
             <div className="flex items-center justify-between mb-6">
               <p className="text-muted-foreground">
-                Showing <span className="text-primary font-medium">{filteredProducts.length}</span> products
+                Showing <span className="text-primary font-medium">{paginated.length}</span> of {filteredProducts.length} products
               </p>
               <button
                 type="button"
@@ -97,6 +103,7 @@ export default function ShopPage() {
                   onClick={() => {
                     setSelectedCategory('all')
                     setSelectedPrice('all')
+                    setPage(1)
                   }}
                   className="mt-4 text-gold hover:text-primary transition-colors underline underline-offset-4"
                 >
@@ -105,9 +112,43 @@ export default function ShopPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredProducts.map((product, index) => (
+                {paginated.map((product, index) => (
                   <ProductCard key={product.id} product={product} index={index} />
                 ))}
+              </div>
+            )}
+            {filteredProducts.length > pageSize && (
+              <div className="flex justify-center items-center gap-2 mt-8">
+                <button
+                  type="button"
+                  onClick={() => goTo(page - 1)}
+                  disabled={page === 1}
+                  className="px-3 py-1.5 rounded-lg border border-border bg-cream text-primary disabled:opacity-50"
+                >
+                  Prev
+                </button>
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => goTo(i + 1)}
+                    className={`px-3 py-1.5 rounded-lg border ${
+                      page === i + 1
+                        ? 'bg-gold border-gold text-white'
+                        : 'bg-cream border-border text-primary'
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => goTo(page + 1)}
+                  disabled={page === totalPages}
+                  className="px-3 py-1.5 rounded-lg border border-border bg-cream text-primary disabled:opacity-50"
+                >
+                  Next
+                </button>
               </div>
             )}
           </div>
