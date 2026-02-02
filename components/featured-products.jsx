@@ -153,7 +153,7 @@ export function FeaturedProducts() {
                               </span>
                               <div className="flex gap-2">
                                 <Link
-                                  href={`/product/${slugify(product.name)}`}
+                                  href={`/shop/${slugify(product.name)}`}
                                   className="text-sm bg-cream border border-border text-primary px-3 py-1.5 rounded-lg hover:bg-beige transition"
                                 >
                                   Detail
