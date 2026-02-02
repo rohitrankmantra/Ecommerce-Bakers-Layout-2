@@ -66,7 +66,7 @@ export function ProductCard({ product, index }) {
           {/* Buttons */}
           <div className="mt-auto flex gap-3">
             <Link
-              href={`/product/${slugify(product.name)}`}
+              href={`/shop/${slugify(product.name)}`}
               className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-transparent px-4 py-2 text-sm font-medium text-primary hover:bg-muted transition-colors"
             >
               Details
