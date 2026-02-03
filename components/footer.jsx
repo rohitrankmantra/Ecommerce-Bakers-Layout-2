@@ -27,7 +27,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
               <Image
-                src="/logo-transparent.png"
+                src="/new-logo.png"
                 alt="Artisan Bakery Logo"
                 width={200}
                 height={80}
