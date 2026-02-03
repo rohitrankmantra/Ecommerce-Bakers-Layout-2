@@ -48,14 +48,21 @@ export function Header() {
   const handleSearchSubmit = (e) => {
     e.preventDefault()
     if (searchQuery.trim()) {
-      router.push(`/shop?search=₹{encodeURIComponent(searchQuery.trim())}`)
+      router.push(`/shop`)
       setSearchOpen(false)
       setSearchQuery('')
     }
   }
 
-  const handleProductClick = (productId) => {
-    router.push(`/shop?highlight=₹{productId}`)
+  const slugify = (s) =>
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+
+  const handleProductClick = (product) => {
+    router.push(`/shop/${slugify(product.name)}`)
     setSearchOpen(false)
     setSearchQuery('')
   }
@@ -202,7 +209,7 @@ export function Header() {
                               <button
                                 key={product.id}
                                 type="button"
-                                onClick={() => handleProductClick(product.id)}
+                                onClick={() => handleProductClick(product)}
                                 className="w-full flex items-center gap-3 px-3 py-2 hover:bg-beige/50 transition-colors text-left"
                               >
                                 <Image
