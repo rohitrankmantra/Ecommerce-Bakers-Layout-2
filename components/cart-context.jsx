@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState } from 'react'
+import { toast } from '@/hooks/use-toast'
 
 const CartContext = createContext(undefined)
 
@@ -19,6 +20,10 @@ export function CartProvider({ children }) {
         )
       }
       return [...prev, { ...product, quantity: 1 }]
+    })
+    toast({
+      title: 'Added to cart',
+      description: `${product.name} was added successfully.`,
     })
     setIsOpen(true)
   }
