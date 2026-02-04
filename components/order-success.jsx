@@ -1,54 +1,57 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 
 export function OrderSuccessOverlay({ visible, onDone }) {
   const shouldReduceMotion = useReducedMotion()
   const [status, setStatus] = useState('loading')
 
-  // Stabilizing the effect to prevent the "array size changed" error
   useEffect(() => {
     if (!visible) {
       setStatus('loading')
       return
     }
 
-    // Phase 1: The "Buzzing" Drive (Loading/Processing)
     const processTimer = setTimeout(() => {
       setStatus('success')
-    }, 2500)
+    }, 3000)
     
-    // Phase 2: The "Arrival" (Transition to Success Page)
     const finishTimer = setTimeout(() => {
       onDone?.()
-    }, shouldReduceMotion ? 3500 : 5000)
+    }, shouldReduceMotion ? 4000 : 5500)
 
     return () => {
       clearTimeout(processTimer)
       clearTimeout(finishTimer)
     }
-    // Fixed: All dependencies explicitly listed and constant
   }, [visible, onDone, shouldReduceMotion])
 
   if (!visible) return null
 
-  // Engine Vibration Effect
   const truckBuzz = {
     loading: {
-      y: [0, -1.5, 0],
-      x: [0, 0.5, -0.5, 0],
-      transition: { repeat: Infinity, duration: 0.1, ease: "linear" }
+      y: [0, -1.8, 0],
+      transition: { repeat: Infinity, duration: 0.12, ease: "linear" }
     }
   }
 
-  // Steam/Exhaust Puffs
-  const Puff = ({ delay }) => (
+  const SpeedLine = ({ top, delay }) => (
+    <motion.div
+      initial={{ x: 200, opacity: 0 }}
+      animate={{ x: -800, opacity: [0, 1, 0] }}
+      transition={{ repeat: Infinity, duration: 0.4, delay, ease: "linear" }}
+      className="absolute h-[3px] bg-slate-300 rounded-full"
+      style={{ top, width: Math.random() * 150 + 50 }}
+    />
+  )
+
+  const ExhaustPuff = ({ delay }) => (
     <motion.div
       initial={{ scale: 0, opacity: 0, x: 0 }}
-      animate={{ scale: [1, 2], opacity: [0, 0.5, 0], x: -40, y: -10 }}
-      transition={{ repeat: Infinity, duration: 0.8, delay }}
-      className="absolute left-0 bottom-6 w-4 h-4 bg-gray-200 rounded-full blur-sm"
+      animate={{ scale: [1, 2.5], opacity: [0, 0.4, 0], x: -80, y: -20 }}
+      transition={{ repeat: Infinity, duration: 0.6, delay }}
+      className="absolute left-0 bottom-6 w-6 h-6 bg-gray-400 rounded-full blur-md"
     />
   )
 
@@ -58,94 +61,85 @@ export function OrderSuccessOverlay({ visible, onDone }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center overflow-hidden"
+        className="fixed inset-0 z-[9999] bg-[#FAF7EF] flex flex-col items-center justify-center overflow-hidden"
       >
-        <div className="relative w-full max-w-md flex flex-col items-center">
+        <div className="relative w-full max-w-lg flex flex-col items-center">
           
           <AnimatePresence mode="wait">
             {status === 'loading' ? (
               <motion.div
                 key="truck-container"
-                initial={{ x: "-100vw" }}
+                initial={{ x: "-120vw" }}
                 animate={{ x: 0 }}
-                exit={{ x: "100vw", opacity: 0 }}
-                transition={{ type: "spring", damping: 20, stiffness: 100 }}
+                exit={{ x: "120vw", opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 100 }}
                 className="relative"
               >
-                {/* Exhaust Puffs */}
-                <Puff delay={0} />
-                <Puff delay={0.3} />
+                {/* Motion Effects */}
+                <div className="absolute inset-0 -z-10">
+                  <SpeedLine top="15%" delay={0} />
+                  <SpeedLine top="45%" delay={0.15} />
+                  <SpeedLine top="75%" delay={0.3} />
+                </div>
 
-                {/* Bakery Truck Body */}
+                <ExhaustPuff delay={0} />
+                <ExhaustPuff delay={0.2} />
+
+                {/* THE TRUCK */}
                 <motion.div
                   variants={!shouldReduceMotion ? truckBuzz : {}}
                   animate="loading"
-                  className="relative w-64 h-40 bg-[#fdf5e6] border-b-4 border-gray-800 rounded-t-3xl rounded-br-lg flex items-center justify-center shadow-xl"
+                  className="relative w-80 h-48"
                 >
-                  {/* Cabin */}
-                  <div className="absolute -right-12 bottom-0 w-16 h-24 bg-[#fdf5e6] rounded-tr-2xl border-l-4 border-gray-100">
-                    <div className="absolute top-4 right-2 w-10 h-8 bg-blue-100 rounded-sm border-2 border-gray-800" />
+                  {/* Body - Orange */}
+                  <div className="absolute left-0 top-0 w-60 h-40 bg-[#C85B24] rounded-2xl shadow-2xl border-b-[8px] border-black/20 overflow-hidden z-10">
+                    <div className="absolute inset-0 flex items-center justify-center p-6">
+                      <img 
+                        src="/new-logo.png" 
+                        alt="Logo" 
+                        className="w-full h-full object-contain select-none"
+                      />
+                    </div>
                   </div>
-                  
-                  {/* Bakery Logo */}
-                  <div className="flex flex-col items-center select-none">
-                    <span className="text-[#8b4513] font-black text-2xl italic tracking-tighter">BAKERY</span>
-                    <div className="h-0.5 w-16 bg-[#d2691e] mt-1" />
-                    <span className="text-[#d2691e] text-[10px] font-bold uppercase mt-1">Fresh Express</span>
+
+                  {/* Cabin - Off-White */}
+                  <div className="absolute right-2 bottom-[8px] w-28 h-32 bg-[#FAF7EF] rounded-tr-[45px] rounded-br-xl border-2 border-black/10 shadow-xl z-20">
+                    <div className="absolute top-4 right-3 w-16 h-14 bg-gray-900 rounded-tr-[30px] rounded-tl-md" />
+                    <div className="absolute bottom-10 right-0 w-3 h-8 bg-yellow-300 rounded-l-full shadow-[6px_0_20px_#fde047]" />
                   </div>
 
                   {/* Wheels */}
-                  <motion.div 
-                    animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 0.4, ease: "linear" }}
-                    className="absolute -bottom-5 left-8 w-10 h-10 bg-gray-800 rounded-full border-4 border-gray-600 flex items-center justify-center"
-                  >
-                    <div className="w-2 h-2 bg-gray-400 rounded-full" />
-                  </motion.div>
-                  <motion.div 
-                    animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 0.4, ease: "linear" }}
-                    className="absolute -bottom-5 right-4 w-10 h-10 bg-gray-800 rounded-full border-4 border-gray-600 flex items-center justify-center"
-                  >
-                    <div className="w-2 h-2 bg-gray-400 rounded-full" />
-                  </motion.div>
+                  {[40, 210].map((leftPos) => (
+                    <motion.div 
+                      key={leftPos}
+                      style={{ left: leftPos }}
+                      animate={{ rotate: 360 }}
+                      transition={{ repeat: Infinity, duration: 0.3, ease: "linear" }}
+                      className="absolute -bottom-4 w-14 h-14 bg-gray-900 rounded-full border-[4px] border-gray-800 flex items-center justify-center z-30 shadow-lg"
+                    >
+                      <div className="w-6 h-6 border-2 border-dashed border-gray-600 rounded-full" />
+                    </motion.div>
+                  ))}
                 </motion.div>
 
                 <motion.p 
                   animate={{ opacity: [1, 0.5, 1] }}
                   transition={{ repeat: Infinity, duration: 1 }}
-                  className="text-center mt-12 font-mono text-gray-400 text-xs tracking-[0.3em] uppercase"
+                  className="text-center mt-20 font-black text-gray-800 text-[11px] tracking-[0.5em] uppercase"
                 >
-                  Starting the engine...
+                  Speeding to you...
                 </motion.p>
               </motion.div>
             ) : (
               <motion.div
                 key="success-prompt"
-                initial={{ scale: 0.5, opacity: 0 }}
+                initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 className="flex flex-col items-center"
               >
-                {/* Floating Bread/Cake Icons */}
-                <div className="relative flex gap-4 mb-8">
-                  {['🥐', '🍰', '🍞'].map((item, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: [0, -20, 0], opacity: 1 }}
-                      transition={{ 
-                        delay: i * 0.1, 
-                        y: { repeat: Infinity, duration: 2, ease: "easeInOut" } 
-                      }}
-                      className="text-4xl"
-                    >
-                      {item}
-                    </motion.span>
-                  ))}
-                </div>
-
-                <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center shadow-2xl shadow-green-200">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" className="text-white">
+                {/* --- GREEN SUCCESS UI --- */}
+                <div className="w-28 h-28 bg-emerald-500 rounded-full flex items-center justify-center shadow-[0_20px_50px_rgba(16,185,129,0.4)]">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" className="text-white">
                     <motion.path
                       d="M20 6L9 17L4 12"
                       stroke="currentColor"
@@ -154,25 +148,21 @@ export function OrderSuccessOverlay({ visible, onDone }) {
                       strokeLinejoin="round"
                       initial={{ pathLength: 0 }}
                       animate={{ pathLength: 1 }}
-                      transition={{ duration: 0.5 }}
+                      transition={{ duration: 0.6 }}
                     />
                   </svg>
                 </div>
-
-                <h2 className="text-3xl font-black text-gray-900 mt-8 tracking-tight">Order Placed!</h2>
-                <p className="text-gray-500 font-medium mt-2">Delivery is buzzing your way.</p>
+                
+                <h2 className="text-4xl font-black text-emerald-600 mt-10 tracking-tight text-center">ORDER PLACED!</h2>
+                
+                <div className="flex items-center gap-2 mt-2">
+                  <div className="w-2 h-2 rounded-full bg-[#C85B24] animate-pulse" />
+                  <p className="text-gray-600 font-bold">Your treats are being prepared.</p>
+                </div>
+                {/* ------------------------- */}
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
-
-        {/* Footer Detail */}
-        <div className="absolute bottom-10 w-full flex justify-center opacity-30">
-          <div className="flex items-center gap-4">
-            <div className="h-[1px] w-12 bg-gray-400" />
-            <span className="text-[10px] font-bold tracking-[0.5em] text-gray-500 uppercase">Premium Bakery Service</span>
-            <div className="h-[1px] w-12 bg-gray-400" />
-          </div>
         </div>
       </motion.div>
     </AnimatePresence>
