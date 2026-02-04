@@ -5,6 +5,7 @@ import { CartProvider } from '@/components/cart-context'
 import { Header } from '@/components/header'
 import { CartDrawer } from '@/components/cart-drawer'
 import { Footer } from '@/components/footer'
+import { Toaster } from '@/components/ui/toaster'
 
 /* ✅ BEST Josefin Slab config */
 const josefinSlab = Josefin_Slab({
@@ -36,12 +37,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`₹{josefinSlab.variable} ₹{dmSans.variable}`}>
+    <html lang="en" className={`${josefinSlab.variable} ${dmSans.variable}`}>
       <body className="font-sans antialiased bg-cream text-foreground">
         <CartProvider>
           <Header />
           <main>{children}</main>
           <CartDrawer />
+          <Toaster />
           <Footer />
         </CartProvider>
         <Analytics />

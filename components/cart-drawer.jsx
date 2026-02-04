@@ -3,10 +3,12 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Plus, Minus, ShoppingBag } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useCart } from './cart-context'
 
 export function CartDrawer() {
   const { items, isOpen, setIsOpen, removeItem, updateQuantity, total } = useCart()
+  const router = useRouter()
 
   return (
     <AnimatePresence>
@@ -27,7 +29,7 @@ export function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 h-full w-full max-w-md bg-card z-50 shadow-2xl flex flex-col"
+            className="fixed right-0 top-0 h-full w-full max-w-[92vw] sm:max-w-md bg-card z-50 shadow-2xl flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-border">
@@ -117,7 +119,7 @@ export function CartDrawer() {
 
             {/* Footer */}
             {items.length > 0 && (
-              <div className="border-t border-border p-6 space-y-4">
+              <div className="border-t border-border p-6 space-y-4 sticky bottom-0 bg-card">
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
                   <span className="font-serif text-xl text-primary">
@@ -126,13 +128,20 @@ export function CartDrawer() {
                 </div>
                 <button
                   type="button"
+                  onClick={() => {
+                    setIsOpen(false)
+                    router.push('/checkout')
+                  }}
                   className="w-full py-4 bg-primary text-primary-foreground font-medium rounded-2xl hover:bg-primary/90 transition-colors uppercase tracking-wide"
                 >
                   Checkout
                 </button>
                 <button
                   type="button"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false)
+                    router.push('/shop')
+                  }}
                   className="w-full py-3 bg-transparent border border-primary text-primary font-medium rounded-2xl hover:bg-primary/5 transition-colors uppercase tracking-wide text-sm"
                 >
                   Continue Shopping

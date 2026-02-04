@@ -90,7 +90,7 @@ export default function ProductDetailPage({ params }) {
         <div className="grid lg:grid-cols-2 gap-14 items-start">
 
           {/* LEFT – IMAGE + BACK BUTTON FOR LARGE DEVICES */}
-          <div className="relative flex flex-col items-center pt-8 lg:pt-12">
+          <div className="relative flex flex-col items-center pt-6 lg:pt-8">
             {/* BACK BUTTON FOR LARGE SCREENS */}
             <button
               onClick={() => router.back()}
@@ -106,7 +106,7 @@ export default function ProductDetailPage({ params }) {
                   {images.map((src, i) => (
                     <CarouselItem key={i}>
                       <div
-                        className="relative aspect-[3/2] rounded-xl overflow-hidden bg-muted cursor-zoom-in"
+                        className="relative aspect-[4/3] sm:aspect-[3/2] rounded-xl overflow-hidden bg-muted cursor-zoom-in"
                         onClick={() => setLightboxOpen(true)}
                       >
                         <Image
@@ -129,9 +129,9 @@ export default function ProductDetailPage({ params }) {
               </Carousel>
             </div>
             <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
-              <DialogContent className="bg-transparent border-none p-0 sm:max-w-3xl w-[95vw] sm:w-[75vw] h-auto rounded-xl shadow-2xl">
+              <DialogContent className="bg-transparent border-none p-0 sm:max-w-3xl w-[95vw] sm:w-[85vw] h-auto rounded-xl shadow-2xl">
                 <DialogTitle className="sr-only">{product.name}</DialogTitle>
-                <div className="relative w-full aspect-[3/2] sm:aspect-[3/2]">
+                <div className="relative w-full aspect-[4/3] sm:aspect-[3/2]">
                   <Image
                     src={images[activeIndex] || '/placeholder.svg'}
                     alt={product.name}
@@ -143,18 +143,15 @@ export default function ProductDetailPage({ params }) {
             </Dialog>
 
             {/* BOTTOM THUMBNAILS */}
-            <div
-              className="relative z-20"
-              style={{ transform: 'translateY(-30%)' }}
-            >
-              <div className="flex justify-center gap-3">
+            <div className="relative z-20 mt-4">
+              <div className="flex justify-center gap-3 flex-wrap">
                 {images.map((src, i) => {
                   const isActive = i === activeIndex
                   return (
                     <div
                       key={i}
                       className={`
-                        w-28 h-28 flex-shrink-0
+                        w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0
                         p-[3px] rounded-lg
                         bg-white/30 backdrop-blur-md
                         transition-all duration-300
