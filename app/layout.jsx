@@ -6,6 +6,7 @@ import { Header } from '@/components/header'
 import { CartDrawer } from '@/components/cart-drawer'
 import { Footer } from '@/components/footer'
 import { Toaster } from '@/components/ui/toaster'
+import Script from 'next/script'
 
 /* ✅ BEST Josefin Slab config */
 const josefinSlab = Josefin_Slab({
@@ -38,6 +39,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${josefinSlab.variable} ${dmSans.variable}`}>
+        <head>
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="beforeInteractive"
+        />
+        </head>
       <body className="font-sans antialiased bg-cream text-foreground">
         <CartProvider>
           <Header />
