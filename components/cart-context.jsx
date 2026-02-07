@@ -1,55 +1,108 @@
-'use client'
+"use client";
 
-import { createContext, useContext, useState } from 'react'
-import { toast } from '@/hooks/use-toast'
+import { createContext, useContext, useEffect, useState } from "react";
+import api from "@/utils/axiosinstance";
+import { toast } from "@/hooks/use-toast";
 
-const CartContext = createContext(undefined)
+const CartContext = createContext(undefined);
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([])
-  const [isOpen, setIsOpen] = useState(false)
+  const [items, setItems] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const addItem = (product) => {
-    setItems((prev) => {
-      const existing = prev.find((item) => item.id === product.id)
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
+  /* ---------------- FETCH CART ---------------- */
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const { data } = await api.get("/cart/get");
+        setItems(data?.cart?.items || []);
+      } catch (error) {
+        console.error("Fetch cart failed", error);
+      } finally {
+        setLoading(false);
       }
-      return [...prev, { ...product, quantity: 1 }]
-    })
-    toast({
-      title: 'Added to cart', 
-      description: `${product.name} was added successfully.`,
-    })
-    setIsOpen(true)
-  }
+    };
 
-  const removeItem = (productId) => {
-    setItems((prev) => prev.filter((item) => item.id !== productId))
-  }
+    fetchCart();
+  }, []);
 
-  const updateQuantity = (productId, quantity) => {
-    if (quantity <= 0) {
-      removeItem(productId)
-      return
+  /* ---------------- ADD ITEM ---------------- */
+  const addItem = async (product) => {
+    try {
+      const { data } = await api.post("/cart/add", {
+        items: [
+          {
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1,
+          },
+        ],
+      });
+
+      // 🔥 always trust backend
+      setItems(data?.cart?.items || []);
+      setIsOpen(true);
+
+      toast({
+        title: "Added to cart",
+        description: `${product.name} added successfully`,
+      });
+    } catch (error) {
+      console.error("Add failed", error);
+      toast({
+        title: "Error",
+        description: "Could not add item",
+        variant: "destructive",
+      });
     }
-    setItems((prev) =>
-      prev.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
-      )
-    )
-  }
+  };
 
+  /* ---------------- UPDATE QUANTITY ---------------- */
+  const updateQuantity = async (itemId, newQuantity) => {
+    try {
+      const { data } = await api.put("/cart/update", {
+        itemId,
+        quantity: newQuantity,
+      });
+
+      setItems(data?.cart?.items || []);
+    } catch (error) {
+      console.error("Update failed", error);
+      toast({
+        title: "Error",
+        description: "Quantity update failed",
+        variant: "destructive",
+      });
+    }
+  };
+
+  /* ---------------- REMOVE ITEM ---------------- */
+  const removeItem = async (itemId) => {
+    try {
+      const { data } = await api.delete("/cart/remove", {
+        data: { itemId },
+      });
+
+      setItems(data?.cart?.items || []);
+    } catch (error) {
+      console.error("Remove failed", error);
+      toast({
+        title: "Error",
+        description: "Remove item failed",
+        variant: "destructive",
+      });
+    }
+  };
+
+  /* ---------------- TOTALS ---------------- */
   const total = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
-  )
+    0,
+  );
 
-  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
+  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <CartContext.Provider
@@ -58,21 +111,22 @@ export function CartProvider({ children }) {
         isOpen,
         setIsOpen,
         addItem,
-        removeItem,
         updateQuantity,
+        removeItem,
         total,
         itemCount,
+        loading,
       }}
     >
       {children}
     </CartContext.Provider>
-  )
+  );
 }
 
 export function useCart() {
-  const context = useContext(CartContext)
+  const context = useContext(CartContext);
   if (!context) {
-    throw new Error('useCart must be used within a CartProvider')
+    throw new Error("useCart must be used within CartProvider");
   }
-  return context
+  return context;
 }
