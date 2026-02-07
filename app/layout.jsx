@@ -1,6 +1,7 @@
 import { Josefin_Slab, DM_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { AuthProvider } from '@/components/auth-context'
 import { CartProvider } from '@/components/cart-context'
 import { Header } from '@/components/header'
 import { CartDrawer } from '@/components/cart-drawer'
@@ -39,13 +40,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${josefinSlab.variable} ${dmSans.variable}`}>
       <body className="font-sans antialiased bg-cream text-foreground">
-        <CartProvider>
-          <Header />
-          <main>{children}</main>
-          <CartDrawer />
-          <Toaster />
-          <Footer />
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <Header />
+            <main>{children}</main>
+            <CartDrawer />
+            <Toaster />
+            <Footer />
+          </CartProvider>
+        </AuthProvider>
         <Analytics />
       </body>
     </html>

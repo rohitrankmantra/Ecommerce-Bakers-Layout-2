@@ -5,9 +5,18 @@ import Image from 'next/image'
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, ShoppingBag, Menu, X, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react'
+import { Search, ShoppingBag, Menu, X, Phone, Mail, MapPin, Facebook, Instagram, Twitter, User } from 'lucide-react'
 import { useCart } from './cart-context'
 import { products } from '@/lib/products'
+import { useAuth } from '@/components/auth-context'
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+} from '@/components/ui/dropdown-menu'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -24,6 +33,7 @@ export function Header() {
   const searchRef = useRef(null)
   const router = useRouter()
   const { setIsOpen, itemCount } = useCart()
+  const { user, logout } = useAuth()
 
   // Filter products based on search query
   const searchResults = searchQuery.length > 0
@@ -166,6 +176,44 @@ export function Header() {
 
             {/* Right Actions */}
             <div className="flex items-center gap-4">
+              {/* Account */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    type="button"
+                    aria-label="Account"
+                    className="p-2 text-black hover:text-primary/80 transition-colors"
+                  >
+                    <User className="w-5 h-5 text-black hover:text-primary/80 transition-colors" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="min-w-56">
+                  <DropdownMenuLabel>
+                    {user ? `Signed in as ${user.name}` : 'Account'}
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {user ? (
+                    <DropdownMenuItem
+                      variant="destructive"
+                      onClick={() => {
+                        logout()
+                        router.push('/')
+                      }}
+                    >
+                      Logout
+                    </DropdownMenuItem>
+                  ) : (
+                    <>
+                      <DropdownMenuItem onClick={() => router.push('/auth/login')}>
+                        Login
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => router.push('/auth/signup')}>
+                        Sign up
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
               {/* Search */}
               <div ref={searchRef} className="relative">
                 <button 
