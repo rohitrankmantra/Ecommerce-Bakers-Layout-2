@@ -8,7 +8,7 @@ import Image from 'next/image'
 const slides = [
   {
     id: 1,
-    imageDesktop: '/homebanner.png',
+    imageDesktop: '/homebanner.webp',
     imageMobile: '/homebannermobile1.png',
   },
 ]

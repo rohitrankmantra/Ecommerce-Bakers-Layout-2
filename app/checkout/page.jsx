@@ -54,85 +54,100 @@ const placeOrder = async () => {
   setSubmitting(true)
 
   try {
-    const { data } = await api.post('/orders/checkout', {
-      userInfo: form,
-      items: items.map((item) => ({
-        productId: item._id,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-        image: item.image,
-      })),
+    toast({
+      title: 'Order placed successfully',
+      description: 'Your order is being processed',
     })
-
-    const { razorpayOrder } = data
-
-    if (!window.Razorpay) {
-      toast({
-        title: 'Payment error',
-        description: 'Razorpay SDK not loaded',
-        variant: 'destructive',
-      })
-      return
-    }
-
-    // ✅ Razorpay options
-    const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // 🔥 PUBLIC KEY
-      amount: razorpayOrder.amount,
-      currency: razorpayOrder.currency,
-      name: 'BakeMasters',
-      description: 'Order Payment',
-      order_id: razorpayOrder.id,
-
-      prefill: {
-        name: form.name,
-        email: form.email,
-        contact: form.phone,
-      },
-
-      handler: async function (response) {
-        try {
-          await api.post('/orders/verify', {
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature,
-          })
-
-          clearCart()
-
-          toast({
-            title: 'Payment successful 🎉',
-            description: 'Order confirmed',
-          })
-
-          router.push('/checkout/success')
-        } catch (err) {
-          toast({
-            title: 'Payment verification failed',
-            variant: 'destructive',
-          })
-        }
-      },
-
-      theme: {
-        color: '#7C3AED',
-      },
-    }
-
-    const rzp = new window.Razorpay(options)
-    rzp.open()
-
+    setSuccessVisible(true)
+    clearCart()
+    router.push('/checkout/success')
   } catch (error) {
     toast({
-      title: 'Checkout failed',
-      description:
-        error?.response?.data?.message || 'Something went wrong',
+      title: 'Order placement failed',
       variant: 'destructive',
     })
-  } finally {
-    setSubmitting(false)
   }
+
+  // try {
+  //   const { data } = await api.post('/orders/checkout', {
+  //     userInfo: form,
+  //     items: items.map((item) => ({
+  //       productId: item._id,
+  //       name: item.name,
+  //       price: item.price,
+  //       quantity: item.quantity,
+  //       image: item.image,
+  //     })),
+  //   })
+
+  //   const { razorpayOrder } = data
+
+  //   if (!window.Razorpay) {
+  //     toast({
+  //       title: 'Payment error',
+  //       description: 'Razorpay SDK not loaded',
+  //       variant: 'destructive',
+  //     })
+  //     return
+  //   }
+
+  //   // ✅ Razorpay options
+  //   const options = {
+  //     key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // 🔥 PUBLIC KEY
+  //     amount: razorpayOrder.amount,
+  //     currency: razorpayOrder.currency,
+  //     name: 'BakeMasters',
+  //     description: 'Order Payment',
+  //     order_id: razorpayOrder.id,
+
+  //     prefill: {
+  //       name: form.name,
+  //       email: form.email,
+  //       contact: form.phone,
+  //     },
+
+  //     handler: async function (response) {
+  //       try {
+  //         await api.post('/orders/verify', {
+  //           razorpay_order_id: response.razorpay_order_id,
+  //           razorpay_payment_id: response.razorpay_payment_id,
+  //           razorpay_signature: response.razorpay_signature,
+  //         })
+
+  //         clearCart()
+
+  //         toast({
+  //           title: 'Payment successful 🎉',
+  //           description: 'Order confirmed',
+  //         })
+
+  //         router.push('/checkout/success')
+  //       } catch (err) {
+  //         toast({
+  //           title: 'Payment verification failed',
+  //           variant: 'destructive',
+  //         })
+  //       }
+  //     },
+
+  //     theme: {
+  //       color: '#7C3AED',
+  //     },
+  //   }
+
+  //   const rzp = new window.Razorpay(options)
+  //   rzp.open()
+
+  // } catch (error) {
+  //   toast({
+  //     title: 'Checkout failed',
+  //     description:
+  //       error?.response?.data?.message || 'Something went wrong',
+  //     variant: 'destructive',
+  //   })
+  // } finally {
+  //   setSubmitting(false)
+  // }
 }
 
 

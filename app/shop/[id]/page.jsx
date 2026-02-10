@@ -106,7 +106,7 @@ export default function ProductDetailPage({ params }) {
                   {images.map((src, i) => (
                     <CarouselItem key={i}>
                       <div
-                        className="relative aspect-[4/3] sm:aspect-[3/2] rounded-xl overflow-hidden bg-muted cursor-zoom-in"
+                        className="relative aspect-4/3 sm:aspect-3/2 rounded-xl overflow-hidden bg-muted cursor-zoom-in"
                         onClick={() => setLightboxOpen(true)}
                       >
                         <Image
@@ -131,7 +131,7 @@ export default function ProductDetailPage({ params }) {
             <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
               <DialogContent className="bg-transparent border-none p-0 sm:max-w-3xl w-[95vw] sm:w-[85vw] h-auto rounded-xl shadow-2xl">
                 <DialogTitle className="sr-only">{product.name}</DialogTitle>
-                <div className="relative w-full aspect-[4/3] sm:aspect-[3/2]">
+                <div className="relative w-full aspect-4/3 sm:aspect-3/2">
                   <Image
                     src={images[activeIndex] || '/placeholder.svg'}
                     alt={product.name}
@@ -151,8 +151,8 @@ export default function ProductDetailPage({ params }) {
                     <div
                       key={i}
                       className={`
-                        w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0
-                        p-[3px] rounded-lg
+                        w-24 h-24 sm:w-28 sm:h-28 shrink-0
+                        p-0.75 rounded-lg
                         bg-white/30 backdrop-blur-md
                         transition-all duration-300
                         ${isActive
