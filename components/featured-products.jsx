@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion, useMotionValue, animate } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -42,22 +41,22 @@ export function FeaturedProducts() {
   const [page, setPage] = useState(0)
 
   const viewportRef = useRef(null)
-  const x = useMotionValue(0)
 
-  /* ---------------- SLIDE ---------------- */
+  /* ---------------- SLIDE WITHOUT ANIMATION ---------------- */
   const slideTo = useCallback(
     (targetPage) => {
       if (!viewportRef.current) return
 
       const width = viewportRef.current.offsetWidth
-      const targetX = -targetPage * width
+      const offset = -targetPage * width
 
-      animate(x, targetX, {
-        duration: 0.75,
-        ease: [0.22, 1, 0.36, 1],
-      })
+      // Use CSS transform without animation for instant scroll
+      const motionDiv = viewportRef.current.querySelector('.carousel-inner')
+      if (motionDiv) {
+        motionDiv.style.transform = `translateX(${offset}px)`
+      }
     },
-    [x]
+    []
   )
 
   const next = () => {
@@ -72,18 +71,13 @@ export function FeaturedProducts() {
     slideTo(prevPage)
   }
 
-  /* ---------------- AUTO PLAY ---------------- */
+  /* ---------------- AUTO PLAY DISABLED (NO INTERRUPTION) -------- */
   useEffect(() => {
     slideTo(page)
   }, [page, slideTo])
 
-  useEffect(() => {
-    const id = setInterval(next, 5000)
-    return () => clearInterval(id)
-  }, [page])
-
   return (
-    <section className="py-20 md:py-28 bg-beige/30 overflow-hidden">
+    <section className="py-20 md:py-28 bg-beige/30">
       <div className="max-w-7xl mx-auto px-4">
         {/* -------- HEADER -------- */}
         <div className="text-center mb-12">
@@ -106,9 +100,9 @@ export function FeaturedProducts() {
 
           {/* -------- VIEWPORT -------- */}
           <div ref={viewportRef} className="overflow-hidden">
-            <motion.div
-              style={{ x }}
-              className="flex will-change-transform"
+            <div
+              className="carousel-inner flex transition-transform duration-300"
+              style={{ transform: `translateX(0)` }}
             >
               {Array.from({ length: totalPages }).map((_, i) => {
                 const items = featuredProducts.slice(
@@ -175,7 +169,7 @@ export function FeaturedProducts() {
                   </div>
                 )
               })}
-            </motion.div>
+            </div>
           </div>
 
           {/* -------- DOTS -------- */}

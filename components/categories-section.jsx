@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -36,28 +35,13 @@ const categories = [
 export function CategoriesSection() {
   /* MOBILE SLIDER STATE */
   const [index, setIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
 
   const next = () => {
-    setDirection(1)
     setIndex((prev) => (prev === categories.length - 1 ? 0 : prev + 1))
   }
 
   const prev = () => {
-    setDirection(-1)
     setIndex((prev) => (prev === 0 ? categories.length - 1 : prev - 1))
-  }
-
-  const slideVariants = {
-    enter: (direction ) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0,
-    }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction) => ({
-      x: direction > 0 ? -100 : 100,
-      opacity: 0,
-    }),
   }
 
   return (
@@ -90,19 +74,9 @@ export function CategoriesSection() {
           </button>
 
           <div className="overflow-hidden px-10">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={index}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.35 }}
-              >
-                <CategoryCard category={categories[index]} />
-              </motion.div>
-            </AnimatePresence>
+            <div>
+              <CategoryCard category={categories[index]} />
+            </div>
           </div>
         </div>
 

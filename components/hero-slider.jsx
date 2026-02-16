@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 
@@ -34,28 +33,20 @@ function HeroSlider() {
   }, [nextSlide, hasMultipleSlides])
 
   return (
-    <section className="relative w-full h-[70vh] md:h-[75vh] ">
-      <AnimatePresence initial={false}>
-        <motion.div
-          key={current}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-          className="absolute inset-0"
-        >
-          <picture className="absolute inset-0">
-            <source media="(min-width: 768px)" srcSet={slides[current].imageDesktop} />
-            <img
-              src={slides[current].imageMobile}
-              alt={`Slide ₹{current + 1}`}
-              loading="eager"
-              fetchPriority="high"
-              sizes="100vw"
-              className="w-full h-full object-cover"
-            />
-          </picture>
-        </motion.div>
-      </AnimatePresence>
+    <section className="relative w-full h-[70vh] md:h-[75vh]">
+      <div className="absolute inset-0">
+        <picture className="absolute inset-0">
+          <source media="(min-width: 768px)" srcSet={slides[current].imageDesktop} />
+          <img
+            src={slides[current].imageMobile}
+            alt={`Slide ${current + 1}`}
+            loading="eager"
+            fetchPriority="high"
+            sizes="100vw"
+            className="w-full h-full object-cover"
+          />
+        </picture>
+      </div>
 
       {hasMultipleSlides && (
         <>

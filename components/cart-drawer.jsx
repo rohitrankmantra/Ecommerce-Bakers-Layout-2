@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { X, Plus, Minus, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,52 +10,45 @@ export function CartDrawer() {
     useCart();
   const router = useRouter();
 
+  if (!isOpen) return null;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+    <>
+      {/* Backdrop */}
+      <div
+        onClick={() => setIsOpen(false)}
+        className="fixed inset-0 bg-primary/20 backdrop-blur-sm z-50"
+      />
+
+      {/* Drawer */}
+      <div
+        className="fixed right-0 top-0 h-full w-full max-w-[92vw] sm:max-w-md bg-card z-50 shadow-2xl flex flex-col transition-transform duration-300"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-border">
+          <div className="flex items-center gap-3">
+            <ShoppingBag className="w-6 h-6 text-primary" />
+            <h2 className="font-serif text-xl text-primary">Your Cart</h2>
+          </div>
+          <button
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 bg-primary/20 backdrop-blur-sm z-50"
-          />
-
-          {/* Drawer */}
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 h-full w-full max-w-[92vw] sm:max-w-md bg-card z-50 shadow-2xl flex flex-col"
+            className="p-2 hover:bg-muted rounded-full"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-border">
-              <div className="flex items-center gap-3">
-                <ShoppingBag className="w-6 h-6 text-primary" />
-                <h2 className="font-serif text-xl text-primary">Your Cart</h2>
-              </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-2 hover:bg-muted rounded-full"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+            <X className="w-5 h-5" />
+          </button>
+        </div>
 
-            {/* Items */}
-            <div className="flex-1 overflow-y-auto p-6">
-              {items.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
-                  <ShoppingBag className="w-16 h-16 mb-4 opacity-30" />
-                  <p>Your cart is empty</p>
-                </div>
-              ) : (
-                <ul className="space-y-6">
-                  {items.map((item) => (
-                    <motion.li key={item.name} layout className="flex gap-4">
+        {/* Items */}
+        <div className="flex-1 overflow-y-auto p-6">
+          {items.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
+              <ShoppingBag className="w-16 h-16 mb-4 opacity-30" />
+              <p>Your cart is empty</p>
+            </div>
+          ) : (
+            <ul className="space-y-6">
+              {items.map((item) => (
+                <li key={item.name} className="flex gap-4">
                       <div className="relative w-24 h-24 rounded-2xl overflow-hidden bg-muted">
                         <Image
                           src={item.image || "/placeholder.svg"}
@@ -108,7 +100,7 @@ export function CartDrawer() {
                       >
                         <X className="w-4 h-4" />
                       </button>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               )}
@@ -135,9 +127,7 @@ export function CartDrawer() {
                 </button>
               </div>
             )}
-          </motion.div>
+          </div>
         </>
-      )}
-    </AnimatePresence>
-  );
-}
+      );
+    }
