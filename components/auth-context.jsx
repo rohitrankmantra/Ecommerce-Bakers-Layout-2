@@ -80,7 +80,7 @@
      }
      users.push(newUser)
      saveUsers(users)
-     const session = { user: { id: newUser.id, name, email } }
+     const session = { user: { id: newUser.id, name, email, createdAt: newUser.createdAt } }
      saveSession(session)
      setUser(session.user)
      toast({
@@ -108,7 +108,7 @@
        })
        return { ok: false, error: 'invalid' }
      }
-     const session = { user: { id: match.id, name: match.name, email: match.email } }
+     const session = { user: { id: match.id, name: match.name, email: match.email, createdAt: match.createdAt } }
      saveSession(session)
      setUser(session.user)
      toast({
@@ -127,6 +127,35 @@
      })
    }
  
+   const resetPassword = async ({ email, newPassword }) => {
+     const users = loadUsers()
+     const user = users.find((u) => u.email.toLowerCase() === email.toLowerCase())
+     
+     if (!user) {
+       toast({
+         title: 'Error',
+         description: 'User not found.',
+       })
+       return { ok: false }
+     }
+
+     // Update password with new salt
+     const salt = Math.random().toString(36).slice(2)
+     const passwordHash = await sha256(salt + ':' + newPassword)
+     
+     user.passwordHash = passwordHash
+     user.salt = salt
+     
+     saveUsers(users)
+     
+     toast({
+       title: 'Success',
+       description: 'Your password has been reset successfully.',
+     })
+     
+     return { ok: true }
+   }
+
    const value = useMemo(
      () => ({
        user,
@@ -134,6 +163,7 @@
        signup,
        login,
        logout,
+       resetPassword,
      }),
      [user, loading],
    )

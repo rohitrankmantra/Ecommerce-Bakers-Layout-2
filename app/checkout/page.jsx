@@ -1,22 +1,35 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/components/cart-context'
+import { useAuth } from '@/components/auth-context'
 import { toast } from '@/hooks/use-toast'
 import { OrderSuccessOverlay } from '@/components/order-success'
 import api from '@/utils/axiosinstance'
 
 export default function CheckoutPage() {
   const router = useRouter()
+  const { user } = useAuth()
   const { items, removeItem, total, clearCart } = useCart()
+
+  // Redirect if not logged in
+  useEffect(() => {
+    if (!user) {
+      toast({
+        title: 'Please login first',
+        description: 'You need to sign in to place an order',
+      })
+      router.push('/auth/login')
+    }
+  }, [user, router])
 
   const [form, setForm] = useState({
     name: '',
     phone: '',
-    email: '',
+    email: user?.email || '',
     address: '',
     city: '',
     state: '',
@@ -47,107 +60,93 @@ const grandTotal = subtotal
     form.postalCode.trim().length >= 6
 
   /**
-   * PLACE ORDER → BACKEND CHECKOUT
+   * PLACE ORDER → BACKEND CHECKOUT WITH RAZORPAY
    */
 const placeOrder = async () => {
   if (!isValid() || isEmpty || submitting) return
   setSubmitting(true)
 
   try {
-    toast({
-      title: 'Order placed successfully',
-      description: 'Your order is being processed',
+    const { data } = await api.post('/orders/checkout', {
+      userInfo: form,
+      items: items.map((item) => ({
+        productId: item._id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        image: item.image,
+      })),
     })
-    setSuccessVisible(true)
-    clearCart()
-    router.push('/checkout/success')
+
+    const { razorpayOrder } = data
+
+    if (!window.Razorpay) {
+      toast({
+        title: 'Payment error',
+        description: 'Razorpay SDK not loaded',
+        variant: 'destructive',
+      })
+      setSubmitting(false)
+      return
+    }
+
+    // ✅ Razorpay options
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // 🔥 PUBLIC KEY
+      amount: razorpayOrder.amount,
+      currency: razorpayOrder.currency,
+      name: 'BakeMasters',
+      description: 'Order Payment',
+      order_id: razorpayOrder.id,
+
+      prefill: {
+        name: form.name,
+        email: form.email,
+        contact: form.phone,
+      },
+
+      handler: async function (response) {
+        try {
+          await api.post('/orders/verify', {
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+          })
+
+          clearCart()
+
+          toast({
+            title: 'Payment successful 🎉',
+            description: 'Order confirmed',
+          })
+
+          router.push('/checkout/success')
+        } catch (err) {
+          toast({
+            title: 'Payment verification failed',
+            variant: 'destructive',
+          })
+          setSubmitting(false)
+        }
+      },
+
+      theme: {
+        color: '#7C3AED',
+      },
+    }
+
+    const rzp = new window.Razorpay(options)
+    rzp.open()
+
   } catch (error) {
     toast({
-      title: 'Order placement failed',
+      title: 'Checkout failed',
+      description:
+        error?.response?.data?.message || 'Something went wrong',
       variant: 'destructive',
     })
+    setSubmitting(false)
   }
-
-  // try {
-  //   const { data } = await api.post('/orders/checkout', {
-  //     userInfo: form,
-  //     items: items.map((item) => ({
-  //       productId: item._id,
-  //       name: item.name,
-  //       price: item.price,
-  //       quantity: item.quantity,
-  //       image: item.image,
-  //     })),
-  //   })
-
-  //   const { razorpayOrder } = data
-
-  //   if (!window.Razorpay) {
-  //     toast({
-  //       title: 'Payment error',
-  //       description: 'Razorpay SDK not loaded',
-  //       variant: 'destructive',
-  //     })
-  //     return
-  //   }
-
-  //   // ✅ Razorpay options
-  //   const options = {
-  //     key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // 🔥 PUBLIC KEY
-  //     amount: razorpayOrder.amount,
-  //     currency: razorpayOrder.currency,
-  //     name: 'BakeMasters',
-  //     description: 'Order Payment',
-  //     order_id: razorpayOrder.id,
-
-  //     prefill: {
-  //       name: form.name,
-  //       email: form.email,
-  //       contact: form.phone,
-  //     },
-
-  //     handler: async function (response) {
-  //       try {
-  //         await api.post('/orders/verify', {
-  //           razorpay_order_id: response.razorpay_order_id,
-  //           razorpay_payment_id: response.razorpay_payment_id,
-  //           razorpay_signature: response.razorpay_signature,
-  //         })
-
-  //         clearCart()
-
-  //         toast({
-  //           title: 'Payment successful 🎉',
-  //           description: 'Order confirmed',
-  //         })
-
-  //         router.push('/checkout/success')
-  //       } catch (err) {
-  //         toast({
-  //           title: 'Payment verification failed',
-  //           variant: 'destructive',
-  //         })
-  //       }
-  //     },
-
-  //     theme: {
-  //       color: '#7C3AED',
-  //     },
-  //   }
-
-  //   const rzp = new window.Razorpay(options)
-  //   rzp.open()
-
-  // } catch (error) {
-  //   toast({
-  //     title: 'Checkout failed',
-  //     description:
-  //       error?.response?.data?.message || 'Something went wrong',
-  //     variant: 'destructive',
-  //   })
-  // } finally {
-  //   setSubmitting(false)
-  // }
 }
 
 

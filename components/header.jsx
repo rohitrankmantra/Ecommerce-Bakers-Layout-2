@@ -23,7 +23,9 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false)
   const searchRef = useRef(null)
+  const accountRef = useRef(null)
   const router = useRouter()
   const { setIsOpen, itemCount } = useCart()
   const { user, logout } = useAuth()
@@ -42,6 +44,9 @@ export function Header() {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setSearchOpen(false)
         setSearchQuery('')
+      }
+      if (accountRef.current && !accountRef.current.contains(event.target)) {
+        setAccountMenuOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -170,14 +175,66 @@ export function Header() {
             {/* Right Actions */}
             <div className="flex items-center gap-4">
               {/* Account */}
-              <button
-                type="button"
-                aria-label="Account"
-                onClick={() => router.push('/auth/login')}
-                className="p-2 text-black cursor-pointer transition-colors"
-              >
-                <User className="w-5 h-5 text-black transition-colors" />
-              </button>
+              <div ref={accountRef} className="relative">
+                <button
+                  type="button"
+                  aria-label="Account"
+                  onClick={() => {
+                    if (user) {
+                      setAccountMenuOpen(!accountMenuOpen)
+                    } else {
+                      router.push('/auth/login')
+                    }
+                  }}
+                  className="w-10 h-10 rounded-full bg-linear-to-r from-primary to-gold text-white flex items-center justify-center font-semibold text-sm cursor-pointer hover:ring-2 hover:ring-gold transition-all"
+                  title={user?.name || 'Account'}
+                >
+                  {user ? user.name.charAt(0).toUpperCase() : <User className="w-5 h-5" />}
+                </button>
+
+                {/* Account Dropdown Menu */}
+                {user && (
+                  <AnimatePresence>
+                    {accountMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute right-0 top-full mt-2 w-48 bg-cream rounded-lg shadow-xl border border-border overflow-hidden z-50"
+                      >
+                        <div className="p-3 border-b border-border">
+                          <p className="text-sm font-medium text-primary">{user.name}</p>
+                          <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            router.push('/account')
+                            setAccountMenuOpen(false)
+                          }}
+                          className="w-full text-left px-4 py-2.5 text-sm hover:bg-beige/50 transition-colors text-primary font-medium flex items-center gap-2"
+                        >
+                          <i className="fas fa-box"></i>
+                          My Orders
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            logout()
+                            setAccountMenuOpen(false)
+                            router.push('/')
+                          }}
+                          className="w-full text-left px-4 py-2.5 text-sm hover:bg-beige/50 transition-colors text-red-600 border-t border-border flex items-center gap-2"
+                        >
+                          <i className="fas fa-sign-out-alt"></i>
+                          Logout
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </div>
 
               {/* Search */}
               <div ref={searchRef} className="relative">
