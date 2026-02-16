@@ -18,11 +18,18 @@ const categories = [
   { href: '/shop?category=other', label: 'Other Items' },
 ]
 
+const policies = [
+  { href: '/policies/privacy', label: 'Privacy Policy' },
+  { href: '/policies/terms', label: 'Terms & Conditions' },
+  { href: '/policies/refund', label: 'Refund & Cancellation' },
+  { href: '/policies/shipping', label: 'Shipping & Delivery' },
+]
+
 export function Footer() {
   return (
     <footer id="contact" className="bg-cream border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
@@ -90,6 +97,23 @@ export function Footer() {
             <h3 className="font-serif text-lg font-bold text-primary mb-6">Categories</h3>
             <ul className="space-y-3">
               {categories.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-black hover:text-primary hover:underline underline-offset-8 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Policies */}
+          <div>
+            <h3 className="font-serif text-lg font-bold text-primary mb-6">Policies</h3>
+            <ul className="space-y-3">
+              {policies.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

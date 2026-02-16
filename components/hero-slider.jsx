@@ -8,7 +8,7 @@ import Image from 'next/image'
 const slides = [
   {
     id: 1,
-    imageDesktop: '/homebanner.png',
+    imageDesktop: '/homebanner.webp',
     imageMobile: '/homebannermobile1.png',
   },
 ]
@@ -43,25 +43,17 @@ function HeroSlider() {
           transition={{ duration: 0.8, ease: 'easeInOut' }}
           className="absolute inset-0"
         >
-          {/* Desktop Image */}
-          <Image
-            src={slides[current].imageDesktop}
-            alt={`Slide ₹{current + 1}`}
-            fill
-            priority
-            quality={90}
-            className="hidden md:block object-cover"
-          />
-
-          {/* Mobile Image */}
-          <Image
-            src={slides[current].imageMobile}
-            alt={`Slide ₹{current + 1}`}
-            fill
-            priority
-            quality={90}
-            className="block md:hidden object-cover"
-          />
+          <picture className="absolute inset-0">
+            <source media="(min-width: 768px)" srcSet={slides[current].imageDesktop} />
+            <img
+              src={slides[current].imageMobile}
+              alt={`Slide ₹{current + 1}`}
+              loading="eager"
+              fetchPriority="high"
+              sizes="100vw"
+              className="w-full h-full object-cover"
+            />
+          </picture>
         </motion.div>
       </AnimatePresence>
 

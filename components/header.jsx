@@ -9,14 +9,7 @@ import { Search, ShoppingBag, Menu, X, Phone, Mail, MapPin, Facebook, Instagram,
 import { useCart } from './cart-context'
 import { products } from '@/lib/products'
 import { useAuth } from '@/components/auth-context'
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuLabel,
-} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -177,43 +170,15 @@ export function Header() {
             {/* Right Actions */}
             <div className="flex items-center gap-4">
               {/* Account */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button
-                    type="button"
-                    aria-label="Account"
-                    className="p-2 text-black hover:text-primary/80 transition-colors"
-                  >
-                    <User className="w-5 h-5 text-black hover:text-primary/80 transition-colors" />
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="min-w-56">
-                  <DropdownMenuLabel>
-                    {user ? `Signed in as ${user.name}` : 'Account'}
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  {user ? (
-                    <DropdownMenuItem
-                      variant="destructive"
-                      onClick={() => {
-                        logout()
-                        router.push('/')
-                      }}
-                    >
-                      Logout
-                    </DropdownMenuItem>
-                  ) : (
-                    <>
-                      <DropdownMenuItem onClick={() => router.push('/auth/login')}>
-                        Login
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => router.push('/auth/signup')}>
-                        Sign up
-                      </DropdownMenuItem>
-                    </>
-                  )}
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <button
+                type="button"
+                aria-label="Account"
+                onClick={() => router.push('/auth/login')}
+                className="p-2 text-black cursor-pointer transition-colors"
+              >
+                <User className="w-5 h-5 text-black transition-colors" />
+              </button>
+
               {/* Search */}
               <div ref={searchRef} className="relative">
                 <button 
