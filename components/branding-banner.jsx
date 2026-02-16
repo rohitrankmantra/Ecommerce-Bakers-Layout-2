@@ -15,6 +15,8 @@ export function BrandingBanner() {
           src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1920&q=80"
           alt="Fresh baked goods background"
           fill
+          loading="lazy"
+          sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/90 to-primary/80" />
@@ -141,6 +143,7 @@ export function BrandingBanner() {
                   alt="Fresh pastries"
                   width={192}
                   height={192}
+                loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>

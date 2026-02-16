@@ -45,6 +45,10 @@ export default function RootLayout({ children }) {
           src="https://checkout.razorpay.com/v1/checkout.js"
           strategy="beforeInteractive"
         />
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         </head>
       <body className="font-sans antialiased bg-cream text-foreground">
         <AuthProvider>

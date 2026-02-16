@@ -63,6 +63,7 @@ export function GalleryPreview() {
                   src={image || "/placeholder.svg"}
                   alt={`Bakery gallery image ₹{index + 1}`}
                   fill
+                  loading="lazy"
                   sizes="(max-width: 768px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />

@@ -174,7 +174,7 @@ export function Header() {
                 type="button"
                 aria-label="Account"
                 onClick={() => router.push('/auth/login')}
-                className="p-2 text-black transition-colors"
+                className="p-2 text-black cursor-pointer transition-colors"
               >
                 <User className="w-5 h-5 text-black transition-colors" />
               </button>

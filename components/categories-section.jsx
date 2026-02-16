@@ -126,6 +126,8 @@ function CategoryCard({ category }) {
           src={category.image}
           alt={category.name}
           fill
+          loading="lazy"
+          sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-linear-to-t from-primary/70 via-primary/20 to-transparent" />
