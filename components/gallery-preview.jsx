@@ -1,8 +1,13 @@
-'use client'
+ 
 
 import Image from 'next/image'
 import Link from 'next/link'
 import { galleryImages } from '@/lib/products'
+
+const transformCloudinary = (url, width = 800) => {
+  if (!url?.includes('res.cloudinary.com')) return url
+  return url.replace('/image/upload/', `/image/upload/f_auto,q_auto,w_${width}/`)
+}
 
 export function GalleryPreview() {
   const previewImages = galleryImages.slice(0, 6)
@@ -27,7 +32,7 @@ export function GalleryPreview() {
             >
               <div className="relative aspect-4/3">
                 <Image
-                  src={image || "/placeholder.svg"}
+                  src={transformCloudinary(image || "/placeholder.svg", 800)}
                   alt={`Bakery gallery image ${index + 1}`}
                   fill
                   loading="lazy"

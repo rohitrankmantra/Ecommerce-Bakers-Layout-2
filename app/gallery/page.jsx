@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { X, Play, Pause } from 'lucide-react'
 import { galleryImages, galleryVideos } from '@/lib/products'
@@ -14,22 +13,9 @@ import {
   CarouselNext,
 } from '@/components/ui/carousel'
 
-/* ---------------- ANIMATIONS ---------------- */
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.06 },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.4, ease: 'easeOut' },
-  },
+const transformCloudinary = (url, width = 800) => {
+  if (!url?.includes('res.cloudinary.com')) return url
+  return url.replace('/image/upload/', `/image/upload/f_auto,q_auto,w_${width}/`)
 }
 
 /* ---------------- VIDEO CARD ---------------- */
@@ -76,7 +62,7 @@ function VideoCard({ src, isPlaying, onPlay, onPause, setEl }) {
         type="button"
         onClick={() => (isPlaying ? onPause?.() : onPlay?.())}
         aria-label={isPlaying ? 'Pause video' : 'Play video'}
-        className="
+        className={`
           absolute left-1/2 top-1/2
           -translate-x-1/2 -translate-y-1/2
           w-16 h-16
@@ -87,8 +73,9 @@ function VideoCard({ src, isPlaying, onPlay, onPause, setEl }) {
           flex items-center justify-center
           shadow-lg
           hover:bg-card/60
-          transition-colors
-        "
+          transition-colors transition-opacity transition-transform duration-300
+          ${isPlaying ? 'opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100' : 'opacity-100'}
+        `}
       >
         {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8" />}
       </button>
@@ -136,42 +123,42 @@ export default function GalleryPage() {
         title="Our Gallery"
         subtitle="Visual Delights"
         description="A visual journey through our artisan creations. Each image tells a story of passion, craftsmanship, and delicious moments."
-        backgroundImage="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579285/_STU0309_ktbfso.jpg"
+        backgroundImage={transformCloudinary('https://res.cloudinary.com/dzq7axes2/image/upload/v1769579285/_STU0309_ktbfso.jpg', 1600)}
       />
 
       {/* ---------------- IMAGE GRID ---------------- */}
       <div className="max-w-7xl mx-auto px-4 py-12 md:py-20">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-        >
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {galleryImages.map((image, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={itemVariants}
-              className={`group relative overflow-hidden rounded-2xl cursor-pointer ${
+              className={`group relative overflow-hidden rounded-2xl cursor-pointer animate-in fade-in duration-500 ${
                 index % 5 === 0 ? 'md:col-span-2 md:row-span-2' : ''
               }`}
               onClick={() => setSelectedImage(image)}
             >
               <div className="relative aspect-square">
                 <Image
-                  src={image || '/placeholder.svg'}
+                  src={transformCloudinary(image || '/placeholder.svg', 800)}
                   alt={`Gallery image ${index + 1}`}
                   fill
+                  loading="lazy"
+                  sizes={
+                    index % 5 === 0
+                      ? '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw'
+                      : '(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 25vw'
+                  }
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition" />
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* ---------------- VIDEO SLIDER ---------------- */}
-      <div className="max-w-6xl mx-auto px-4 pb-20">
+      <div className="max-w-6xl  mx-auto px-4 pb-20">
         <div className="mb-6">
           <span className="text-gold uppercase tracking-widest text-sm">
             Client Videos
@@ -192,7 +179,7 @@ export default function GalleryPage() {
                 key={index}
                 className="basis-full sm:basis-1/2 lg:basis-1/3"
               >
-                <motion.div variants={itemVariants}>
+                <div className="animate-in rounded fade-in duration-500">
                   <VideoCard
                     src={src}
                     isPlaying={currentPlaying === index}
@@ -227,7 +214,7 @@ export default function GalleryPage() {
                       videoEls.current[index] = el
                     }}
                   />
-                </motion.div>
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -269,38 +256,29 @@ export default function GalleryPage() {
       </div>
 
       {/* ---------------- LIGHTBOX ---------------- */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-primary/90 backdrop-blur-md z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-primary/90 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-in fade-in duration-300"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button className="absolute top-6 right-6 w-12 h-12 bg-card/30 rounded-full flex items-center justify-center text-white">
+            <X className="w-6 h-6" />
+          </button>
+          <div
+            className="relative w-full max-w-4xl aspect-4/3 rounded-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
-            <button
-              className="absolute top-6 right-6 w-12 h-12 bg-card/30 rounded-full flex items-center justify-center text-white"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              className="relative w-full max-w-4xl aspect-4/3 rounded-2xl overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={selectedImage}
-                alt="Gallery preview"
-                fill
-                className="object-contain"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <Image
+              src={selectedImage}
+              alt="Gallery preview"
+              fill
+              loading="eager"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              className="object-contain"
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
