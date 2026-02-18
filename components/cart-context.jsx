@@ -29,7 +29,29 @@ export function CartProvider({ children }) {
 
   /* ---------------- ADD ITEM ---------------- */
   const addItem = async (product) => {
+    setIsOpen(true);
+    const prev = items;
+    const idx = items.findIndex((i) => i.name === product.name);
+    const optimistic =
+      idx !== -1
+        ? items.map((i, iidx) =>
+            iidx === idx ? { ...i, quantity: i.quantity + 1 } : i,
+          )
+        : [
+            ...items,
+            {
+              name: product.name,
+              price: product.price,
+              image: product.image,
+              quantity: 1,
+            },
+          ];
+    setItems(optimistic);
     try {
+      toast({
+        title: "Added to cart",
+        description: `${product.name} added successfully`,
+      });
       const { data } = await api.post("/cart/add", {
         items: [
           {
@@ -40,16 +62,9 @@ export function CartProvider({ children }) {
           },
         ],
       });
-
-      // 🔥 always trust backend
-      setItems(data?.cart?.items || []);
-      setIsOpen(true);
-
-      toast({
-        title: "Added to cart",
-        description: `${product.name} added successfully`,
-      });
+      setItems(data?.cart?.items || optimistic);
     } catch (error) {
+      setItems(prev);
       console.error("Add failed", error);
       toast({
         title: "Error",
@@ -61,14 +76,20 @@ export function CartProvider({ children }) {
 
   /* ---------------- UPDATE QUANTITY ---------------- */
   const updateQuantity = async (itemId, newQuantity) => {
+    const prev = items;
+    const optimistic = items.map((i) =>
+      i._id === itemId ? { ...i, quantity: newQuantity } : i,
+    );
+    setItems(optimistic);
+    if (!itemId) return;
     try {
       const { data } = await api.put("/cart/update", {
         itemId,
         quantity: newQuantity,
       });
-
-      setItems(data?.cart?.items || []);
+      setItems(data?.cart?.items || optimistic);
     } catch (error) {
+      setItems(prev);
       console.error("Update failed", error);
       toast({
         title: "Error",
@@ -80,13 +101,17 @@ export function CartProvider({ children }) {
 
   /* ---------------- REMOVE ITEM ---------------- */
   const removeItem = async (itemId) => {
+    const prev = items;
+    const optimistic = items.filter((i) => i._id !== itemId);
+    setItems(optimistic);
+    if (!itemId) return;
     try {
       const { data } = await api.delete("/cart/remove", {
         data: { itemId },
       });
-
-      setItems(data?.cart?.items || []);
+      setItems(data?.cart?.items || optimistic);
     } catch (error) {
+      setItems(prev);
       console.error("Remove failed", error);
       toast({
         title: "Error",

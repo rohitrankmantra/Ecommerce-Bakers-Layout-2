@@ -1,6 +1,5 @@
-'use client'
+ 
 
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Award, Users, Clock, Heart } from 'lucide-react'
@@ -32,21 +31,9 @@ const team = [
   },
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
+const transformCloudinary = (url, width = 1200) => {
+  if (!url?.includes('res.cloudinary.com')) return url
+  return url.replace('/image/upload/', `/image/upload/f_auto,q_auto,w_${width}/`)
 }
 
 export default function AboutPage() {
@@ -57,19 +44,14 @@ export default function AboutPage() {
         title="Our Story"
         subtitle="About Us"
         description="A family tradition of baking excellence, crafting moments of joy one loaf at a time since 1998."
-        backgroundImage="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579242/_STU0278_qrnxbu.jpg"
+        backgroundImage={transformCloudinary('https://res.cloudinary.com/dzq7axes2/image/upload/v1769579242/_STU0278_qrnxbu.jpg', 1600)}
       />
 
       {/* Story Section */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            <div className="animate-in fade-in slide-in-from-left-4 duration-700">
               <span className="text-gold uppercase tracking-widest text-sm font-medium">
                 Our Heritage
               </span>
@@ -97,26 +79,22 @@ export default function AboutPage() {
               <Button asChild className="mt-8 bg-gold hover:black text-white">
                 <Link href="/shop">Explore Our Products</Link>
               </Button>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
+            <div className="relative animate-in fade-in slide-in-from-right-4 duration-700">
               <div className="relative aspect-3/4 rounded-3xl overflow-hidden">
                 <Image
-                  src="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579284/_STU0305_a7o5d8.jpg"
+                  src={transformCloudinary('https://res.cloudinary.com/dzq7axes2/image/upload/v1769579284/_STU0305_a7o5d8.jpg', 1200)}
                   alt="Baker kneading dough"
                   fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 800px"
                   className="object-cover"
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-gold/20 rounded-3xl -z-10" />
               <div className="absolute -top-6 -right-6 w-32 h-32 bg-beige rounded-3xl -z-10" />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -124,19 +102,9 @@ export default function AboutPage() {
       {/* Stats Section */}
       <section className="py-16 bg-beige/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-8"
-          >
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="text-center"
-              >
+              <div key={index} className="text-center animate-in fade-in duration-500">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gold/20 rounded-2xl mb-4">
                   <stat.icon className="w-8 h-8 text-gold" />
                 </div>
@@ -144,29 +112,23 @@ export default function AboutPage() {
                   {stat.value}
                 </div>
                 <div className="text-muted-foreground">{stat.label}</div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Values Section */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12 animate-in fade-in duration-600">
             <span className="text-gold uppercase tracking-widest text-sm font-medium">
               What We Believe
             </span>
             <h2 className="font-serif text-3xl md:text-4xl text-primary mt-3">
               Our Core Values
             </h2>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -186,25 +148,20 @@ export default function AboutPage() {
                 image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579279/_STU0303_io5bmq.jpg',
               },
             ].map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group"
-              >
+              <div key={index} className="group animate-in fade-in slide-in-from-bottom-2 duration-500">
                 <div className="relative aspect-4/3 rounded-2xl overflow-hidden mb-6">
                   <Image
-                    src={value.image || "/placeholder.svg"}
+                    src={transformCloudinary(value.image || "/placeholder.svg", 800)}
                     alt={value.title}
                     fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <h3 className="font-serif text-xl text-primary mb-3">{value.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -213,13 +170,7 @@ export default function AboutPage() {
       {/* Team Section */}
       <section className="py-16 md:py-24 bg-beige/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
+          <div className="text-center mb-12 animate-in fade-in duration-600">
             <span className="text-gold uppercase tracking-widest text-sm font-medium">
               The Artisans
             </span>
@@ -229,34 +180,26 @@ export default function AboutPage() {
             <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
               The passionate people behind every delicious creation
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-3 gap-8"
-          >
+          <div className="grid md:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="text-center group"
-              >
+              <div key={index} className="text-center group animate-in fade-in duration-500">
                 <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-gold/30 group-hover:border-gold transition-colors duration-300">
                   <Image
-                    src={member.image || "/placeholder.svg"}
+                    src={transformCloudinary(member.image || "/placeholder.svg", 400)}
                     alt={member.name}
                     fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 50vw, 300px"
                     className="object-cover"
                   />
                 </div>
                 <h3 className="font-serif text-xl text-primary">{member.name}</h3>
                 <p className="text-gold mt-1">{member.role}</p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -265,9 +208,11 @@ export default function AboutPage() {
         {/* Black overlay image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579285/_STU0309_ktbfso.jpg"
+            src={transformCloudinary('https://res.cloudinary.com/dzq7axes2/image/upload/v1769579285/_STU0309_ktbfso.jpg', 1600)}
             alt=""
             fill
+            loading="lazy"
+            sizes="(max-width: 1024px) 100vw, 1024px"
             className="object-cover"
           />
           {/* Black overlay */}
@@ -276,12 +221,7 @@ export default function AboutPage() {
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-primary-foreground">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <div className="animate-in fade-in slide-in-from-bottom-2 duration-600">
             <h2 className="font-serif text-3xl md:text-4xl mb-6">
               Visit Our Bakery
             </h2>
@@ -292,7 +232,7 @@ export default function AboutPage() {
             <Button asChild size="lg" className="bg-gold hover:bg-gold/90 text-white">
               <Link href="/contact">Get in Touch</Link>
             </Button>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

@@ -1,9 +1,9 @@
-'use client'
+ 
 
-import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import CategoryMobileSlider from '@/components/categories-mobile-slider'
 
 const categories = [
   {
@@ -32,18 +32,12 @@ const categories = [
   },
 ]
 
+const transformCloudinary = (url, width = 800) => {
+  if (!url?.includes('res.cloudinary.com')) return url
+  return url.replace('/image/upload/', `/image/upload/f_auto,q_auto,w_${width}/`)
+}
+
 export function CategoriesSection() {
-  /* MOBILE SLIDER STATE */
-  const [index, setIndex] = useState(0)
-
-  const next = () => {
-    setIndex((prev) => (prev === categories.length - 1 ? 0 : prev + 1))
-  }
-
-  const prev = () => {
-    setIndex((prev) => (prev === 0 ? categories.length - 1 : prev - 1))
-  }
-
   return (
     <section className="py-16 md:py-24 bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,27 +52,7 @@ export function CategoriesSection() {
         </div>
 
         {/* ================= MOBILE SLIDER ================= */}
-        <div className="relative md:hidden">
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-cream border rounded-full flex items-center justify-center shadow"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-cream border rounded-full flex items-center justify-center shadow"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-
-          <div className="overflow-hidden px-10">
-            <div>
-              <CategoryCard category={categories[index]} />
-            </div>
-          </div>
-        </div>
+        <CategoryMobileSlider categories={categories} />
 
         {/* ================= DESKTOP GRID (UNCHANGED) ================= */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -97,7 +71,7 @@ function CategoryCard({ category }) {
     <Link href={`/shop?category=${category.id}`} className="group block">
       <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-muted">
         <Image
-          src={category.image}
+          src={transformCloudinary(category.image, 800)}
           alt={category.name}
           fill
           loading="lazy"

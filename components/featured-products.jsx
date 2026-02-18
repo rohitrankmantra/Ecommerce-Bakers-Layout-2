@@ -34,7 +34,7 @@ function useProductsPerView() {
 }
 
 export function FeaturedProducts() {
-  const { addItem } = useCart()
+  const { addItem, setIsOpen } = useCart()
   const perView = useProductsPerView()
 
   const totalPages = Math.ceil(featuredProducts.length / perView)
@@ -120,7 +120,7 @@ export function FeaturedProducts() {
                   >
                     {items.map((product) => (
                       <div key={product.id} className="group">
-                        <div className="bg-card rounded-2xl overflow-hidden shadow hover:shadow-xl transition">
+                        <div className="bg-card rounded-3xl overflow-hidden shadow hover:shadow-xl transition">
                           <div className="relative aspect-square">
                             <Image
                               src={product.image || '/placeholder.svg'}
@@ -132,7 +132,10 @@ export function FeaturedProducts() {
                             />
 
                             <button
-                              onClick={() => addItem(product)}
+                              onClick={() => {
+                                setIsOpen(true)
+                                addItem(product)
+                              }}
                               className="absolute bottom-3 right-3 w-11 h-11 bg-primary text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
                             >
                               <ShoppingBag className="w-5 h-5" />
@@ -155,7 +158,10 @@ export function FeaturedProducts() {
                                   Detail
                                 </Link>
                                 <button
-                                  onClick={() => addItem(product)}
+                                  onClick={() => {
+                                    setIsOpen(true)
+                                    addItem(product)
+                                  }}
                                   className="text-sm bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-gold transition"
                                 >
                                   Add
