@@ -30,7 +30,7 @@ export const metadata = {
     'Discover our collection of freshly baked artisan cakes, biscuits, rusks, and premium bakery items made with the finest ingredients.',
       icons: {
     icon: [
-      { url: '/logo-transparent.png', type: 'image/png' },
+      { url: '/favicon.png', type: 'image/png' },
     ],
     apple: '/apple-touch-icon.png',
   },
