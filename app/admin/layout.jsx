@@ -70,7 +70,7 @@ export function NavBar() {
         
         {/* Brand Section */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <Logo />
+          {/* <Logo /> */}
           <div style={{ display: scrolled ? 'block' : 'block' }}>
             <div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#0f172a', lineHeight: 1 }}>D M SYSTEMS</div>
             <div style={{ fontSize: '0.65rem', color: '#3b82f6', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '4px' }}>
