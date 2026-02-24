@@ -44,7 +44,7 @@ export default function AboutPage() {
         title="Our Story"
         subtitle="About Us"
         description="A family tradition of baking excellence, crafting moments of joy one loaf at a time since 1998."
-        backgroundImage={transformCloudinary('https://res.cloudinary.com/dzq7axes2/image/upload/v1769579242/_STU0278_qrnxbu.jpg', 1600)}
+        backgroundImage={transformCloudinary('https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908534/_STU0309_ogdku5.webp', 1600)}
       />
 
       {/* Story Section */}
@@ -84,7 +84,7 @@ export default function AboutPage() {
             <div className="relative animate-in fade-in slide-in-from-right-4 duration-700">
               <div className="relative aspect-3/4 rounded-3xl overflow-hidden">
                 <Image
-                  src={transformCloudinary('https://res.cloudinary.com/dzq7axes2/image/upload/v1769579284/_STU0305_a7o5d8.jpg', 1200)}
+                  src={transformCloudinary('https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908532/_STU0305_baaehl.webp', 1200)}
                   alt="Baker kneading dough"
                   fill
                   loading="lazy"
@@ -135,17 +135,17 @@ export default function AboutPage() {
               {
                 title: 'Quality Ingredients',
                 description: 'We source only the finest organic flour, farm-fresh eggs, and premium butter to ensure every bite is exceptional.',
-                image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579147/_STU0079_jxfko7.jpg',
+                image: 'https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908524/_STU0293_mfrygw.webp',
               },
               {
                 title: 'Artisan Craftsmanship',
                 description: 'Our bakers are trained in traditional European techniques, bringing centuries of wisdom to modern creations.',
-                image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579242/_STU0278_qrnxbu.jpg',
+                image: 'https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908531/_STU0303_bihhv0.webp',
               },
               {
                 title: 'Community First',
                 description: 'We believe in giving back, supporting local farmers, and creating a welcoming space for our neighborhood.',
-                image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579279/_STU0303_io5bmq.jpg',
+                image: 'https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908521/_STU0289_noanaq.webp',
               },
             ].map((value, index) => (
               <div key={index} className="group animate-in fade-in slide-in-from-bottom-2 duration-500">
@@ -208,7 +208,7 @@ export default function AboutPage() {
         {/* Black overlay image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src={transformCloudinary('https://res.cloudinary.com/dzq7axes2/image/upload/v1769579285/_STU0309_ktbfso.jpg', 1600)}
+            src={transformCloudinary('https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908534/_STU0309_ogdku5.webp', 1600)}
             alt=""
             fill
             loading="lazy"
