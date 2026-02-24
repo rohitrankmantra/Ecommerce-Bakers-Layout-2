@@ -223,3 +223,7 @@ export function NavBar() {
     </header>
   );
 }
+
+export default function AdminLayout({ children }) {
+  return children;
+}
