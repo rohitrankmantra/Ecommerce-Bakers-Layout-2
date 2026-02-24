@@ -160,12 +160,12 @@ export default function GalleryPage() {
       {/* ---------------- VIDEO SLIDER ---------------- */}
       <div className="max-w-6xl  mx-auto px-4 pb-20">
         <div className="mb-6">
-          <span className="text-gold uppercase tracking-widest text-sm">
+          {/* <span className="text-gold uppercase tracking-widest text-sm">
             Client Videos
-          </span>
-          <h2 className="font-serif text-2xl text-primary mt-2">
+          </span> */}
+          {/* <h2 className="font-serif text-2xl text-primary mt-2">
             Video Gallery
-          </h2>
+          </h2> */}
         </div>
 
         <Carousel
