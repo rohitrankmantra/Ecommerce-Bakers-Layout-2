@@ -219,8 +219,8 @@ export default function GalleryPage() {
             ))}
           </CarouselContent> */}
 
-          <CarouselPrevious className="bg-cream border border-border hover:bg-primary hover:text-white" />
-          <CarouselNext className="bg-cream border border-border hover:bg-primary hover:text-white" />
+          {/* <CarouselPrevious className="bg-cream border border-border hover:bg-primary hover:text-white" />
+          <CarouselNext className="bg-cream border border-border hover:bg-primary hover:text-white" /> */}
         </Carousel>
 
         {/* Swipe indicator for small devices */}
