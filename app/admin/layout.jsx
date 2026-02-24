@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Ticket, ShieldCheck } from 'lucide-react';
-import { Logo } from '../shared';
+// import { Logo } from '../shared';
 
 const navConfig = [
   { label: 'Home', href: '/' },
