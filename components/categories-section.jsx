@@ -9,25 +9,25 @@ const categories = [
   {
     id: 'tea-time-cake',
     name: 'Tea Time Cake',
-    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579288/_STU0300_h6yjs9.jpg',
+    image: 'https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908495/_STU0220_kfdh9p.webp',
     description: 'Celebration & everyday cakes',
   },
   {
     id: 'biscuit-and-confections',
     name: 'Biscuit & Confections',
-    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579135/_STU0016_uweqqo.jpg',
+    image: 'https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908476/_STU0159_t7bw5o.webp',
     description: 'Crispy & buttery delights',
   },
   {
     id: 'rusk',
     name: 'Rusks',
-    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579141/_STU0062_dicysj.jpg',
+    image: 'https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908443/_STU0057_ojlsuo.webp',
     description: 'Traditional baked rusks',
   },
   {
     id: 'fresh-bread',
     name: 'Fresh Bread',
-    image: 'https://res.cloudinary.com/dzq7axes2/image/upload/v1769579226/_STU0235_pxarhy.jpg',
+    image: 'https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908493/_STU0213_yashin.webp',
     description: 'Breads baked fresh',
   },
 ]

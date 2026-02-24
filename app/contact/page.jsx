@@ -83,7 +83,7 @@ export default function ContactPage() {
         title="Get in Touch"
         subtitle="Contact Us"
         description="Have a question, special request, or want to place a custom order? We would love to hear from you."
-        backgroundImage="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579289/_STU0306_mozypp.jpg"
+        backgroundImage="https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908533/_STU0306_qmpfz8.webp"
       />
 
       {/* Contact Section */}

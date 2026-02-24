@@ -58,7 +58,7 @@ export default function ShopPage() {
         title="Our Shop"
         subtitle="Browse Our Collection"
         description="Discover our handcrafted selection of premium baked goods, made fresh daily with the finest ingredients."
-        backgroundImage="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579287/_STU0310_pwsopq.jpg"
+        backgroundImage="https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908535/_STU0310_ljsglm.webp"
       />
 
       {/* Main Content */}

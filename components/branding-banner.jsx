@@ -46,7 +46,7 @@ export function BrandingBanner() {
               {/* Logo Container with Decorative Border */}
               <div className="relative bg-cream/10 backdrop-blur-sm rounded-2xl p-1 border border-gold/20">
                 <Image
-                  src="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579257/_STU0289_g2iezp.jpg"
+                  src="https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908510/_STU0278_djddr5.webp"
                   alt="Artisan Bakery Logo"
                   width={200}
                   height={80}
@@ -139,7 +139,7 @@ export function BrandingBanner() {
             <div className="relative">
               <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gold/30">
                 <Image
-                  src="https://res.cloudinary.com/dzq7axes2/image/upload/v1769579263/_STU0299_poviiu.jpg"
+                  src="https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908517/_STU0284_bxau0y.webp"
                   alt="Fresh pastries"
                   width={192}
                   height={192}

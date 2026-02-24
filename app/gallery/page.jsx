@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { X, Play, Pause } from 'lucide-react'
-import { galleryImages, galleryVideos } from '@/lib/products'
+import { galleryImages} from '@/lib/products'
 import { PageHero } from '@/components/page-hero'
 import {
   Carousel,
@@ -123,7 +123,7 @@ export default function GalleryPage() {
         title="Our Gallery"
         subtitle="Visual Delights"
         description="A visual journey through our artisan creations. Each image tells a story of passion, craftsmanship, and delicious moments."
-        backgroundImage={transformCloudinary('https://res.cloudinary.com/dzq7axes2/image/upload/v1769579285/_STU0309_ktbfso.jpg', 1600)}
+        backgroundImage={transformCloudinary('https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908536/_STU0316_munq23.webp', 1600)}
       />
 
       {/* ---------------- IMAGE GRID ---------------- */}
@@ -173,7 +173,7 @@ export default function GalleryPage() {
           opts={{ align: 'center', loop: false }}
           className="w-full"
         >
-          <CarouselContent>
+          {/* <CarouselContent>
             {galleryVideos.map((src, index) => (
               <CarouselItem
                 key={index}
@@ -217,7 +217,7 @@ export default function GalleryPage() {
                 </div>
               </CarouselItem>
             ))}
-          </CarouselContent>
+          </CarouselContent> */}
 
           <CarouselPrevious className="bg-cream border border-border hover:bg-primary hover:text-white" />
           <CarouselNext className="bg-cream border border-border hover:bg-primary hover:text-white" />
