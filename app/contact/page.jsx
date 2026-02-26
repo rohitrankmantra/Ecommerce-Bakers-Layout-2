@@ -23,7 +23,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    details: ['navrajjolly@gmail.com'],
+    details: ['bakemasters.in@gmail.com'],
   },
   {
     icon: Clock,
@@ -33,9 +33,9 @@ const contactInfo = [
 ]
 
 const socialLinks = [
-  { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
-  { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-  { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+  { icon: Facebook, href: 'https://www.facebook.com/bakemasters.in/', label: 'Facebook' },
+  { icon: Instagram, href: 'https://www.instagram.com/bakemasters.in?igsh=OXl1emo1eGhwa3cy&utm_source=ig_contact_invite', label: 'Instagram' },
+  // { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
 ]
 
 export default function ContactPage() {
@@ -147,7 +147,7 @@ export default function ContactPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-primary-foreground hover:bg-gold hover:text-primary transition-colors duration-300"
+                      className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-primary-foreground transition-colors duration-300"
                     >
                       <social.icon className="w-5 h-5" />
                     </a>

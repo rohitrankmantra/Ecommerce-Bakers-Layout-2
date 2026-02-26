@@ -52,8 +52,8 @@
                <h2 className="font-serif text-2xl text-primary">Contact</h2>
                <p className="mt-3">
                  To initiate a refund or cancellation, email{' '}
-                 <Link href="mailto:navrajjolly@gmail.com" className="text-primary hover:text-gold transition-colors">
-                   navrajjolly@gmail.com
+                 <Link href="mailto:bakemasters.in@gmail.com" className="text-primary hover:text-gold transition-colors">
+                   bakemasters.in@gmail.com
                  </Link>{' '}
                  or call{' '}
                  <Link href="tel:+919068664222" className="text-primary hover:text-gold transition-colors">

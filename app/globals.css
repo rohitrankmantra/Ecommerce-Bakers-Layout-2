@@ -164,3 +164,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gold);
 }
+
+.font-brand {
+  font-family: var(--font-brand);
+}
