@@ -1,4 +1,4 @@
-import { Josefin_Slab, DM_Sans } from 'next/font/google'
+import { Josefin_Slab, DM_Sans, Unica_One } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { AuthProvider } from '@/components/auth-context'
@@ -7,6 +7,7 @@ import { Header } from '@/components/header'
 import { CartDrawer } from '@/components/cart-drawer'
 import { Footer } from '@/components/footer'
 import { Toaster } from '@/components/ui/toaster'
+import { FloatingContact } from '@/components/floating-contact'
 import Script from 'next/script'
 
 /* ✅ BEST Josefin Slab config */
@@ -21,6 +22,13 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['400', '500'], // clean & readable
   variable: '--font-sans',
+  display: 'swap',
+})
+
+const unicaOne = Unica_One({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-brand',
   display: 'swap',
 })
 
@@ -39,7 +47,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${josefinSlab.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${josefinSlab.variable} ${dmSans.variable} ${unicaOne.variable}`}>
         <head>
         <Script
           src="https://checkout.razorpay.com/v1/checkout.js"
@@ -59,6 +67,7 @@ export default function RootLayout({ children }) {
             <CartDrawer />
             <Toaster />
             <Footer />
+            <FloatingContact />
           </CartProvider>
         </AuthProvider>
         <Analytics />

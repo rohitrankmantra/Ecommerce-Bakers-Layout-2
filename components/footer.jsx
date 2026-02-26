@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Instagram, Facebook, Twitter } from 'lucide-react'
+import { Instagram, Facebook } from 'lucide-react'
 import { FiPhone, FiMail } from 'react-icons/fi'  // <- React Icons import
 
 const quickLinks = [
@@ -45,17 +45,8 @@ export function Footer() {
               Crafting delicious memories with premium ingredients and artisan techniques since 2010.
             </p>
             <div className="flex items-center gap-4 mt-6">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-[#C85B24] hover:text-primary hover:bg-primary/15 transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="https://facebook.com"
+               <a
+                href="https://www.facebook.com/bakemasters.in/#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-[#C85B24] hover:text-primary hover:bg-primary/15 transition-colors"
@@ -64,14 +55,15 @@ export function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://www.instagram.com/bakemasters.in?igsh=OXl1emo1eGhwa3cy&utm_source=ig_contact_invite"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-[#C85B24] hover:text-primary hover:bg-primary/15 transition-colors"
-                aria-label="Twitter"
+                aria-label="Instagram"
               >
-                <Twitter className="w-5 h-5" />
+                <Instagram className="w-5 h-5" />
               </a>
+             
             </div>
           </div>
 
@@ -146,8 +138,8 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <FiMail className="w-4 h-4 text-primary" />
-                <a href="mailto:navrajjolly@gmail.com" className="text-black hover:text-primary/80 transition-colors">
-                  navrajjolly@gmail.com
+                <a href="mailto:bakemasters.in@gmail.com" className="text-black hover:text-primary/80 transition-colors">
+                  bakemasters.in@gmail.com
                 </a>
               </li>
             </ul>
