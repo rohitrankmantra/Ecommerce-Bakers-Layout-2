@@ -93,7 +93,8 @@ export default function CheckoutPage() {
 
   const isEmpty = items.length === 0
   const subtotal = useMemo(() => total, [total])
-  const grandTotal = subtotal
+  const deliveryCharge = 160
+  const grandTotal = subtotal + deliveryCharge
 
   const citiesOfState = useMemo(() => {
     return form.stateCode ? City.getCitiesOfState('IN', form.stateCode) : []
@@ -263,7 +264,7 @@ export default function CheckoutPage() {
               <div className="space-y-4 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
                 {items.map((item) => (
                   <div key={item._id} className="flex gap-3">
-                    <div className="relative w-16 h-16 rounded-lg overflow-hidden border bg-white/40 flex-shrink-0">
+                    <div className="relative w-16 h-16 rounded-lg overflow-hidden border bg-white/40 shrink-0">
                       <Image src={item.image || '/placeholder.svg'} alt={item.name} fill className="object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -283,7 +284,16 @@ export default function CheckoutPage() {
                   <span>Subtotal</span>
                   <span>₹{subtotal.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-lg pt-2 font-semibold">
+                <div className="flex justify-between text-sm text-muted-foreground">
+                  <span>Delivery Charge</span>
+                  <span>₹{deliveryCharge.toFixed(2)}</span>
+                </div>
+                <div className="bg-primary/5 rounded-lg p-2 mt-2">
+                  <p className="text-[11px] text-primary font-medium text-center">
+                    ₹160 flat delivery fee added for secure shipping
+                  </p>
+                </div>
+                <div className="flex justify-between text-lg pt-2 font-semibold border-t border-border mt-2">
                   <span>Total</span>
                   <span className="text-gold">₹{grandTotal.toFixed(2)}</span>
                 </div>
