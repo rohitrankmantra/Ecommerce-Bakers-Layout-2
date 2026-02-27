@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "media_url": "https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908531/_STU0303_bihhv0.webp",
+    "permalink": "https://www.instagram.com/p/EXAMPLE1/",
+    "caption": "Freshly baked goodness"
+  },
+  {
+    "id": "2",
+    "media_url": "https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908529/_STU0300_w9dfvz.webp",
+    "permalink": "https://www.instagram.com/p/EXAMPLE2/",
+    "caption": "Signature gifting hamper"
+  },
+  {
+    "id": "3",
+    "media_url": "https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908526/_STU0296_tiqlab.webp",
+    "permalink": "https://www.instagram.com/p/EXAMPLE3/",
+    "caption": "Tea time favorites"
+  },
+  {
+    "id": "4",
+    "media_url": "https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908532/_STU0305_baaehl.webp",
+    "permalink": "https://www.instagram.com/p/EXAMPLE4/",
+    "caption": "Artisanal treats"
+  },
+  {
+    "id": "5",
+    "media_url": "https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908509/_STU0273_thkaib.webp",
+    "permalink": "https://www.instagram.com/p/EXAMPLE5/",
+    "caption": "Rustic breads"
+  },
+  {
+    "id": "6",
+    "media_url": "https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908536/_STU0316_munq23.webp",
+    "permalink": "https://www.instagram.com/p/EXAMPLE6/",
+    "caption": "Seasonal specials"
+  }
+]

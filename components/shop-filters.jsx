@@ -1,116 +1,128 @@
 'use client'
 
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, SlidersHorizontal } from 'lucide-react'
+import { X } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 const categories = [
-  { id: 'all', label: 'All Products' },
-  { id: 'tea-time-cake', label: 'Tea Time Cake' },
-  { id: 'biscuit-and-confections', label: 'Biscuit & Confections' },
-  { id: 'rusk', label: 'Rusk' },
-  { id: 'fresh-bread', label: 'Fresh Bread' },
-]
-
-const priceRanges = [
-  { id: 'all', label: 'All Prices' },
-  { id: 'under-20', label: 'Under ₹20' },
-  { id: '20-40', label: '₹20 - ₹40' },
-  { id: 'over-40', label: 'Over ₹40' },
-]
-
-const sortOptions = [
-  { id: 'featured', label: 'Featured' },
-  { id: 'price-low', label: 'Price: Low to High' },
-  { id: 'price-high', label: 'Price: High to Low' },
-  { id: 'name', label: 'Name: A-Z' },
+  { id: 'all', label: 'All Categories' },
+  { id: 'biscuit-and-confections', label: 'Biscuits & Cookies' },
+  { id: 'rusk', label: 'Rusks & Toasts' },
+  { id: 'tea-time-cake', label: 'Cakes' },
+  { id: 'confections-and-stick-jaws', label: 'Confections & Stick Jaws' },
+  { id: 'gifts', label: 'Gifting Hampers', href: '/gifts' },
+  { id: 'baklava', label: 'Baklava' },
+  { id: 'pastries', label: 'Pastries' },
+  { id: 'desserts', label: 'Desserts' },
+  { id: 'savory-snacks', label: 'Savory Snacks' },
 ]
 
 export function ShopFilters({
   selectedCategory,
   onCategoryChange,
-  selectedPrice,
-  onPriceChange,
-  selectedSort,
-  onSortChange,
+  selectedDiet,
+  onDietChange,
   isMobileOpen,
   onMobileClose,
 }) {
+  const router = useRouter()
+  const [dietOpen, setDietOpen] = useState(false)
+
   const FilterContent = () => (
     <div className="space-y-8">
-      {/* Categories */}
-      <div>
-        <h3 className="font-serif text-lg text-primary mb-4">Categories</h3>
-        <div className="space-y-2">
-          {categories.map((cat) => (
+      <div className="space-y-2">
+        {categories.map((cat) => (
+          <div key={cat.id} className="relative">
             <button
-              key={cat.id}
               type="button"
-              onClick={() => onCategoryChange(cat.id)}
+              onClick={() => {
+                if (cat.href) {
+                  router.push(cat.href)
+                  onMobileClose?.()
+                } else {
+                  // If 'all' is clicked, show all products
+                  const newCat = cat.id === 'all' ? null : cat.id;
+                  onCategoryChange(newCat);
+                  
+                  // Open diet menu only if Cakes is selected
+                  if (cat.id === 'tea-time-cake') {
+                    setDietOpen(true);
+                  } else {
+                    setDietOpen(false);
+                    onDietChange?.(null); // Clear diet if moving to other categories
+                  }
+                }
+              }}
               className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ${
-                selectedCategory === cat.id
+                (selectedCategory === cat.id || (cat.id === 'all' && !selectedCategory))
                   ? 'bg-primary text-primary-foreground'
                   : 'text-foreground hover:bg-beige'
               }`}
             >
               {cat.label}
             </button>
-          ))}
-        </div>
-      </div>
 
-      {/* Price Range */}
-      <div>
-        <h3 className="font-serif text-lg text-primary mb-4">Price Range</h3>
-        <div className="space-y-2">
-          {priceRanges.map((range) => (
-            <button
-              key={range.id}
-              type="button"
-              onClick={() => onPriceChange(range.id)}
-              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ${
-                selectedPrice === range.id
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-foreground hover:bg-beige'
-              }`}
-            >
-              {range.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Sort */}
-      <div>
-        <h3 className="font-serif text-lg text-primary mb-4">Sort By</h3>
-        <div className="space-y-2">
-          {sortOptions.map((sort) => (
-            <button
-              key={sort.id}
-              type="button"
-              onClick={() => onSortChange(sort.id)}
-              className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors ${
-                selectedSort === sort.id
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-foreground hover:bg-beige'
-              }`}
-            >
-              {sort.label}
-            </button>
-          ))}
-        </div>
+            {/* Veg/Non-Veg Section appears BELOW the Cake button */}
+            <AnimatePresence>
+              {cat.id === 'tea-time-cake' && selectedCategory === 'tea-time-cake' && dietOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="mt-2 bg-white/70 backdrop-blur-md border border-white rounded-2xl p-3 shadow-xl z-20"
+                >
+                  <div className="space-y-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onDietChange?.('veg');
+                        setDietOpen(false); // Vanish once selected
+                      }}
+                      className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors flex items-center gap-2 ${
+                        selectedDiet === 'veg'
+                          ? 'bg-primary text-primary-foreground'
+                          : 'text-foreground hover:bg-beige'
+                      }`}
+                    >
+                      <span className="inline-block w-3 h-3 rounded-full" style={{ backgroundColor: '#128a17' }} />
+                      Veg
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onDietChange?.('nonveg');
+                        setDietOpen(false); // Vanish once selected
+                      }}
+                      className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors flex items-center gap-2 ${
+                        selectedDiet === 'nonveg'
+                          ? 'bg-primary text-primary-foreground'
+                          : 'text-foreground hover:bg-beige'
+                      }`}
+                    >
+                      <span className="inline-block w-3 h-3 rounded-full" style={{ backgroundColor: '#c91e1e' }} />
+                      Non-Veg
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        ))}
       </div>
     </div>
   )
 
   return (
     <>
+      <style jsx global>{`
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+
       {/* Desktop Sidebar */}
       <aside className="hidden lg:block w-72 shrink-0">
-        <div className="sticky top-28 bg-card rounded-2xl p-6 shadow-sm">
-          <div className="flex items-center gap-2 mb-6">
-            <SlidersHorizontal className="w-5 h-5 text-gold" />
-            <h2 className="font-serif text-xl text-primary">Filters</h2>
-          </div>
+        <div className="sticky top-20 bg-card rounded-2xl p-6 shadow-sm max-h-[calc(100vh-6rem)] overflow-y-auto no-scrollbar">
           <FilterContent />
         </div>
       </aside>
@@ -131,20 +143,11 @@ export function ShopFilters({
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed inset-x-0 bottom-0 max-h-[80vh] bg-card rounded-t-3xl z-50 lg:hidden overflow-y-auto"
+              className="fixed inset-x-0 bottom-0 max-h-[80vh] bg-card rounded-t-3xl z-50 lg:hidden overflow-y-auto no-scrollbar"
             >
               <div className="p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-2">
-                    <SlidersHorizontal className="w-5 h-5 text-gold" />
-                    <h2 className="font-serif text-xl text-primary">Filters</h2>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={onMobileClose}
-                    className="p-2 hover:bg-muted rounded-full transition-colors"
-                    aria-label="Close filters"
-                  >
+                <div className="flex justify-end mb-4">
+                  <button type="button" onClick={onMobileClose} className="p-2 hover:bg-muted rounded-full">
                     <X className="w-5 h-5" />
                   </button>
                 </div>

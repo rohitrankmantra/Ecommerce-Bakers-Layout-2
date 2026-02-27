@@ -1,51 +1,55 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { SlidersHorizontal } from 'lucide-react'
 import { ShopFilters } from '@/components/shop-filters'
 import { ProductCard } from '@/components/product-card'
 import { PageHero } from '@/components/page-hero'
 import { orderedProducts } from '@/lib/products'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
-  const [selectedPrice, setSelectedPrice] = useState('all')
-  const [selectedSort, setSelectedSort] = useState('featured')
+  const [selectedDiet, setSelectedDiet] = useState('all')
+  const [deliveryScope, setDeliveryScope] = useState('unset')
+  const [scopeOpen, setScopeOpen] = useState(false)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [page, setPage] = useState(1)
   const pageSize = 12
+  useEffect(() => {
+    const s = typeof window !== 'undefined' ? localStorage.getItem('deliveryScope') : null
+    if (s === 'city' || s === 'panIndia') {
+      setDeliveryScope(s)
+    }
+    setScopeOpen(true)
+  }, [])
 
   const filteredProducts = useMemo(() => {
     let filtered = [...orderedProducts]
 
+    if (deliveryScope === 'panIndia') {
+      const allowed = new Set(['biscuit-and-confections', 'rusk'])
+      filtered = filtered.filter((p) => allowed.has(p.category))
+    }
+
     // Category filter
-    if (selectedCategory !== 'all') {
+    if (selectedCategory && selectedCategory !== 'all') {
       filtered = filtered.filter((p) => p.category === selectedCategory)
     }
 
-    // Price filter
-    if (selectedPrice === 'under-20') {
-      filtered = filtered.filter((p) => p.price < 20)
-    } else if (selectedPrice === '20-40') {
-      filtered = filtered.filter((p) => p.price >= 20 && p.price <= 40)
-    } else if (selectedPrice === 'over-40') {
-      filtered = filtered.filter((p) => p.price > 40)
-    }
-
-    // Sort
-    if (selectedSort === 'price-low') {
-      filtered.sort((a, b) => a.price - b.price)
-    } else if (selectedSort === 'price-high') {
-      filtered.sort((a, b) => b.price - a.price)
-    } else if (selectedSort === 'name') {
-      filtered.sort((a, b) => a.name.localeCompare(b.name))
-    } else if (selectedSort === 'featured') {
-      filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
+    if (selectedCategory === 'tea-time-cake' && selectedDiet !== 'all') {
+      const isVeg = (p) => {
+        const s = `${p.name} ${p.description || ''}`.toLowerCase()
+        return s.includes('eggless')
+      }
+      filtered = filtered.filter((p) =>
+        selectedDiet === 'veg' ? isVeg(p) : !isVeg(p),
+      )
     }
 
     return filtered
-  }, [selectedCategory, selectedPrice, selectedSort])
+  }, [selectedCategory, selectedDiet, deliveryScope])
 
   const totalPages = Math.ceil(filteredProducts.length / pageSize) || 1
   const paginated = filteredProducts.slice((page - 1) * pageSize, page * pageSize)
@@ -53,6 +57,41 @@ export default function ShopPage() {
 
   return (
     <div className="min-h-screen bg-cream">
+      <Dialog open={scopeOpen} onOpenChange={setScopeOpen}>
+        <DialogContent className="max-w-md bg-cream/90 backdrop-blur-xl border border-white/70 rounded-3xl p-6 text-primary">
+          <DialogTitle className="sr-only">Choose Delivery Scope</DialogTitle>
+          <div className="text-center space-y-3">
+            <h3 className="font-serif text-2xl">Delivery Options</h3>
+            <p className="text-muted-foreground text-sm">
+              Choose your delivery preference to tailor product visibility.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+            <button
+              type="button"
+              onClick={() => {
+                setDeliveryScope('city')
+                setScopeOpen(false)
+                if (typeof window !== 'undefined') localStorage.setItem('deliveryScope', 'city')
+              }}
+              className="px-4 py-4 rounded-2xl bg-white border border-border text-primary hover:bg-beige transition"
+            >
+              Deliver in Dehradun
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setDeliveryScope('panIndia')
+                setScopeOpen(false)
+                if (typeof window !== 'undefined') localStorage.setItem('deliveryScope', 'panIndia')
+              }}
+              className="px-4 py-4 rounded-2xl bg-white border border-border text-primary hover:bg-beige transition"
+            >
+              Pan India
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
       {/* Hero Section with Background Image */}
       <PageHero
         title="Our Shop"
@@ -63,15 +102,40 @@ export default function ShopPage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2 bg-white/70 border border-border rounded-2xl p-1">
+            <button
+              type="button"
+              onClick={() => {
+                setDeliveryScope('city')
+                if (typeof window !== 'undefined') localStorage.setItem('deliveryScope', 'city')
+              }}
+              className={`px-3 py-1.5 rounded-xl text-sm ${deliveryScope === 'city' ? 'bg-primary text-white' : 'text-primary hover:bg-beige'}`}
+            >
+              Deliver in Dehradun
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setDeliveryScope('panIndia')
+                if (typeof window !== 'undefined') localStorage.setItem('deliveryScope', 'panIndia')
+              }}
+              className={`px-3 py-1.5 rounded-xl text-sm ${deliveryScope === 'panIndia' ? 'bg-primary text-white' : 'text-primary hover:bg-beige'}`}
+            >
+              Pan India
+            </button>
+          </div>
+          <div className="text-sm text-muted-foreground">
+            {deliveryScope === 'panIndia' ? 'Showing only Pan-India shippable items' : 'Showing all items'}
+          </div>
+        </div>
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Sidebar */}
           <ShopFilters
             selectedCategory={selectedCategory}
             onCategoryChange={setSelectedCategory}
-            selectedPrice={selectedPrice}
-            onPriceChange={setSelectedPrice}
-            selectedSort={selectedSort}
-            onSortChange={setSelectedSort}
+            selectedDiet={selectedDiet}
+            onDietChange={setSelectedDiet}
             isMobileOpen={mobileFiltersOpen}
             onMobileClose={() => setMobileFiltersOpen(false)}
           />
@@ -102,7 +166,6 @@ export default function ShopPage() {
                   type="button"
                   onClick={() => {
                     setSelectedCategory('all')
-                    setSelectedPrice('all')
                     setPage(1)
                   }}
                   className="mt-4 text-gold hover:text-primary transition-colors underline underline-offset-4"

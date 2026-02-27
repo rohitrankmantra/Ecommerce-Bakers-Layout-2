@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Classic Tea-Time Hamper",
+    "description": "Assorted biscuits, rusks, and tea-time cakes packed beautifully.",
+    "price": 799,
+    "image": "https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908449/_STU0076_kdwubn.webp",
+    "items": ["Ajwain biscuits", "Traditional rusk", "Butter vanilla cake"]
+  },
+  {
+    "id": 2,
+    "name": "Premium Celebration Hamper",
+    "description": "Curated premium selection with artisanal treats and chocolates.",
+    "price": 1299,
+    "image": "https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908531/_STU0303_bihhv0.webp",
+    "items": ["Almond biscotti", "Cranberry cookies", "Chocolate fudge"]
+  },
+  {
+    "id": 3,
+    "name": "Festive Gift Box",
+    "description": "Seasonal special with personalized note and elegant packaging.",
+    "price": 999,
+    "image": "https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908526/_STU0296_tiqlab.webp",
+    "items": ["Zeera biscuits", "Plum cake", "Fruit muffins (pack of 4)"]
+  }
+]
