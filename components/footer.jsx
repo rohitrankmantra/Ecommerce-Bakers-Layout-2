@@ -41,7 +41,7 @@ export function Footer() {
                 className="h-32 w-auto object-contain"
               />
             </Link>
-            <p className="text-foreground/80 leading-relaxed">
+            <p className="text-foreground/80 font-semibold leading-relaxed">
               Crafting delicious memories with premium ingredients and artisan techniques since 2010.
             </p>
             <div className="flex items-center gap-4 mt-6">
@@ -122,8 +122,8 @@ export function Footer() {
           <div>
             <h3 className="font-serif text-lg font-bold text-primary mb-6">Contact Us</h3>
             <ul className="space-y-3 text-foreground/80">
-              <li>BAKEMASTERS, 19,Rajpur Road, Kwality Complex, Dehradun, </li>
-              <li>Uttarakhand. 248001 INDIA</li>
+              <li><strong>BAKEMASTERS, 19,Rajpur Road, Kwality Complex, Dehradun, </strong></li>
+              <li><strong>Uttarakhand. 248001 INDIA</strong></li>
               <li className="flex items-center gap-2">
                 <FiPhone className="w-4 h-4 text-primary" />
                 <a href="tel:+919068664222" className="text-black hover:text-primary/80 transition-colors">

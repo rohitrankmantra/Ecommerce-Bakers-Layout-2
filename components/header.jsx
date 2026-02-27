@@ -10,12 +10,15 @@ import { useCart } from './cart-context'
 import { products } from '@/lib/products'
 import { useAuth } from '@/components/auth-context'
 import { Button } from '@/components/ui/button'
+import { TopBanner } from '@/components/top-banner'
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/shop', label: 'Our Products' },
    { href: '/our-story', label: 'Our Story' },
   { href: '/gallery', label: 'Gallery' },
+    { href: '/gifts', label: 'Gifting Hampers' },
+
  
   { href: '/contact', label: 'Contact Us' },
 ]
@@ -77,8 +80,7 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* Info Bar */}
+    <div>
       <div className="bg-primary text-primary-foreground py-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between text-sm">
@@ -134,11 +136,11 @@ export function Header() {
           </div>
         </div>
       </div>
-
-{/* Main Header */}
-<div className="bg-cream/95 backdrop-blur-sm border-b border-border">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4">
-    <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 md:gap-8">
+      <header className="relative z-40">
+        <TopBanner />
+        <div className="bg-cream/95 backdrop-blur-sm border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4">
+            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 md:gap-8">
 
       {/* LEFT – Logo */}
       <div className="flex items-center min-w-17.5 sm:min-w-25">
@@ -158,11 +160,15 @@ export function Header() {
 
       {/* CENTER – Brand name + nav links below */}
       <div className="flex flex-col items-center justify-center">
-        <Link
-          href="/"
-          className="font-unica-one font-bold  text-black text-3xl sm:text-4xl md:text-5xl  mt-2"
-        >
-          BakeMasters
+        <Link href="/" className="block">
+          <Image
+            src="/center.png"
+            alt="BakeMasters"
+            width={280}
+            height={80}
+            className="h-12 sm:h-14 md:h-16 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop nav – hidden on mobile */}
@@ -178,7 +184,6 @@ export function Header() {
           ))}
         </div>
       </div>
-
       {/* RIGHT – Icons + mobile hamburger */}
       <div className="flex items-center justify-end gap-1.5 sm:gap-3 md:gap-4">
 
@@ -364,50 +369,49 @@ export function Header() {
             <Menu className="w-6 h-6" />
           )}
         </button>
-      </div>
-    </div>
-  </div>
-</div>
+            </div>
+          </div>
+        </div>
 
-
-{/* Mobile Navigation */}
-<AnimatePresence>
-  {mobileMenuOpen && (
-    <motion.div
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: 'auto' }}
-      exit={{ opacity: 0, height: 0 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="md:hidden bg-cream border-t border-border overflow-hidden shadow-sm"
-    >
-      <nav className="flex flex-col px-5 py-5">
-        {navLinks.map((link, index) => (
-          <motion.div
-            key={link.href}
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.08, duration: 0.25 }}
-          >
-            <Link
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`
-                block py-3.5 px-2 
-                text-base font-medium uppercase tracking-wide text-black
-                hover:text-primary hover:bg-beige/40 
-                active:bg-beige/60 
-                transition-colors duration-150
-                border-b border-border/40 last:border-b-0
-              `}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="md:hidden bg-cream border-t border-border overflow-hidden shadow-sm"
             >
-              {link.label}
-            </Link>
-          </motion.div>
-        ))}
-      </nav>
-    </motion.div>
-  )}
-</AnimatePresence>
-    </header>
+              <nav className="flex flex-col px-5 py-5">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.08, duration: 0.25 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`
+                        block py-3.5 px-2 
+                        text-base font-medium uppercase tracking-wide text-black
+                        hover:text-primary hover:bg-beige/40 
+                        active:bg-beige/60 
+                        transition-colors duration-150
+                        border-b border-border/40 last:border-b-0
+                      `}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        </div>
+      </header>
+    </div>
   )
 }
