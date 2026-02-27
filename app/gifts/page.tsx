@@ -8,7 +8,7 @@ import hampers from '@/lib/hampers.json'
 import { useCart } from '@/components/cart-context'
 
 export default function GiftingHampersPage() {
-  const { addItem, setIsOpen } = useCart()
+  const { addItem, setIsOpen } = useCart() as any
 
   return (
     <div className="min-h-screen bg-cream">

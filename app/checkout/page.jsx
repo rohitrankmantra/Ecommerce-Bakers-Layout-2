@@ -47,7 +47,7 @@ const GlassSelect = ({ label, placeholder, options, value, onChange, disabled })
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 5 }}
-            className="absolute z-[100] w-full mt-2 max-h-60 overflow-y-auto rounded-xl border border-border 
+            className="absolute z-100 w-full mt-2 max-h-60 overflow-y-auto rounded-xl border border-border 
                        bg-white/90 backdrop-blur-xl shadow-2xl custom-scrollbar"
           >
             {options.map((opt) => (
