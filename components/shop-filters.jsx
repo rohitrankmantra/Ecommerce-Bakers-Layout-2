@@ -67,42 +67,51 @@ export function ShopFilters({
             <AnimatePresence>
               {cat.id === 'tea-time-cake' && selectedCategory === 'tea-time-cake' && dietOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="mt-2 bg-white/70 backdrop-blur-md border border-white rounded-2xl p-3 shadow-xl z-20"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden"
                 >
-                  <div className="space-y-2">
+                  <div className="mt-2 ml-4 space-y-1 border-l-2 border-primary/10 pl-4 py-2">
                     <button
                       type="button"
                       onClick={() => {
                         onDietChange?.('veg');
-                        setDietOpen(false); // Vanish once selected
+                        // setDietOpen(false); // Keep open for better UX
                       }}
-                      className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors flex items-center gap-2 ${
+                      className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm ${
                         selectedDiet === 'veg'
                           ? 'bg-primary text-primary-foreground'
                           : 'text-foreground hover:bg-beige'
                       }`}
                     >
-                      <span className="inline-block w-3 h-3 rounded-full" style={{ backgroundColor: '#128a17' }} />
+                      <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: '#128a17' }} />
                       Veg
                     </button>
                     <button
                       type="button"
                       onClick={() => {
                         onDietChange?.('nonveg');
-                        setDietOpen(false); // Vanish once selected
+                        // setDietOpen(false); // Keep open for better UX
                       }}
-                      className={`w-full text-left px-4 py-2.5 rounded-xl transition-colors flex items-center gap-2 ${
+                      className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center gap-2 text-sm ${
                         selectedDiet === 'nonveg'
                           ? 'bg-primary text-primary-foreground'
                           : 'text-foreground hover:bg-beige'
                       }`}
                     >
-                      <span className="inline-block w-3 h-3 rounded-full" style={{ backgroundColor: '#c91e1e' }} />
+                      <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: '#c91e1e' }} />
                       Non-Veg
                     </button>
+                    
+                    {selectedDiet && (
+                      <button
+                        onClick={() => onDietChange?.(null)}
+                        className="text-[10px] uppercase tracking-widest text-muted-foreground hover:text-primary mt-2 ml-3"
+                      >
+                        Clear Diet Filter
+                      </button>
+                    )}
                   </div>
                 </motion.div>
               )}
