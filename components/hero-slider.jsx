@@ -1,7 +1,9 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
+
 
 const slides = [
   { id: 1, imageDesktop: '/homebanner.webp', imageMobile: '/homebannermobile1.png', label: 'THE ART OF BAKING' },
@@ -106,9 +108,10 @@ function HeroSection() {
       </span>
     </h2>
 
-    <a
+    <Link
       href="/shop"
-      className="group relative inline-flex items-center justify-center px-8 py-3 bg-[#C85B24] rounded-full text-white transition-all duration-500 ease-in-out overflow-hidden hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
+      aria-label="Go to shop"
+      className="group relative z-50 inline-flex items-center justify-center px-8 py-3 bg-[#C85B24] rounded-full text-white transition-all duration-500 ease-in-out overflow-hidden hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
     >
       <div className="absolute inset-0 z-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
       
@@ -116,7 +119,7 @@ function HeroSection() {
       <span className="relative z-10 text-[11px] lg:text-[10px] uppercase tracking-[0.2em] font-black">
         Order Now
       </span>
-    </a>
+    </Link>
   </div>
 
   {/* MOBILE NAVIGATION */}
