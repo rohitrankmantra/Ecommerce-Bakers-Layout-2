@@ -117,15 +117,17 @@ function HeroSection() {
       </span>
     </h2>
 
-    <a
-      href="/products"
-      className="group relative inline-flex items-center justify-center px-10 py-3 lg:px-12 lg:py-5 bg-[#1c1c1c] rounded-full text-white transition-all duration-500 overflow-hidden"
-    >
-      <span className="relative z-10 text-[10px] lg:text-[11px] uppercase tracking-[0.4em] font-bold">
-        Order Now
-      </span>
-      <div className="absolute inset-0 bg-[#C85B24] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-    </a>
+  <a
+  href="/shop"
+  className="group relative inline-flex items-center justify-center px-10 py-3 lg:px-12 lg:py-5 bg-[#C85B24] rounded-full text-white transition-all duration-300 overflow-hidden hover:brightness-110 active:scale-95"
+>
+  <span className="relative z-10 text-[10px] lg:text-[11px] uppercase tracking-[0.4em] font-bold">
+    Order Now
+  </span>
+
+  {/* Simple White Glare Slide */}
+  <div className="absolute inset-0 w-full h-full bg-white/20 -translate-x-full skew-x-[-20deg] group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+</a>
     
   </div>
 
