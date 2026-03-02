@@ -69,9 +69,9 @@ function HeroSection() {
 
       {/* RIGHT: CONTENT PANEL (Responsive Fix Applied) */}
  {/* Updated background to #EEE3D2 */}
-<div className="relative w-full min-h-[45vh] lg:h-full lg:w-[28%] bg-gradient-to-b from-[#F9F6F1] to-[#EEE3D2] flex flex-col items-center lg:justify-between px-8 py-12 lg:py-16 border-t lg:border-t-0 lg:border-l border-stone-300/30">
+<div className="relative w-full min-h-[45vh] lg:h-full lg:w-[28%] bg-gradient-to-b from-[#F9F6F1] to-[#EEE3D2] flex flex-col items-center justify-center gap-8 lg:gap-12 px-8 py-12 lg:py-16 border-t lg:border-t-0 lg:border-l border-stone-300/30">
   
-  {/* --- BACKGROUND LAYER: Dots & SVGs (Contained so they don't leak, but allow logo to overlap) --- */}
+  {/* --- BACKGROUND LAYER --- */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     <div 
       className="absolute inset-0 opacity-[0.12]" 
@@ -80,17 +80,19 @@ function HeroSection() {
         backgroundSize: '24px 24px' 
       }} 
     />
+    
     {/* Cake SVG */}
     <svg className="absolute top-12 -right-6 opacity-[0.05] w-24 h-24 text-stone-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
       <path d="M20 21v-8a2 2 0 00-2-2H6a2 2 0 00-2 2v8m16 0H4m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m13-14a3 3 0 11-6 0c0-1.657 1.343-3 3-3s3 1.343 3 3z" />
     </svg>
+
     {/* Croissant SVG */}
     <svg className="absolute bottom-32 -left-6 opacity-[0.05] w-24 h-24 text-stone-900 -rotate-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
       <path d="M3 15c2-2 4-3 7-3s5 1 7 3m-12-3c1.5-2 3.5-3 6-3s4.5 1 6 3m-10-3c1-2 2.5-3 4-3s3 1 4 3" />
     </svg>
   </div>
 
-  {/* LOGO - Now visible because overflow-hidden is moved to the bg layer */}
+  {/* LOGO */}
   <div className="absolute -top-8 lg:static lg:top-0 z-40 bg-transparent p-1 lg:p-0 rounded-full lg:rounded-none lg:mb-4">
     <Image
       src="/new-logo.png"
@@ -103,13 +105,16 @@ function HeroSection() {
 
   {/* Text Section */}
   <div className={`relative z-10 flex flex-col items-center text-center transition-all duration-700 lg:my-auto ${fade ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+    
     <p className="text-[9px] uppercase tracking-[0.5em] text-stone-600 mb-4 lg:mb-6 font-bold">
       {slides[current].label}
     </p>
     
     <h2 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-sans font-black text-[#1c1c1c] tracking-tight leading-[0.95] mb-6 lg:mb-10 whitespace-nowrap lg:whitespace-normal">
       Freshly <br className="hidden lg:block" />
-      <span className="text-[#C85B24] uppercase text-xl sm:text-2xl lg:text-3xl tracking-widest font-light ml-2 lg:ml-0">Baked</span>
+      <span className="text-[#C85B24] uppercase text-xl sm:text-2xl lg:text-3xl tracking-widest font-light ml-2 lg:ml-0">
+        Baked
+      </span>
     </h2>
 
     <a
@@ -121,6 +126,7 @@ function HeroSection() {
       </span>
       <div className="absolute inset-0 bg-[#C85B24] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
     </a>
+    
   </div>
 
   {/* MOBILE NAVIGATION */}
@@ -128,11 +134,14 @@ function HeroSection() {
     <button onClick={prevSlide} className="p-2 text-stone-500 hover:text-stone-800 transition-colors">
       <ChevronLeft size={20} strokeWidth={1} />
     </button>
+    
     <div className="w-px h-6 bg-stone-300/50" />
+    
     <button onClick={nextSlide} className="p-2 text-stone-500 hover:text-stone-800 transition-colors">
       <ChevronRight size={20} strokeWidth={1} />
     </button>
   </div>
+
 </div>
     </section>
   )
