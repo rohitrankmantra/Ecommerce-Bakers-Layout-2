@@ -25,14 +25,19 @@ export function ShopFilters({
   onDietChange,
   isMobileOpen,
   onMobileClose,
+  deliveryScope,
 }) {
   const router = useRouter()
   const [dietOpen, setDietOpen] = useState(false)
 
+  const visibleCategories = deliveryScope === 'panIndia' 
+    ? categories.filter(c => c.id !== 'tea-time-cake') 
+    : categories
+
   const FilterContent = () => (
     <div className="space-y-8">
       <div className="space-y-2">
-        {categories.map((cat) => (
+        {visibleCategories.map((cat) => (
           <div key={cat.id} className="relative">
             <button
               type="button"

@@ -128,6 +128,7 @@ export default function ShopPage() {
                 onDietChange={setSelectedDiet}
                 isMobileOpen={mobileFiltersOpen}
                 onMobileClose={() => setMobileFiltersOpen(false)}
+                deliveryScope={deliveryScope}
               />
 
               {/* Products Grid */}
