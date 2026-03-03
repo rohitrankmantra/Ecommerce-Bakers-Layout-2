@@ -1,7 +1,8 @@
  'use client'
  
  import { FaWhatsapp } from 'react-icons/fa'
- import { FiPhone } from 'react-icons/fi'
+import { FiPhone } from 'react-icons/fi'
+import { SiZomato } from 'react-icons/si'
  
  const whatsappNumber = '919997766661'
  const dialNumber = '+919997766661'
@@ -17,10 +18,19 @@
          className="w-14 h-14 rounded-full bg-green-500 text-white shadow-lg grid place-items-center hover:bg-green-600 transition"
        >
          <FaWhatsapp size={24} />
-       </a>
-       <a
-         href={`tel:${dialNumber}`}
-         aria-label="Call"
+      </a>
+      <a
+        href="https://www.zomato.com/dehradun/bake-masters-rajpur-road"
+        aria-label="Zomato"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-14 h-14 rounded-full bg-red-500 text-white shadow-lg grid place-items-center hover:bg-red-600 transition"
+      >
+        <SiZomato size={24} />
+      </a>
+      <a
+        href={`tel:${dialNumber}`}
+        aria-label="Call"
          className="w-14 h-14 rounded-full bg-primary text-white shadow-lg grid place-items-center hover:opacity-90 transition"
        >
          <FiPhone size={24} />
