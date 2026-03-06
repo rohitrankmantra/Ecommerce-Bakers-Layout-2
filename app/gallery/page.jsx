@@ -73,7 +73,7 @@ function VideoCard({ src, isPlaying, onPlay, onPause, setEl }) {
           flex items-center justify-center
           shadow-lg
           hover:bg-card/60
-          transition-colors transition-opacity transition-transform duration-300
+          transition-colors duration-300
           ${isPlaying ? 'opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100' : 'opacity-100'}
         `}
       >
