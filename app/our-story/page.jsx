@@ -15,19 +15,19 @@ const stats = [
 
 const team = [
   {
-    name: 'Marie Laurent',
-    role: 'Head Pastry Chef',
-    image: 'https://images.unsplash.com/photo-1595257841889-eca2678454e2?w=400&q=80',
+    name: 'Vikram Sharma',
+    role: 'Founder & Head Pastry Chef',
+    image: 'https://images.unsplash.com/photo-1583394238182-6f71f218a66e?w=400&q=80',
   },
   {
-    name: 'Thomas Bernard',
+    name: 'Anjali Gupta',
     role: 'Master Baker',
-    image: 'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: 'https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=400&q=80',
   },
   {
-    name: 'Sophie Dubois',
+    name: 'Rahul Verma',
     role: 'Cake Designer',
-    image: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1622618991746-fe6004db3a47?w=400&q=80',
   },
 ]
 
@@ -60,9 +60,9 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  What began as a small family bakery in the heart of the city has blossomed 
+                  What began as a small family bakery in the heart of Dehradun has blossomed 
                   into a beloved destination for artisan breads and pastries. Our founder, 
-                  Jean-Pierre Laurent, brought his grandmother&apos;s recipes from France, 
+                  Vikram Sharma, brought his family&apos;s secret recipes, 
                   infusing each creation with generations of baking wisdom.
                 </p>
                 <p>

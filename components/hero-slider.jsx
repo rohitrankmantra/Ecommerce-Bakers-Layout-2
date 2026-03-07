@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Instagram } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -82,53 +82,72 @@ function HeroSection() {
       </div>
 
       {/* RIGHT: CONTENT PANEL */}
-      <div className="relative w-full h-[30%] lg:h-full lg:w-[22%] bg-linear-to-b from-[#F9F6F1] to-[#EEE3D2] flex flex-col items-center justify-center gap-1.5 lg:gap-4 px-6 py-4 lg:py-10 border-t lg:border-t-0 lg:border-l border-stone-300/30">
+      <div className="relative w-full h-[35%] lg:h-full lg:w-[22%] bg-[#D2B48C] flex flex-col items-center justify-between px-6 py-6 lg:py-12 border-t lg:border-t-0 lg:border-l border-stone-300/30">
         
         {/* --- BACKGROUND LAYER --- */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div 
-            className="absolute inset-0 opacity-[0.06]" 
+            className="absolute inset-0 opacity-[0.1]" 
             style={{ 
               backgroundImage: `radial-gradient(#1c1c1c 1px, transparent 0)`, 
-              backgroundSize: '30px 30px' 
+              backgroundSize: '24px 24px' 
             }} 
           />
+          {/* Subtle floral/organic overlay if desired - keeping it clean for now */}
         </div>
 
-        {/* LOGO */}
-        <div className="relative z-40 mb-1">
+        {/* TOP: LOGO */}
+        <div className="relative z-40 flex flex-col items-center">
           <Image
             src="/new-logo.png"
             alt="Logo"
-            width={100}
-            height={50}
-            className="object-contain w-11.25 sm:w-13.75 lg:w-21.25"
+            width={120}
+            height={60}
+            className="object-contain w-14 sm:w-16 lg:w-24"
           />
+          <div className="h-[1px] w-8 bg-black/20 mt-4 hidden lg:block" />
         </div>
 
-        {/* Text Section */}
-        <div className={`relative z-10 flex flex-col items-center text-center transition-all duration-700 ${fade ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          
-          <h2 className="text-xl sm:text-3xl lg:text-4xl font-serif font-black text-[#1c1c1c] tracking-tight leading-tight mb-1.5 lg:mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
-            <span className="block">
-              DESSERTS
-            </span>
-            <span className="text-[#B44B1E] uppercase text-[9px] sm:text-[11px] lg:text-[12px] tracking-[0.3em] font-extrabold block mt-1 sm:mt-1.5">
-              made to impress
-            </span>
+        {/* MIDDLE: MAIN MESSAGE */}
+        <Link 
+          href="/shop"
+          className="relative z-10 flex flex-col items-center text-center group transition-transform duration-300 hover:scale-105"
+        >
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-black text-white leading-tight tracking-tight drop-shadow-md">
+            TAP HERE
           </h2>
+          <p className="text-white font-bold text-[10px] sm:text-xs lg:text-sm uppercase tracking-[0.2em] mt-2 lg:mt-4 max-w-[180px]">
+            TO GET OUR PRODUCTS DELIVERED PAN-INDIA
+          </p>
+          
+          {/* Animated indicator */}
+          <div className="mt-4 flex items-center gap-2">
+            <div className="w-8 h-[1px] bg-white/60" />
+            <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            <div className="w-8 h-[1px] bg-white/60" />
+          </div>
+        </Link>
 
-          <Link
-            href="/shop"
-            aria-label="Go to shop"
-            className="group relative z-50 inline-flex items-center justify-center px-5 py-2 sm:px-7 sm:py-2.5 bg-[#C85B24] rounded-full text-white transition-all duration-500 ease-in-out overflow-hidden hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
+        {/* BOTTOM: SOCIAL */}
+        <div className="relative z-10 flex flex-col items-center gap-2">
+          <a 
+            href="https://www.instagram.com/bakemasters.in" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-white hover:text-white/80 transition-colors group"
           >
-            <div className="absolute inset-0 z-0 bg-black/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            <span className="relative z-10 text-[8px] sm:text-[10px] lg:text-[9px] uppercase tracking-[0.2em] font-black">
-              Order Now
+            <Instagram size={16} className="group-hover:scale-110 transition-transform" />
+            <span className="text-[9px] lg:text-[11px] font-bold uppercase tracking-widest">
+              FOLLOW US AT
             </span>
-          </Link>
+          </a>
+          <span className="text-[11px] lg:text-[13px] font-black text-white/90 tracking-tighter">
+            bakemasters.in
+          </span>
         </div>
+
+        {/* Decorative Bookmark "Notch" or Edge - Optional refinement */}
+        <div className="absolute top-0 right-0 bottom-0 w-1 bg-white/10 hidden lg:block" />
       </div>
     </section>
   )

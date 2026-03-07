@@ -60,37 +60,61 @@ export default function ShopPage() {
     <div className="min-h-screen bg-cream">
       {/* Hero Section with Background Image */}
       <PageHero
-        title="Our Shop"
-        subtitle="Browse Our Collection"
-        description="Discover our handcrafted selection of premium baked goods, made fresh daily with the finest ingredients."
+        title={deliveryScope === 'unset' ? null : "Our Shop"}
+        subtitle={deliveryScope === 'unset' ? null : "Browse Our Collection"}
+        description={deliveryScope === 'unset' ? null : "Discover our handcrafted selection of premium baked goods, made fresh daily with the finest ingredients."}
         backgroundImage="https://res.cloudinary.com/drx8l7t5c/image/upload/v1771908535/_STU0310_ljsglm.webp"
-      />
+      >
+        {deliveryScope === 'unset' && (
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12">
+            <motion.button
+              whileHover={{ y: -5 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                setDeliveryScope('city')
+                if (typeof window !== 'undefined') localStorage.setItem('deliveryScope', 'city')
+              }}
+              className="group flex items-center gap-4 bg-white border border-gold/30 hover:border-gold px-8 py-5 rounded-xl shadow-lg transition-all duration-300 min-w-[280px]"
+            >
+              <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center group-hover:bg-gold transition-colors duration-300">
+                <MapPin className="w-6 h-6 text-gold group-hover:text-white" />
+              </div>
+              <div className="text-left">
+                <span className="block text-primary text-lg font-semibold tracking-wide">
+                  Delivery in Dehradun
+                </span>
+                <span className="text-primary/50 text-sm">Fresh local delivery</span>
+              </div>
+            </motion.button>
+
+            <motion.button
+              whileHover={{ y: -5 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                setDeliveryScope('panIndia')
+                if (typeof window !== 'undefined') localStorage.setItem('deliveryScope', 'panIndia')
+              }}
+              className="group flex items-center gap-4 bg-white border border-gold/30 hover:border-gold px-8 py-5 rounded-xl shadow-lg transition-all duration-300 min-w-[280px]"
+            >
+              <div className="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center group-hover:bg-gold transition-colors duration-300">
+                <Globe className="w-6 h-6 text-gold group-hover:text-white" />
+              </div>
+              <div className="text-left">
+                <span className="block text-primary text-lg font-semibold tracking-wide">
+                  Pan-India Delivery
+                </span>
+                <span className="text-primary/50 text-sm">Shipping across India</span>
+              </div>
+            </motion.button>
+          </div>
+        )}
+      </PageHero>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {deliveryScope === 'unset' ? (
-          <div className="min-h-[40vh] flex flex-col items-center justify-center py-10">
-            <div className="w-full max-w-md space-y-6 px-4">
-              <button
-                onClick={() => {
-                  setDeliveryScope('city')
-                  if (typeof window !== 'undefined') localStorage.setItem('deliveryScope', 'city')
-                }}
-                className="w-full py-4 text-xl text-gray-400 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors bg-white shadow-sm"
-              >
-                Delivery in Dehradun
-              </button>
-
-              <button
-                onClick={() => {
-                  setDeliveryScope('panIndia')
-                  if (typeof window !== 'undefined') localStorage.setItem('deliveryScope', 'panIndia')
-                }}
-                className="w-full py-4 text-xl text-gray-400 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors bg-white shadow-sm"
-              >
-                Pan-India Delivery
-              </button>
-            </div>
+          <div className="min-h-[20vh] flex flex-col items-center justify-center py-10">
+            <p className="text-primary/60 italic">Please select your delivery method to browse our shop</p>
           </div>
         ) : (
           <>

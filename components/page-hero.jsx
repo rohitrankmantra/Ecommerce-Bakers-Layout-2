@@ -7,7 +7,8 @@ export function PageHero({
   title, 
   subtitle, 
   description, 
-  backgroundImage 
+  backgroundImage,
+  children
 }) {
   return (
     <div className="relative h-[50vh] min-h-100 max-h-125 overflow-hidden">
@@ -38,13 +39,20 @@ export function PageHero({
                 {subtitle}
               </span>
             )}
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-gold mb-6 font-black text-balance drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
-              {title}
-            </h1>
+            {title && (
+              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-gold mb-6 font-black text-balance drop-shadow-[0_6px_18px_rgba(0,0,0,0.8)]">
+                {title}
+              </h1>
+            )}
             {description && (
               <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)]">
                 {description}
               </p>
+            )}
+            {children && (
+              <div className="mt-8">
+                {children}
+              </div>
             )}
           </motion.div>
         </div>
