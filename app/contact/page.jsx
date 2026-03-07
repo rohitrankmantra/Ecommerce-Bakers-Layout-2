@@ -42,7 +42,7 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    phone: '+91 ',
     subject: '',
     message: '',
   })
@@ -58,7 +58,7 @@ export default function ContactPage() {
     
     setIsSubmitting(false)
     setSubmitted(true)
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
+    setFormData({ name: '', email: '', phone: '+91 ', subject: '', message: '' })
     
     // Reset success message after 5 seconds
     setTimeout(() => setSubmitted(false), 5000)
@@ -190,7 +190,7 @@ export default function ContactPage() {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          placeholder="John Doe"
+                          placeholder="Enter your name"
                           required
                           className="bg-background"
                         />
@@ -203,7 +203,7 @@ export default function ContactPage() {
                           type="email"
                           value={formData.email}
                           onChange={handleChange}
-                          placeholder="john@example.com"
+                          placeholder="Enter your email"
                           required
                           className="bg-background"
                         />
@@ -219,7 +219,7 @@ export default function ContactPage() {
                           type="tel"
                           value={formData.phone}
                           onChange={handleChange}
-                          placeholder="+1 (234) 567-890"
+                          placeholder="+91 98765 43210"
                           className="bg-background"
                         />
                       </div>
@@ -230,7 +230,7 @@ export default function ContactPage() {
                           name="subject"
                           value={formData.subject}
                           onChange={handleChange}
-                          placeholder="Custom Order Inquiry"
+                          placeholder="What is this about?"
                           required
                           className="bg-background"
                         />

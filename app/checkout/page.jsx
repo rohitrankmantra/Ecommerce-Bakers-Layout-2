@@ -261,7 +261,7 @@ export default function CheckoutPage() {
             <div className="bg-white/60 backdrop-blur-xl rounded-2xl border border-white p-6 sticky top-8 shadow-2xl">
               <h2 className="font-serif text-xl text-primary mb-4">Order Summary</h2>
 
-              <div className="space-y-4 max-h-[40vh] overflow-y-auto pr-2 custom-scrollbar">
+              <div className="space-y-4 max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
                 {items.map((item) => (
                   <div key={item._id} className="flex gap-3">
                     <div className="relative w-16 h-16 rounded-lg overflow-hidden border bg-white/40 shrink-0">
@@ -294,7 +294,10 @@ export default function CheckoutPage() {
                   </p>
                 </div>
                 <div className="flex justify-between text-lg pt-2 font-semibold border-t border-border mt-2">
-                  <span>Total</span>
+                  <div className="flex flex-col">
+                    <span>Total</span>
+                    <span className="text-[10px] text-muted-foreground font-normal italic">Inclusive of all taxes</span>
+                  </div>
                   <span className="text-gold">₹{grandTotal.toFixed(2)}</span>
                 </div>
               </div>

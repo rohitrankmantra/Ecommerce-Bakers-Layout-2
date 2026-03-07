@@ -15,12 +15,17 @@ import { TopBanner } from '@/components/top-banner'
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/shop', label: 'Our Products' },
-   { href: '/our-story', label: 'Our Story' },
   { href: '/gallery', label: 'Gallery' },
-    { href: '/gifts', label: 'Gifting Hampers' },
-
- 
+  { href: '/gifts', label: 'Gifting Hampers' },
   { href: '/contact', label: 'Contact Us' },
+  { href: '/our-story', label: 'Our Story' },
+]
+
+const productCategories = [
+  { name: 'Biscuit & Confections', slug: 'biscuit-and-confections' },
+  { name: 'Rusk', slug: 'rusk' },
+  { name: 'Tea Time Cake', slug: 'tea-time-cake' },
+  { name: 'Fresh Bread', slug: 'fresh-bread' },
 ]
 
 export function Header() {
@@ -28,6 +33,8 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [accountMenuOpen, setAccountMenuOpen] = useState(false)
+  const [hoveredLink, setHoveredLink] = useState(null)
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false)
   const searchRef = useRef(null)
   const accountRef = useRef(null)
   const router = useRouter()
@@ -174,13 +181,53 @@ export function Header() {
         {/* Desktop nav – hidden on mobile */}
         <div className="hidden md:flex flex-wrap justify-center gap-5 lg:gap-8 mt-6">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-black hover:text-primary hover:underline underline-offset-8 transition-colors text-sm md:text-base uppercase tracking-wide font-medium"
+            <div 
+              key={link.href} 
+              className="relative group"
+              onMouseEnter={() => setHoveredLink(link.label)}
+              onMouseLeave={() => setHoveredLink(null)}
             >
-              {link.label}
-            </Link>
+              <Link
+                href={link.href}
+                className="text-black hover:text-primary hover:underline underline-offset-8 transition-colors text-sm md:text-base uppercase tracking-wide font-medium py-2"
+              >
+                {link.label}
+              </Link>
+
+              {/* DROPDOWN FOR OUR PRODUCTS */}
+              {link.label === 'Our Products' && (
+                <AnimatePresence>
+                  {hoveredLink === 'Our Products' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute left-1/2 -translate-x-1/2 top-full pt-4 z-50 w-64"
+                    >
+                      <div className="bg-white rounded-lg shadow-2xl border border-border overflow-hidden">
+                        <div className="p-2">
+                          {productCategories.map((category) => (
+                            <Link
+                              key={category.slug}
+                              href={`/shop?category=${category.slug}`}
+                              className="block px-4 py-3 text-sm text-black hover:bg-beige/50 hover:text-primary transition-colors font-medium border-b border-beige/30 last:border-0"
+                            >
+                              {category.name}
+                            </Link>
+                          ))}
+                          <Link
+                            href="/shop"
+                            className="block px-4 py-3 text-sm text-primary font-bold hover:bg-beige/50 transition-colors bg-beige/10"
+                          >
+                            VIEW ALL PRODUCTS →
+                          </Link>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
+            </div>
           ))}
         </div>
       </div>
@@ -390,20 +437,65 @@ export function Header() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.08, duration: 0.25 }}
                   >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`
-                        block py-3.5 px-2 
-                        text-base font-medium uppercase tracking-wide text-black
-                        hover:text-primary hover:bg-beige/40 
-                        active:bg-beige/60 
-                        transition-colors duration-150
-                        border-b border-border/40 last:border-b-0
-                      `}
-                    >
-                      {link.label}
-                    </Link>
+                    {link.label === 'Our Products' ? (
+                      <div>
+                        <button
+                          onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                          className="flex items-center justify-between w-full py-3.5 px-2 text-base font-medium uppercase tracking-wide text-black hover:text-primary transition-colors border-b border-border/40"
+                        >
+                          <span>{link.label}</span>
+                          <motion.span
+                            animate={{ rotate: mobileProductsOpen ? 180 : 0 }}
+                            className="text-muted-foreground"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                          </motion.span>
+                        </button>
+                        <AnimatePresence>
+                          {mobileProductsOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden bg-beige/20"
+                            >
+                              {productCategories.map((category) => (
+                                <Link
+                                  key={category.slug}
+                                  href={`/shop?category=${category.slug}`}
+                                  onClick={() => setMobileMenuOpen(false)}
+                                  className="block py-3 px-6 text-sm font-medium text-black hover:text-primary border-b border-border/20 last:border-b-0"
+                                >
+                                  {category.name}
+                                </Link>
+                              ))}
+                              <Link
+                                href="/shop"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="block py-3 px-6 text-sm font-bold text-primary"
+                              >
+                                VIEW ALL PRODUCTS
+                              </Link>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`
+                          block py-3.5 px-2 
+                          text-base font-medium uppercase tracking-wide text-black
+                          hover:text-primary hover:bg-beige/40 
+                          active:bg-beige/60 
+                          transition-colors duration-150
+                          border-b border-border/40 last:border-b-0
+                        `}
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </motion.div>
                 ))}
               </nav>
