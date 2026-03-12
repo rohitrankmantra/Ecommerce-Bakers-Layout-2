@@ -17,17 +17,17 @@ const team = [
   {
     name: 'Vikram Sharma',
     role: 'Founder & Head Pastry Chef',
-    image: 'https://images.unsplash.com/photo-1583394238182-6f71f218a66e?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1583394293214-28ded15ee548?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     name: 'Anjali Gupta',
     role: 'Master Baker',
-    image: 'https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=400&q=80',
+    image: 'https://images.unsplash.com/photo-1659354219028-cae11db067c4?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     name: 'Rahul Verma',
     role: 'Cake Designer',
-    image: 'https://images.unsplash.com/photo-1622618991746-fe6004db3a47?w=400&q=80',
+    image: 'https://plus.unsplash.com/premium_photo-1687697861242-03e99059e833?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
 ]
 
