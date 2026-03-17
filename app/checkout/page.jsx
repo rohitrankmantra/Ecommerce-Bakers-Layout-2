@@ -155,8 +155,9 @@ export default function CheckoutPage() {
               razorpay_signature: response.razorpay_signature,
             })
             clearCart()
-            toast({ title: 'Payment successful 🎉', description: 'Order confirmed' })
-            router.push('/checkout/success')
+            // toast({ title: 'Payment successful 🎉', description: 'Order confirmed' })
+            // Show success overlay instead of immediate redirect
+            setSuccessVisible(true)
           } catch (err) {
             toast({ title: 'Payment verification failed', variant: 'destructive' })
             setSubmitting(false)
@@ -189,7 +190,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-cream">
-      <OrderSuccessOverlay visible={successVisible} onDone={() => { setSuccessVisible(false); router.push('/checkout/success') }} />
+      <OrderSuccessOverlay visible={successVisible} onDone={() => { setSuccessVisible(false); router.push('/') }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="font-serif text-3xl text-primary mb-8">Checkout</h1>

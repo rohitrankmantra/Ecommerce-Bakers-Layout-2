@@ -15,11 +15,11 @@ export function OrderSuccessOverlay({ visible, onDone }) {
 
     const processTimer = setTimeout(() => {
       setStatus('success')
-    }, 3000)
+    }, 2500)
     
     const finishTimer = setTimeout(() => {
       onDone?.()
-    }, shouldReduceMotion ? 4000 : 5500)
+    }, shouldReduceMotion ? 4000 : 7000)
 
     return () => {
       clearTimeout(processTimer)
@@ -153,11 +153,16 @@ export function OrderSuccessOverlay({ visible, onDone }) {
                   </svg>
                 </div>
                 
-                <h2 className="text-4xl font-black text-emerald-600 mt-10 tracking-tight text-center">ORDER PLACED!</h2>
+                <h2 className="text-3xl md:text-4xl font-serif text-emerald-700 mt-8 tracking-tight text-center">
+                  Order Successfully Placed!
+                </h2>
                 
-                <div className="flex items-center gap-2 mt-2">
-                  <div className="w-2 h-2 rounded-full bg-[#C85B24] animate-pulse" />
-                  <p className="text-gray-600 font-bold">Your treats are being prepared.</p>
+                <div className="flex flex-col items-center gap-3 mt-4">
+                  <p className="text-gray-600 font-medium text-lg">Your delicious treats are being prepared.</p>
+                  <div className="flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full border border-emerald-100">
+                    <div className="w-2 h-2 rounded-full bg-[#C85B24] animate-pulse" />
+                    <span className="text-sm text-emerald-800 font-semibold">Redirecting to home...</span>
+                  </div>
                 </div>
                 {/* ------------------------- */}
               </motion.div>

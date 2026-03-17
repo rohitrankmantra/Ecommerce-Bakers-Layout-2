@@ -119,11 +119,11 @@ export function CartDrawer() {
                 <button
                   onClick={() => {
                     setIsOpen(false);
-                    router.push("/checkout");
+                    router.push("/cart-page");
                   }}
-                  className="w-full py-4 bg-primary text-white rounded-2xl"
+                  className="w-full py-4 bg-primary text-white rounded-2xl font-medium tracking-wide hover:bg-primary/90 transition-colors"
                 >
-                  Checkout
+                  View Cart
                 </button>
               </div>
             )}

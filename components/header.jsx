@@ -146,18 +146,18 @@ export function Header() {
       <header className="relative z-40">
         <TopBanner />
         <div className="bg-cream/95 backdrop-blur-sm border-b border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4">
-            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 md:gap-8">
+          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-3 md:py-4">
+            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-1 sm:gap-4 md:gap-8">
 
       {/* LEFT – Logo */}
-      <div className="flex items-center min-w-17.5 sm:min-w-25">
+      <div className="flex items-center min-w-[50px] xs:min-w-[60px] sm:min-w-25">
         <Link href="/" className="block">
           <Image
             src="/new-logo.png"
             alt="BakeMasters Logo"
             width={220}
             height={100}
-            className="h-13.75 xs:h-16.25 sm:h-18.75 md:h-21.25 lg:h-23.75 w-auto object-contain"
+            className="h-10 xs:h-12 sm:h-18.75 md:h-21.25 lg:h-23.75 w-auto object-contain"
             priority
             // Temporary debug: remove after confirming it loads
             // onError={() => console.error("Logo failed to load – check /public/new-logo.png")}
@@ -171,9 +171,9 @@ export function Header() {
           <Image
             src="/center.png"
             alt="BakeMasters"
-            width={280}
-            height={80}
-            className="h-12 sm:h-14 md:h-16 w-auto object-contain"
+            width={400}
+            height={114}
+            className="h-20 xs:h-24 sm:h-28 md:h-16 w-auto object-contain"
             priority
           />
         </Link>
