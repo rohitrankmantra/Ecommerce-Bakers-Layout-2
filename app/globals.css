@@ -92,6 +92,7 @@
 @theme inline {
   --font-sans: 'DM Sans', sans-serif;
   --font-serif: 'Josefin Slab', serif;
+  --font-cursive: var(--font-cursive), cursive;
   --font-mono: monospace; /* preserved from existing */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
