@@ -225,5 +225,9 @@ export function NavBar() {
 }
 
 export default function AdminLayout({ children }) {
-  return children;
+  return (
+    <div className="bg-cream min-h-screen">
+      {children}
+    </div>
+  );
 }
