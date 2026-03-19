@@ -106,8 +106,9 @@ export function CartProvider({ children }) {
     setItems(optimistic);
     if (!itemId) return;
     try {
-      const { data } = await api.delete("/cart/remove", {
-        data: { itemId },
+      // Use POST instead of DELETE for better body transmission
+      const { data } = await api.post("/cart/remove", {
+        itemId,
       });
       setItems(data?.cart?.items || optimistic);
     } catch (error) {
@@ -129,6 +130,12 @@ export function CartProvider({ children }) {
 
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
+  /* ---------------- CLEAR CART ---------------- */
+  const clearCart = async () => {
+    setItems([]);
+    setIsOpen(false);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -138,6 +145,7 @@ export function CartProvider({ children }) {
         addItem,
         updateQuantity,
         removeItem,
+        clearCart,
         total,
         itemCount,
         loading,
