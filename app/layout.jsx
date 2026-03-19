@@ -3,11 +3,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { AuthProvider } from '@/components/auth-context'
 import { CartProvider } from '@/components/cart-context'
-import { Header } from '@/components/header'
-import { CartDrawer } from '@/components/cart-drawer'
-import { Footer } from '@/components/footer'
-import { Toaster } from '@/components/ui/toaster'
-import { FloatingContact } from '@/components/floating-contact'
+import { LayoutProvider } from '@/components/layout-provider'
 import Script from 'next/script'
 
 /* ✅ BEST Josefin Slab config */
@@ -62,12 +58,7 @@ export default function RootLayout({ children }) {
       <body className="font-sans antialiased bg-cream text-foreground">
         <AuthProvider>
           <CartProvider>
-            <Header />
-            <main>{children}</main>
-            <CartDrawer />
-            <Toaster />
-            <Footer />
-            <FloatingContact />
+            <LayoutProvider>{children}</LayoutProvider>
           </CartProvider>
         </AuthProvider>
         <Analytics />
