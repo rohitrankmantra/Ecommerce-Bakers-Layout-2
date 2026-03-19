@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import api from "@/utils/axiosinstance";
+import api, { setupCartInterceptors } from "@/utils/axiosinstance";
 import { toast } from "@/hooks/use-toast";
 
 const CartContext = createContext(undefined);
@@ -11,12 +11,20 @@ export function CartProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  /* ---------------- FETCH CART ---------------- */
+  /* ---------------- INITIALIZE INTERCEPTORS & FETCH CART ON MOUNT ---------------- */
   useEffect(() => {
+    console.log('[CART_CONTEXT] Component mounted, setting up...');
+    
+    // Setup interceptors FIRST (this will handle token persisting)
+    setupCartInterceptors();
+
+    // Then fetch cart
     const fetchCart = async () => {
       try {
+        console.log('[CART_CONTEXT] Fetching cart...');
         const { data } = await api.get("/cart/get");
         setItems(data?.cart?.items || []);
+        console.log('[CART_CONTEXT] Cart fetched successfully');
       } catch (error) {
         console.error("Fetch cart failed", error);
       } finally {
