@@ -4,14 +4,14 @@
 import { FiPhone } from 'react-icons/fi'
 import { SiZomato } from 'react-icons/si'
  
- const whatsappNumber = '919997766661'
- const dialNumber = '+919997766661'
+ const whatsappNumber = '919068664222'
+ const dialNumber = '+919068664222'
  
  export function FloatingContact() {
    return (
      <div className="fixed bottom-6 right-6 z-10 flex flex-col gap-3">
       <a
-        href="https://www.zomato.com/dehradun/bake-masters-rajpur-road"
+        href="https://zomato.onelink.me/xqzv/4yof4mts"
         aria-label="Zomato"
         target="_blank"
         rel="noopener noreferrer"

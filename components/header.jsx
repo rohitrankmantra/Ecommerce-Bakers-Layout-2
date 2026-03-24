@@ -95,28 +95,34 @@ export function Header() {
             <div className="flex items-center gap-4 md:gap-6">
               <a 
                 href="tel:+919068664222" 
-                className="flex items-center gap-1.5 text-white  transition-colors"
+                className="order-1 lg:order-1 flex items-center gap-1.5 text-white  transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-white" />
                 <span className="hidden sm:inline">+91 9068664222</span>
               </a>
               <a 
                 href="tel:+911352717771" 
-                className="flex items-center gap-1.5 text-white"
+                className="order-2 lg:order-2 flex items-center gap-1.5 text-white"
               >
                 <span className="hidden sm:inline">+91 1352717771</span>
               </a>
               <a 
+                href="https://maps.app.goo.gl/mbnftFUTSuwFhXQf7?g_st=iw" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="View location on Google Maps"
+                className="order-3 lg:order-4 flex items-center gap-1.5 text-white transition-colors"
+              >
+                <MapPin className="w-3.5 h-3.5 text-white transition-colors" />
+                <span className="hidden lg:inline">BAKEMASTERS , 19,Rajpur Road, Kwality Complex, Dehradun, Uttarakhand. 248001 INDIA</span>
+              </a>
+              <a 
                 href="mailto:bakemasters.in@gmail.com" 
-                className="flex items-center gap-1.5 text-white transition-colors"
+                className="order-4 lg:order-3 flex items-center gap-1.5 text-white transition-colors"
               >
                 <Mail className="w-3.5 h-3.5 text-white transition-colors" />
                 <span className="hidden sm:inline">bakemasters.in@gmail.com</span>
               </a>
-              <div className="hidden lg:flex items-center gap-1.5 text-white">
-                <MapPin className="w-3.5 h-3.5 text-white transition-colors" />
-                <span>BAKEMASTERS , 19,Rajpur  Road, Kwality Complex, Dehradun, Uttarakhand. 248001 INDIA</span>
-              </div>
             </div>
 
             {/* Social Media Icons - Right Side */}
