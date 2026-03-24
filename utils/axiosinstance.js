@@ -2,8 +2,8 @@ import axios from 'axios'
 
 // use environment variable so we can point at Render in production
 const api = axios.create({
-  // baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://master-bakers-backend-n9iw.onrender.com/api',
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://master-bakers-backend-n9iw.onrender.com/api',
+  // baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api',
   withCredentials: true, // cookies still used for other data if needed
   headers: { 'Content-Type': 'application/json' },
 })
