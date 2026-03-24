@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export", // 👈 this creates the /out folder
+  trailingSlash: true,
   
 
   typescript: {
